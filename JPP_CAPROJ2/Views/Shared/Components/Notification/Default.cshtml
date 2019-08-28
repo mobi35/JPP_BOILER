@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Notification>
+
+
+
+@{
+    foreach(var notif in Model){
+<li>
+    <a href="index.html#">
+        <span class="label label-warning"><i class="fa fa-bell"></i></span>
+        @notif.Description.Substring(0,20)..
+
+        @{TimeSpan mins =DateTime.Now - notif.StartDate ;
+        }
+        @{
+if(mins.TotalMinutes > 60){
+ <span class="small italic">@Math.Round(mins.TotalHours) hour/s ago</span>
+}else if(mins.TotalHours > 24){
+<span class="small italic">@Math.Round(mins.TotalDays) day/s ago</span>
+}else {
+ <span class="small italic">@Math.Round(mins.TotalMinutes) mins ago</span>
+}
+
+        }
+       
+    </a>
+</li>
+    }
+}

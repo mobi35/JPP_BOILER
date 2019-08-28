@@ -1,0 +1,112 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+    Layout = "Client";
+}
+
+
+@model User
+
+
+
+
+<div class="form-panel">
+    <div class="form">
+        <div class="alert alert-danger validation" asp-validation-summary="All"></div>
+        <input asp-for="Message" name="Message" style="width:100%;font-size:11px" class="alert alert-danger message" />
+
+        <form class="cmxform form-horizontal style-form" id="signupForm" asp-action="Update" asp-controller="Client" method="post">
+            <input asp-for="UserId" type="hidden" />
+            <div class="form-group ">
+                <label for="firstname" class="control-label col-lg-2">Full Name</label>
+                <div class="col-lg-10">
+                    <input asp-for="FullName" class="form-control" id="firstname" name="FullName" type="text" />
+                </div>
+            </div>
+
+            <div class="form-group ">
+                <label for="username" class="control-label col-lg-2">Username</label>
+                <div class="col-lg-10">
+                    <input asp-for="UserName" class="form-control " id="username" name="UserName" type="text" />
+                </div>
+            </div>
+
+            <div class="form-group ">
+                <label for="username" class="control-label col-lg-2">Password</label>
+                <div class="col-lg-10">
+                    <input asp-for="Password" class="form-control " id="username" name="Password" type="password" />
+                </div>
+            </div>
+
+
+            <div class="form-group ">
+                <label for="username" class="control-label col-lg-2">Confirm Password</label>
+                <div class="col-lg-10">
+                    <input asp-for="ConfirmPassword" class="form-control " id="username" name="ConfirmPassword" type="password" />
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group ">
+                <label for="phone" class="control-label col-lg-2">Phone Number</label>
+                <div class="col-lg-10">
+                    <input asp-for="PhoneNumber" class="form-control " id="phone" name="PhoneNumber" type="text" />
+                </div>
+            </div>
+            <div class="form-group ">
+                <label for="email" class="control-label col-lg-2">Email</label>
+                <div class="col-lg-10">
+                    <input asp-for="Email" class="form-control " id="email" name="email" type="email" />
+                </div>
+            </div>
+
+            <div class="form-group ">
+                <label for="gender" class="control-label col-lg-2">Gender</label>
+                <div class="col-lg-10">
+                    <input asp-for="Gender" value="Male" id="gender" name="gender" type="radio" />
+                    <input asp-for="Gender" value="Female" id="gender" name="gender" type="radio" />
+
+                </div>
+            </div>
+            <div class="form-group ">
+                <label for="role" class="control-label col-lg-2">Role</label>
+                <div class="col-lg-10">
+                    <select asp-for="Role" class="form-control " id="role" name="role">
+                        <option>Customer</option>
+                       
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-10">
+                    <button class="btn btn-theme" type="submit">Save</button>
+                    <button class="btn btn-theme04" type="button">Cancel</button>
+                </div>
+            </div>
+            <a style="font-size:15px; font-weight:bold;color:darkred;" asp-controller="Client" asp-action="Delete">Delete Account</a>
+
+        </form>
+
+    </div>
+</div>
+
+
+<script>
+
+        var mess = "@Model.Message";
+        if (mess == "") {
+            $('.message').hide();
+        }
+
+
+
+    if ($('.validation').text().trim() == "") {
+        $('.validation').hide();
+    }
+
+
+
+</script>

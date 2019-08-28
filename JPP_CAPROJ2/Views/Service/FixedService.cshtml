@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+    Layout = "Client";
+}
+
+@model ServiceRequestViewModel
+    <div class="row mt">
+        <div class="col-lg-12">
+            <div class="form-panel">
+
+@{
+                <div class="form">
+                    <div class="alert alert-danger validation" asp-validation-summary="All"></div>
+                    <form class="cmxform form-horizontal style-form" id="signupForm" asp-action="Create" asp-controller="Request" method="post">
+                        <div class="form-group ">
+                            <div class="col-lg-10">
+                           <h1>Boiler Repair</h1>
+                           <h5>@Service.Price</h5>
+                           </div>
+                        </div>
+                    <div class="form-group ">
+                            <label for="username" class="control-label col-lg-2">Address</label>
+                            <div class="col-lg-10">
+                                <input asp-for="@Request.Address" class="form-control " id="username"  type="text" />
+                            </div>
+                    </div>
+                       <div class="form-group ">
+                            <label for="username" class="control-label col-lg-2">Requirements</label>
+                            <div class="col-lg-10">
+                                <input asp-for="@Request.Price" class="form-control " id="username"  type="file" />
+                            </div>
+                        </div>
+                         <div class="form-group ">
+                            <label for="username" class="control-label col-lg-2">Images</label>
+                            <div class="col-lg-10">
+                                <input asp-for="@Request.Image" class="form-control " id="username"  type="file" />
+                            </div>
+                        </div>
+
+
+
+                     
+                        <div class="form-group ">
+                            <label for="password" class="control-label col-lg-2">Describe your problem</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control " asp-for="@Request.Description"> </textarea>
+                            </div>
+                        </div>
+                      
+                        <div class="form-group ">
+                            <label for="password" class="control-label col-lg-2">Available Date</label>
+                            <div class="col-lg-10">
+                                   <input asp-for="@Request.AvailableDate" class="form-control " id="username"  type="date" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button class="btn btn-theme" type="submit">Save</button>
+                                <button class="btn btn-theme04" type="button">Cancel</button>
+                            </div>
+                        </div>
+
+                       
+                    </form>
+                </div>
+   
+}
+
+
+            </div>
+            <!-- /form-panel -->
+        </div>
+        <!-- /col-lg-12 -->
+    </div>
+
+
+    <script>
+
+
+
+    if ($('.validation').text().trim() == "") {
+        $('.validation').hide();
+    }
+
+
+
+    </script>
