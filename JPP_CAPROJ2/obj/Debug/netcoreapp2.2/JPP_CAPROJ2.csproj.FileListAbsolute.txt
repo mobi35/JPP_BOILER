@@ -1,0 +1,268 @@
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.deps.json
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.runtimeconfig.json
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.runtimeconfig.dev.json
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.dll
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.pdb
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.Views.dll
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.Views.pdb
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.csprojAssemblyReference.cache
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.csproj.CoreCompileInputs.cache
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorAssemblyInfo.cache
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorAssemblyInfo.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.AssemblyInfoInputs.cache
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.AssemblyInfo.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.TagHelpers.input.cache
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.TagHelpers.output.cache
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorCoreGenerate.cache
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\FrontEnd.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Layout.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\_ViewStart.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorTargetAssemblyInfo.cache
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorTargetAssemblyInfo.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.Views.pdb
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.dll
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.pdb
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.csproj.CopyComplete
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\About.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\BackEnd.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy - Copy.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Login\Index.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\Create.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\Edit.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\Index.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\List.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Client\Index.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Client\Update.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Client.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Feedback\Add.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Feedback\Feedbacks.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Login\Register.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Login\Success.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\Create.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\Services.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\Update.g.cshtml.cs
+C:\Users\Adrian Radores\source\repos\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Feedback\Contact.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.deps.json
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.runtimeconfig.json
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.runtimeconfig.dev.json
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.dll
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.pdb
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.Views.dll
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.Views.pdb
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.csprojAssemblyReference.cache
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.csproj.CoreCompileInputs.cache
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorAssemblyInfo.cache
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorAssemblyInfo.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.AssemblyInfoInputs.cache
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.AssemblyInfo.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.TagHelpers.input.cache
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.TagHelpers.output.cache
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorCoreGenerate.cache
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\Create.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\Edit.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\Index.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\List.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Client\Index.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Client\Update.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Feedback\Add.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Feedback\Contact.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Feedback\Feedbacks.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\About.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy - Copy.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Login\Index.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Login\Register.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Login\Success.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\Create.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\Services.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\Update.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\BackEnd.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Client.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\FrontEnd.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Layout.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\_ViewStart.g.cshtml.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorTargetAssemblyInfo.cache
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorTargetAssemblyInfo.cs
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.Views.pdb
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.dll
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.pdb
+H:\ADRIAN ESGUERRA\JPP_CAPROJ2\JPP_CAPROJ2\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.csproj.CopyComplete
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.deps.json
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.runtimeconfig.json
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.runtimeconfig.dev.json
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.dll
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.pdb
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.Views.dll
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.Views.pdb
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.csprojAssemblyReference.cache
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.csproj.CoreCompileInputs.cache
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorAssemblyInfo.cache
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorAssemblyInfo.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.AssemblyInfoInputs.cache
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.AssemblyInfo.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.TagHelpers.input.cache
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.TagHelpers.output.cache
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorCoreGenerate.cache
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\Create.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\Edit.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\Index.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\List.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Client\Index.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Client\Update.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Feedback\Add.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Feedback\Contact.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Feedback\Feedbacks.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\About.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy - Copy.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Login\Index.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Login\Register.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Login\Success.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Request\List.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\ClientService.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\Create.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\FixedService.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\QuotationService.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\Services.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\Update.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\BackEnd.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Client.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Components\NotificationCount\Default.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Components\Notification\Default.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\FrontEnd.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\_ViewStart.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorTargetAssemblyInfo.cache
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorTargetAssemblyInfo.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.Views.pdb
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.dll
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.pdb
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.csproj.CopyComplete
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.deps.json
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.runtimeconfig.json
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.runtimeconfig.dev.json
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.dll
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.pdb
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.Views.dll
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.Views.pdb
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.csprojAssemblyReference.cache
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.csproj.CoreCompileInputs.cache
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorAssemblyInfo.cache
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorAssemblyInfo.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.AssemblyInfoInputs.cache
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.AssemblyInfo.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.TagHelpers.input.cache
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.TagHelpers.output.cache
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorCoreGenerate.cache
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\Create.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\Edit.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\Index.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\List.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Client\Index.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Client\Update.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Feedback\Add.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Feedback\Contact.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Feedback\Feedbacks.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\About.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy - Copy.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Login\Index.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Login\Register.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Login\Success.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Request\List.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\ClientService.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\Create.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\FixedService.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\QuotationService.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\Services.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\Update.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\BackEnd.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Client.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Components\NotificationCount\Default.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Components\Notification\Default.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\FrontEnd.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\_ViewStart.g.cshtml.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorTargetAssemblyInfo.cache
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorTargetAssemblyInfo.cs
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.Views.pdb
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.dll
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.pdb
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.csproj.CopyComplete
+C:\Users\ADRIAN\Desktop\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Request\Billing.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.deps.json
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.runtimeconfig.json
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.runtimeconfig.dev.json
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.dll
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.pdb
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.Views.dll
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\bin\Debug\netcoreapp2.2\JPP_CAPROJ2.Views.pdb
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.csprojAssemblyReference.cache
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.csproj.CoreCompileInputs.cache
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorAssemblyInfo.cache
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorAssemblyInfo.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.AssemblyInfoInputs.cache
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.AssemblyInfo.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.TagHelpers.input.cache
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.TagHelpers.output.cache
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorCoreGenerate.cache
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\Create.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\Edit.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\Index.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Account\List.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Client\Index.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Client\Update.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Feedback\Add.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Feedback\Contact.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Feedback\Feedbacks.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\About.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy - Copy.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Login\Index.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Login\Register.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Login\Success.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Request\Billing.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Request\List.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\ClientService.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\Create.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\FixedService.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\QuotationService.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\Services.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\Update.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\BackEnd.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Client.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Components\NotificationCount\Default.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Components\Notification\Default.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\FrontEnd.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\_ViewStart.g.cshtml.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorTargetAssemblyInfo.cache
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.RazorTargetAssemblyInfo.cs
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.Views.pdb
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.dll
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.pdb
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.csproj.CopyComplete
+C:\Users\ADRIAN\Documents\JPP_BOILER-master\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Request\WorkingRequest.g.cshtml.cs
