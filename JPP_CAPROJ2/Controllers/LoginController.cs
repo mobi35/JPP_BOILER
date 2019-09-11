@@ -83,7 +83,11 @@ namespace JPP_CAPROJ2.Controllers
                 Startup.IsSessionAvailable = true;
                 if(loginUser.Role == "employee") { 
                 return RedirectToAction("Index","Account");
-                }else
+                }else if (loginUser.Role == "worker"){
+                 return RedirectToAction("Index","Account");
+                }
+                
+                else
                 {
                     return RedirectToAction("Index", "Client");
                 }

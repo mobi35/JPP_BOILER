@@ -25,8 +25,13 @@ namespace JPP_CAPROJ2.Controllers
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var userName =  HttpContext.Session.GetString("UserName");
-            var findNotif = _notifRepo.Find(a => a.Name == userName);
-            return View( findNotif );
+            var findNotif = _notifRepo.FindNotification(a => a.Name == userName);
+            List<Notification> notifList = new List<Notification>();
+            var allNotif = _notifRepo.GetAll();
+            foreach(var noti in allNotif){
+                notifList.Add(noti);
+            }
+            return View( notifList );
         }
       
 

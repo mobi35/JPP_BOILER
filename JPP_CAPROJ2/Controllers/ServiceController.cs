@@ -1,4 +1,5 @@
 ﻿using JPP_CAPROJ2.Data.Model;
+
 using JPP_CAPROJ2.Data.Model.Interface;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -99,11 +100,11 @@ namespace JPP_CAPROJ2.Controllers
 
         [HttpGet]
           public IActionResult FixedService(int id){
-              var service = _serviceRepo.GetIdBy(id);
-             return View(service);
+              var serviceVM = new ServiceRequestViewModel{
+                  Services = _serviceRepo.GetIdBy(id)
+              };
+        
+             return View(serviceVM);
          }
-
-    
-
     }
 }

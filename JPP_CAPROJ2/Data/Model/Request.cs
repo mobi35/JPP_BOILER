@@ -31,9 +31,15 @@ namespace JPP_CAPROJ2.Data.Model
         public DateTime AvailableDate { get; set; }
         public float Price {get; set;}
         
-        public bool Status {get; set;}
+        public string Status {get; set;}
+
+        public bool IsPaid {get; set;}
+        public string AccountName {get; set;}
+        public string AccountNumber {get; set;}
         [NotMapped]
         public string Message { get; set; }
+
+        public string AssignedBy {get; set;}
 
     }
 }

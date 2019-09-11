@@ -198,45 +198,20 @@
                         </ul>
                     </li>
                     <!-- inbox dropdown end -->
-                    <!-- notification dropdown start-->
+                     <!-- notification dropdown start-->
                     <li id="header_notification_bar" class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                             <i class="fa fa-bell-o"></i>
-                            <span class="badge bg-warning">7</span>
+                            <span class="badge bg-warning"> @await Component.InvokeAsync("NotificationCount")  </span>
                         </a>
                         <ul class="dropdown-menu extended notification">
                             <div class="notify-arrow notify-arrow-yellow"></div>
                             <li>
-                                <p class="yellow">You have 7 new notifications</p>
+                                <p class="yellow">You have @await Component.InvokeAsync("NotificationCount") new notifications</p>
                             </li>
-                            <li>
-                                <a href="index.html#">
-                                    <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                                    Server Overloaded.
-                                    <span class="small italic">4 mins.</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html#">
-                                    <span class="label label-warning"><i class="fa fa-bell"></i></span>
-                                    Memory #2 Not Responding.
-                                    <span class="small italic">30 mins.</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html#">
-                                    <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                                    Disk Space Reached 85%.
-                                    <span class="small italic">2 hrs.</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html#">
-                                    <span class="label label-success"><i class="fa fa-plus"></i></span>
-                                    New User Registered.
-                                    <span class="small italic">3 hrs.</span>
-                                </a>
-                            </li>
+                           
+                          @await Component.InvokeAsync("Notification")  
+                           
                             <li>
                                 <a href="index.html#">See all notifications</a>
                             </li>
@@ -292,6 +267,27 @@
                         </ul>
                     </li>
 
+                     <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-user"></i>
+                            <span>Payment</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a asp-controller="Request" asp-action="PaidRequest">Paid Request</a></li>
+                            <li><a asp-controller="Request" asp-action="PendingRequest">Pending Request</a></li>
+
+                        </ul>
+                    </li>
+                <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-user"></i>
+                            <span>Client Viewing / Quotation</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a asp-controller="Request" asp-action="WorkingRequest">Working Request</a></li>
+
+                        </ul>
+                    </li>
 
                     <li class="sub-menu">
                         <a href="javascript:;">
@@ -314,13 +310,24 @@
                         </ul>
                     </li>
 
+                  <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-user"></i>
+                            <span>Reports</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a asp-controller="Request" asp-action="PaidRequest">Paid Request</a></li>
 
+                        </ul>
+                    </li>
 
 
                 </ul>
                 <!-- sidebar menu end-->
             </div>
         </aside>
+   <script src="~/admin/lib/jquery/jquery.min.js"></script>
+           @RenderBody()
         <!--sidebar end-->
         <!-- **********************************************************************************************************************************************************
             MAIN CONTENT
@@ -347,8 +354,8 @@
                 <!-- Fourth Member -->
                 <!-- /row -->
             </section>
-            <script src="~/admin/lib/jquery/jquery.min.js"></script>
-            @RenderBody()
+         
+         
         </section>
         <!--main content end-->
         <!--footer start-->

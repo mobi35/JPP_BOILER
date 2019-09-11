@@ -41,6 +41,7 @@ namespace JPP_CAPROJ2.Controllers
                     user.Message = "Password Doesn't Match";
                     return View("Create",user);
                 }
+                user.NumberOfTask = 0;
                 _userRepo.Create(user);
 
                 _notifRepo.AddNotification("Welcome to JBoiler. You can update your account on the left",user.UserName);

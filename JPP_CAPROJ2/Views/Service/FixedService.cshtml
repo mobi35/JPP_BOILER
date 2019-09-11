@@ -11,46 +11,43 @@
 @{
                 <div class="form">
                     <div class="alert alert-danger validation" asp-validation-summary="All"></div>
-                    <form class="cmxform form-horizontal style-form" id="signupForm" asp-action="Create" asp-controller="Request" method="post">
+                    <form class="cmxform form-horizontal style-form" id="signupForm" asp-action="CreateFixed" asp-controller="Request" method="post">
                         <div class="form-group ">
                             <div class="col-lg-10">
                            <h1>Boiler Repair</h1>
-                           <h5>@Service.Price</h5>
+                           <h5>@Model.Services.Price</h5>
                            </div>
                         </div>
                     <div class="form-group ">
                             <label for="username" class="control-label col-lg-2">Address</label>
                             <div class="col-lg-10">
-                                <input asp-for="@Request.Address" class="form-control " id="username"  type="text" />
+                                <input asp-for="@Model.Requests.Address" class="form-control " id="username"  type="text" />
                             </div>
                     </div>
                        <div class="form-group ">
                             <label for="username" class="control-label col-lg-2">Requirements</label>
                             <div class="col-lg-10">
-                                <input asp-for="@Request.Price" class="form-control " id="username"  type="file" />
+                                <input asp-for="@Model.Requests.Price" class="form-control " id="username"  type="file" />
                             </div>
                         </div>
                          <div class="form-group ">
                             <label for="username" class="control-label col-lg-2">Images</label>
                             <div class="col-lg-10">
-                                <input asp-for="@Request.Image" class="form-control " id="username"  type="file" />
+                                <input asp-for="@Model.Requests.Image" class="form-control " id="username"  type="file" />
                             </div>
                         </div>
-
-
-
                      
                         <div class="form-group ">
                             <label for="password" class="control-label col-lg-2">Describe your problem</label>
                             <div class="col-lg-10">
-                                <textarea class="form-control " asp-for="@Request.Description"> </textarea>
+                                <textarea class="form-control " asp-for="@Model.Requests.Description"> </textarea>
                             </div>
                         </div>
                       
                         <div class="form-group ">
                             <label for="password" class="control-label col-lg-2">Available Date</label>
                             <div class="col-lg-10">
-                                   <input asp-for="@Request.AvailableDate" class="form-control " id="username"  type="date" />
+                                   <input asp-for="@Model.Requests.AvailableDate" class="form-control " id="username"  type="date" />
                             </div>
                         </div>
                         <div class="form-group">
