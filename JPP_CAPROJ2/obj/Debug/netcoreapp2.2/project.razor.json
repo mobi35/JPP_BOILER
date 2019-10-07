@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\ADRIAN\\Documents\\JPP_BOILER-master\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj",
+  "FilePath": "d:\\JPP\\JPP_BOILER-master\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-2.1",
     "LanguageVersion": "2.1",
@@ -3101,6 +3101,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views\\Request\\PaymentRequest.cshtml",
+      "TargetPath": "Views\\Request\\PaymentRequest.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views\\Feedback\\Add.cshtml",
       "TargetPath": "Views\\Feedback\\Add.cshtml",
       "FileKind": "mvc"
@@ -3136,6 +3141,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views\\Request\\ViewError.cshtml",
+      "TargetPath": "Views\\Request\\ViewError.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views\\Account\\Create.cshtml",
       "TargetPath": "Views\\Account\\Create.cshtml",
       "FileKind": "mvc"
@@ -3143,6 +3153,16 @@
     {
       "FilePath": "Views\\Client\\Update.cshtml",
       "TargetPath": "Views\\Client\\Update.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Request\\PaidRequest.cshtml",
+      "TargetPath": "Views\\Request\\PaidRequest.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Request\\PendingRequest.cshtml",
+      "TargetPath": "Views\\Request\\PendingRequest.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -3163,6 +3183,11 @@
     {
       "FilePath": "Views\\Request\\WorkingRequest.cshtml",
       "TargetPath": "Views\\Request\\WorkingRequest.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Reports\\Index.cshtml",
+      "TargetPath": "Views\\Reports\\Index.cshtml",
       "FileKind": "mvc"
     },
     {

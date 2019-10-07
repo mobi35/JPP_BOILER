@@ -39,8 +39,8 @@ Layout = "BackEnd";
                      </td>
                 <td> <a return="confirm('are you sure you want to delete?')" asp-route-id="@request.RequestId" asp-controller="Request" asp-action="Delete">Delete</a> 
                 
-                <a   asp-route-id="@request.RequestId" asp-controller="Request" asp-action="AcceptService">Accept Service</a>
-                     <button onclick="getMyId('@request.RequestId')" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
+                <a  asp-route-id="@request.RequestId" asp-controller="Request" asp-action="AcceptService">Accept Service</a>
+                     <button onclick="getMyId('@request.RequestId')" class="btn btn-success btn-lg" id="payClick" data-toggle="modal" data-target="#myModal">
                 Accept/Reject Service
                 </button>
 
@@ -63,7 +63,7 @@ Layout = "BackEnd";
               
 <br /><br /><br /><br />
      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <form method="post" asp-action="ConfirmViewing" asp-controller="Request">
+          <form  method="post" asp-action="PayRequest" asp-controller="Request">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -74,9 +74,11 @@ Layout = "BackEnd";
                     <div class="modal-body">
                         <h5>Placeholder</h5>
                     
-                       <input type="hidden" id="requestId" name="id" class="form-control" >
-                        <input type="number"  name="priceQuote" class="form-control" placeholder="Price">
-                          <input type="text" placeholder="Number of Workers" name="worker" class="form-control" >
+                     
+                          <input type="hidden" id="requestId" name="id" class="form-control" >
+                          <input type="text" placeholder="Account Name" name="accountName" class="form-control" >
+                             <input type="text" placeholder="Account Number" name="accountNumber" class="form-control" >
+                          <div id="output">asd</div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -90,9 +92,30 @@ Layout = "BackEnd";
               </div>
 
 <script>
+
+function getMyId(x){
+   var id = x;
+
+        $.ajax({
+            url: '/Request/FetchData/',
+            type: 'post',
+            data: {
+                id: id
+            },
+            success: function (e) {
+                $('#output').html(e);
+               
+            }
+        });
+        return false;
+  }
+
+
   function getMyId(x){
     $('#requestId').val(x);
   }
+
+  
 
     $(document).ready(function () {
         $('#userList').DataTable({

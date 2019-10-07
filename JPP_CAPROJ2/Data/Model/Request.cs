@@ -32,6 +32,10 @@ namespace JPP_CAPROJ2.Data.Model
         public float Price {get; set;}
         
         public string Status {get; set;}
+
+        public bool IsPaid {get; set;}
+        public string AccountName {get; set;}
+        public string AccountNumber {get; set;}
         [NotMapped]
         public string Message { get; set; }
 

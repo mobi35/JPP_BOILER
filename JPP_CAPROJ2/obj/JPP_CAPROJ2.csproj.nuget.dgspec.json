@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ADRIAN\\Documents\\JPP_BOILER-master\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj": {}
+    "D:\\JPP\\JPP_BOILER-master\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ADRIAN\\Documents\\JPP_BOILER-master\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj": {
+    "D:\\JPP\\JPP_BOILER-master\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADRIAN\\Documents\\JPP_BOILER-master\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj",
+        "projectUniqueName": "D:\\JPP\\JPP_BOILER-master\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj",
         "projectName": "JPP_CAPROJ2",
-        "projectPath": "C:\\Users\\ADRIAN\\Documents\\JPP_BOILER-master\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj",
-        "packagesPath": "C:\\Users\\ADRIAN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADRIAN\\Documents\\JPP_BOILER-master\\JPP_CAPROJ2\\obj\\",
+        "projectPath": "D:\\JPP\\JPP_BOILER-master\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj",
+        "packagesPath": "C:\\Users\\ADICHAN\\.nuget\\packages\\",
+        "outputPath": "D:\\JPP\\JPP_BOILER-master\\JPP_CAPROJ2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\ADRIAN\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ADICHAN\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"

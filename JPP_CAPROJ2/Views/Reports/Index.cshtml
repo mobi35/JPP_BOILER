@@ -1,57 +1,31 @@
-﻿@model IEnumerable<User>
-@{
-    ViewData["Title"] = "User List";
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
 Layout = "BackEnd";
 }
-  
 
 
+
+    
     <section id="main-content"> 
          <div class="wrapper">
 
-               <h3><i class="fa fa-angle-right"></i> Form Components</h3>
-        <!-- BASIC FORM ELELEMNTS -->
-        <div class="row mt">
-          <div class="col-lg-12">
-            <div class="form-panel">
+               <h3><i class="fa fa-angle-right"></i>Reports</h3>
+     
+       
+asd
 
-<table class="table table-striped table-bordered responsive no-wrap" style="width:100%" id="userList">
-    <thead>
-        <tr>
-             <th>Task</th>
-              
-            <th>Name</th>
-            <th>Role</th>
-            <th>Phone Number</th>
-            <th>Email</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @{
-            foreach (var user in Model)
-            {   
-                <tr>
-                      <td>@user.NumberOfTask</td>
-                    <td>@user.FullName</td>
-                    <td>@user.Role</td>
-                    <td>@user.PhoneNumber</td>
-                    <td>@user.Email</td>
-                    <td><a asp-route-id="@user.UserId" asp-controller="Account" asp-action="Edit">Edit</a> <a return="confirm('are you sure you want to delete?')" asp-route-id="@user.UserId" asp-controller="Account" asp-action="Delete" >Delete</a>  </td>
-                </tr>
-            }
-        }
-    </tbody>
-</table>
-     </div>
-     </div>
-     </div>
-      </section>
+</div>  
+</section>
 <br /><br /><br /><br />
 
 
 <script>
+
+
+function MyFunction(){
+    alert("asdasd");
+}
+
     $(document).ready(function () {
         $('#userList').DataTable({
 
@@ -100,5 +74,4 @@ Layout = "BackEnd";
 <link href="~/DataTables-1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 <link href="~/DataTables-1.10.18/css/button.css" rel="stylesheet" />
 <script src="~/DataTables-1.10.18/js/dataTables.bootstrap4.js"></script>
-
 
