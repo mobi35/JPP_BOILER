@@ -47,7 +47,7 @@
                             </div>
                         </div>
 
-
+                        <input type="hidden" name="serviceType" value="Boiler" />
 
                      
                         <div class="form-group ">
@@ -81,28 +81,30 @@
                     <form class="cmxform form-horizontal style-form" id="signupForm" asp-action="Create" asp-controller="Request" method="post">
                         <div class="form-group ">
                             <div class="col-lg-10">
-                           <h1>Plumbing</h1>
-                           </div>
+                                <h1>Plumbing</h1>
+                            </div>
                         </div>
-                    <div class="form-group ">
+                        <div class="form-group ">
                             <label for="username" class="control-label col-lg-2">Address</label>
                             <div class="col-lg-10">
-                                <input asp-for="Address" class="form-control " id="username"  type="text" />
-                            </div>
-                    </div>
-                       <div class="form-group ">
-                            <label for="username" class="control-label col-lg-2">Requirements</label>
-                            <div class="col-lg-10">
-                                <input asp-for="Requirements" class="form-control " id="username"  type="file" />
-                            </div>
-                    </div>
- <div class="form-group ">
-                            <label for="username" class="control-label col-lg-2">Images</label>
-                            <div class="col-lg-10">
-                                <input asp-for="Image" class="form-control " id="username"  type="file" />
+                                <input asp-for="Address" class="form-control " id="username" type="text" />
                             </div>
                         </div>
-                
+                        <div class="form-group ">
+                            <label for="username" class="control-label col-lg-2">Requirements</label>
+                            <div class="col-lg-10">
+                                <input asp-for="Requirements" class="form-control " id="username" type="file" />
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="serviceType" value="Plumbing" />
+                        <div class="form-group ">
+                            <label for="username" class="control-label col-lg-2">Images</label>
+                            <div class="col-lg-10">
+                                <input asp-for="Image" class="form-control " id="username" type="file" />
+                            </div>
+                        </div>
+
 
 
                         <div class="form-group ">
@@ -111,12 +113,12 @@
                                 <textarea class="form-control " asp-for="Description"> </textarea>
                             </div>
                         </div>
-                      
-                      
+
+
                         <div class="form-group ">
                             <label for="password" class="control-label col-lg-2">Available Date</label>
                             <div class="col-lg-10">
-                                   <input asp-for="AvailableDate" class="form-control " id="username"  type="date" />
+                                <input asp-for="AvailableDate" class="form-control " id="username" type="date" />
                             </div>
                         </div>
                         <div class="form-group">

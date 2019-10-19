@@ -22,8 +22,14 @@ private readonly IRequestRepository _requestRepo;
         }
         
         [HttpPost]
-        public IActionResult Create(Request request){
-          if(Workers().Count() == 0){
+        public IActionResult Create(Request request, string serviceType){
+
+            if (request.AvailableDate <= DateTime.Now)
+            {
+                request.Message = "Please only select future dates.";
+                return View("ViewError", request);
+            }
+            else  if(Workers().Count() == 0){
               request.Message = "Sorry no worker's at the moment. Please wait for the admin to create new workers";
               
                  return View("ViewError",request);
@@ -41,6 +47,7 @@ private readonly IRequestRepository _requestRepo;
                }
                request.Description = "";
                request.Status = "for viewing";
+            request.UserName = userName;
                 _requestRepo.Create(request);
             request.Message = "You have successfully requested for a service. Please wait for 2-3 days as the inspector will look at your unit";
               
@@ -106,10 +113,11 @@ private readonly IRequestRepository _requestRepo;
             return req;
             
         }
-        [HttpGet]
-         public IActionResult AcceptService(int id){
+        [HttpPost]
+         public IActionResult AcceptService(int id, float price){
             var request = _requestRepo.GetIdBy(id);
             request.Status = "accepted";
+            request.Price = price;
              _requestRepo.Update(request);  
             return RedirectToAction("List","Request");
          }
@@ -181,6 +189,19 @@ private readonly IRequestRepository _requestRepo;
             _requestRepo.Update(getRequest);          
              return View("WorkingRequest", GetWorkerList());
          }
+
+        public IActionResult EmployeeService()
+        {
+            var userName = HttpContext.Session.GetString("UserName");
+            var allRequest = _requestRepo.GetAll();
+            List<Request> requestList = new List<Request>();
+            foreach (var request in allRequest)
+            {
+                if (request.UserName == userName)
+                    requestList.Add(request);
+            }
+            return View(requestList);
+        }
 
         
     }

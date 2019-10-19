@@ -1,28 +1,64 @@
 ﻿@model IEnumerable<Notification>
 
 
-
-@{
-    foreach(var notif in Model){
-<li>
-    <a href="index.html#">
-        <span class="label label-warning"><i class="fa fa-bell"></i></span>
-        @notif.Description.Substring(0,20)..
-
-        @{TimeSpan mins =DateTime.Now - notif.StartDate ;
-        }
-        @{
-if(mins.TotalMinutes > 60){
- <span class="small italic">@Math.Round(mins.TotalHours) hour/s ago</span>
-}else if(mins.TotalHours > 24){
-<span class="small italic">@Math.Round(mins.TotalDays) day/s ago</span>
-}else {
- <span class="small italic">@Math.Round(mins.TotalMinutes) mins ago</span>
-}
-
-        }
-       
+<!-- notification dropdown start-->
+<li id="header_notification_bar" class="dropdown">
+    <a data-toggle="dropdown" class="dropdown-toggle" onclick="MyFunction()"  href="index.html#">
+        <i class="fa fa-bell-o"></i>
+        <span class="badge bg-warning"> @Model.Count()  </span>
     </a>
+    <ul class="dropdown-menu extended notification">
+        <div class="notify-arrow notify-arrow-yellow"></div>
+        <li>
+            <p class="yellow">You have @Model.Count() new notifications</p>
+        </li>
+
+        @{
+            foreach (var notif in Model)
+            {
+                <li>
+                    <a href="index.html#">
+                        <span class="label label-warning"><i class="fa fa-bell"></i></span>
+                        @notif.Description.Substring(0, 20)..
+
+                        @{TimeSpan mins = DateTime.Now - notif.StartDate;
+                        }
+                        @{
+                            if (mins.TotalMinutes > 60)
+                            {
+                                <span class="small italic">@Math.Round(mins.TotalHours) hour/s ago</span>
+                            }
+                            else if (mins.TotalHours > 24)
+                            {
+                                <span class="small italic">@Math.Round(mins.TotalDays) day/s ago</span>
+                            }
+                            else
+                            {
+                                <span class="small italic">@Math.Round(mins.TotalMinutes) mins ago</span>
+                            }
+                        }
+                    </a>
+                </li>
+            }
+        }
+        <li>
+            <a href="index.html#">See all notifications</a>
+        </li>
+    </ul>
 </li>
+<!-- notification dropdown end -->
+
+<script>
+
+    function MyFunction() {
+        $.ajax({
+            url: '/Notification/ClearNotification/',
+            type: 'GET',
+            success: function (x) {
+              
+            }
+
+        });
     }
-}
+
+</script>

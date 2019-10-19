@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ProductCartViewModel>
+
+
+
+
+<li id="header_notification_bar" class="dropdown">
+    <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+        <i class="fa fa-shopping-cart"></i>
+        <span class="badge bg-warning"> @Model.Count()  </span>
+    </a>
+    <ul class="dropdown-menu extended notification">
+        <div class="notify-arrow notify-arrow-yellow"></div>
+
+        <li>
+            <p class="yellow">You have @Model.Count() items in your cart</p>
+        </li>
+
+        @{
+            foreach (var cart in Model)
+            {
+                <li>
+                    <a asp-controller="Product" asp-action="ProductView" asp-route-id="@cart.Product.ProductKey" >
+                        <span class="label label-warning"><i class="fa fa-cart-plus"></i></span>
+                    @cart.Product.ProductName   <span style="color:gray">QTY:</span>   @cart.Cart.Quantity    <span style="color:gray">PRICE:</span> @cart.Product.Price
+                    </a>
+                </li>
+            }
+        }
+
+
+        <li>
+            <a asp-action="Cart" asp-controller="Cart">See all Items in the Cart</a>
+        </li>
+    </ul>
+</li>

@@ -35,7 +35,7 @@ Layout = "BackEnd";
             <tr>
                    <td>@request.AccountName</td>
                 <td>@request.AccountNumber</td>
-                <td>@request.Price</td>
+              
                  <td>@request.Status</td>
                  <td>@request.AssignedBy</td>
                  <td>
@@ -47,10 +47,8 @@ Layout = "BackEnd";
                     
                      
                      </td>
-                <td> <a return="confirm('are you sure you want to delete?')" asp-route-id="@request.RequestId" asp-controller="Request" asp-action="Delete">Delete</a> 
-                
-                <a onclick="MyFunction('asdasd')" asp-route-id="@request.RequestId"  asp-controller="Request" asp-action="AcceptService">Accept Service</a>
-                     <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
+                <td> 
+                     <button class="btn btn-success btn-lg" onclick="MyFunction('@request.RequestId')"  data-toggle="modal" data-target="#myModal">
                 Accept/Reject Service
                 </button>
 
@@ -63,7 +61,7 @@ Layout = "BackEnd";
                     </div>
                     <div class="modal-body">
                         <h5>Placeholder</h5>
-                       <input type="text" class="form-control" placeholder="placeholder">
+                       <input type="text" id="requestId" class="form-control" placeholder="placeholder">
                           <input type="text" class="form-control" placeholder="placeholder">
                     </div>
                     <div class="modal-footer">
@@ -73,7 +71,6 @@ Layout = "BackEnd";
                   </div>
                 </div>
               </div>
-                <a return="confirm('are you sure you want to reject?')" asp-route-id="@request.RequestId" asp-controller="Request" asp-action="RejectService">Reject Service</a> </td>
             </tr>
             }
         }
@@ -93,7 +90,9 @@ Layout = "BackEnd";
 
 <script>
 
-
+    function MyFunction(x) {
+        $('#requestId').val(x);
+    }
 
     $(document).ready(function () {
         $('#userList').DataTable({

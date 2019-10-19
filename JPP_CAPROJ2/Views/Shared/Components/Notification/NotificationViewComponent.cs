@@ -29,7 +29,9 @@ namespace JPP_CAPROJ2.Controllers
             List<Notification> notifList = new List<Notification>();
             var allNotif = _notifRepo.GetAll();
             foreach(var noti in allNotif){
+                if (noti.Name == userName && noti.Read == false) { 
                 notifList.Add(noti);
+                }
             }
             return View( notifList );
         }

@@ -24,10 +24,21 @@ namespace JPP_CAPROJ2.Controllers
             return View();
         }
 
-      
-
-      
-
-      
+        [HttpGet]
+        public IActionResult ClearNotification()
+        {
+            var userName = HttpContext.Session.GetString("UserName");
+       
+           var notifs = _notifRepo.GetAll();
+            foreach (var n in notifs)
+            {
+                if (n.Name == userName)
+                {
+                    n.Read = true;
+                    _notifRepo.Update(n);
+                }
+            }
+            return Content("baknit");
+        }
     }
 }

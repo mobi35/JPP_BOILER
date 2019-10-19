@@ -28,6 +28,14 @@ namespace JPP_CAPROJ2.Data
          
                 context.Users.Add(customer);
 
+                var product = new Product { ProductName = "Adichan", Price = 200, Description = "Good Product" };
+                  var product2 = new Product { ProductName = "Baguvix", Price = 500, Description = "Mediocre Product" };
+
+                      var product3 = new Product { ProductName = "Aezakmi", Price = 900, Description = "Bad Product" };
+             
+                context.Products.Add(product);
+                context.Products.Add(product2);
+                context.Products.Add(product3);
                 context.SaveChanges();
             }
         }

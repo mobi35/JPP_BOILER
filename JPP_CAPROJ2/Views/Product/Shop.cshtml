@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Privacy Policy";
+    Layout = "Client";
+}
+
+
+
+<section id="main-content">
+    <div class="wrapper">
+
+        @{ foreach (var prod in Model)
+            {
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <div class="custom-box">
+                        <div class="servicetitle">
+                                    <h4>@prod.ProductName</h4>
+                            <hr>
+                        </div>
+                        <div class="icn-main-container">
+                            <span class="icn-container">P @prod.Price</span>
+                        </div>
+                        <p>@prod.Description</p>
+                        <ul class="pricing">
+                            <li><a asp-route-id="@prod.ProductKey" asp-action="ProductView" asp-controller="Product">View Product</a></li>
+                            <li></li>
+                         
+                        </ul>
+                        <a class="btn btn-theme" asp-route-id="@prod.ProductKey" asp-action="AddToCart" asp-controller="Cart">Order Now</a>
+                    </div>
+                    <!-- end custombox -->
+                </div>
+
+
+            }
+        }
+
+
+
+</section>
+<br />
+<br />
+<br />
+<br />
+
+<script>
+
+
+    function MyFunction() {
+        alert("asdasd");
+    }
+
+    $(document).ready(function () {
+        $('#userList').DataTable({
+
+            responsive: true,
+            lengthChange: false,
+            "sScrollX": "100%",
+            "scrollCollapse": true,
+            dom: 'lBfrtip',
+            buttons: [
+                {
+                    extend: 'print',
+
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css({ 'font-size': '10pt' })
+                            .prepend(
+                                '<img style= src="~/Images/activefinancelogo.png"  style="position:absolute; height:500px; z-index:5000; width:500px; top:0; left:0;" />'
+                            );
+
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    }
+                }, 'excelHtml5', {
+                    extend: 'pdf',
+                    download: 'open',
+                }
+            ]
+
+        });
+    });
+
+</script>
+<script src="~/DataTables-1.10.18/js/jquery.dataTables.js"></script>
+<script src="~/DataTables-1.10.18/js/dataTables.buttons.min.js"></script>
+<script src="~/DataTables-1.10.18/js/buttons.print.min.js"></script>
+
+<script src="~/DataTables-1.10.18/js/pdfmake.min.js"></script>
+<script src="~/DataTables-1.10.18/js/vfs_fonts.js"></script>
+<script src="~/DataTables-1.10.18/js/buttons.html5.min.js"></script>
+<script src="~/DataTables-1.10.18/js/jszip.min.js"></script>
+<script src="~/DataTables-1.10.18/js/dataTables.responsive.min.js"></script>
+<script src="~/DataTables-1.10.18/js/responsive.bootstrap4.min.js"></script>
+
+<link href="~/DataTables-1.10.18/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+<link href="~/DataTables-1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<link href="~/DataTables-1.10.18/css/button.css" rel="stylesheet" />
+<script src="~/DataTables-1.10.18/js/dataTables.bootstrap4.js"></script>
+

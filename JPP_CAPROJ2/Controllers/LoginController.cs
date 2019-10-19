@@ -82,7 +82,7 @@ namespace JPP_CAPROJ2.Controllers
                 HttpContext.Session.SetString("Role", loginUser.Role);
                 Startup.IsSessionAvailable = true;
                 if(loginUser.Role == "employee") { 
-                return RedirectToAction("Index","Account");
+                return RedirectToAction("Create","Product");
                 }else if (loginUser.Role == "worker"){
                  return RedirectToAction("Index","Account");
                 }

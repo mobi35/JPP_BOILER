@@ -26,6 +26,8 @@ namespace JPP_CAPROJ2
         public IConfiguration Configuration { get; }
         public static bool IsSessionAvailable;
 
+      
+
         public static string whatService;
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -34,8 +36,10 @@ namespace JPP_CAPROJ2
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
             services.AddScoped<IServiceRepository, ServiceRepository>();
-             services.AddScoped<IRequestRepository, RequestRepository>();
+            services.AddScoped<IRequestRepository, RequestRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSession(so => so.IdleTimeout = TimeSpan.FromSeconds(5000));
             services.Configure<CookiePolicyOptions>(options =>
