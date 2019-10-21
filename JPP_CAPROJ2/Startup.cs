@@ -37,6 +37,8 @@ namespace JPP_CAPROJ2
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
             services.AddScoped<IServiceRepository, ServiceRepository>();
             services.AddScoped<IRequestRepository, RequestRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();

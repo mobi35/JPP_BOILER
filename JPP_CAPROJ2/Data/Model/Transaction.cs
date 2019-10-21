@@ -18,5 +18,11 @@ namespace JPP_CAPROJ2.Data.Model
         public string PaymentTerms { get; set; }
 
         public string PaymentStatus { get; set; }
+
+        public string ListOfProductsId { get; set; }
+
+        public double TotalPrice { get; set; }
+
+        public string UserName { get; set; }
     }
 }

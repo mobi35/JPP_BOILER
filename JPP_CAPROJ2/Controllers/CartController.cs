@@ -16,10 +16,14 @@ namespace JPP_CAPROJ2.Controllers
     {
         private IProductRepository _prodRepo;
         private ICartRepository _cartRepo;
-        public CartController(IProductRepository prodRepo, ICartRepository cartRepo)
+        private readonly IOrderRepository _orders;
+        private ITransactionRepository _transactionRepo;
+        public CartController(IOrderRepository orders, ITransactionRepository transactionRepo, IProductRepository prodRepo, ICartRepository cartRepo)
         {
             _prodRepo = prodRepo;
             _cartRepo = cartRepo;
+            _orders = orders;
+            _transactionRepo = transactionRepo;
         }
 
      
@@ -81,9 +85,73 @@ namespace JPP_CAPROJ2.Controllers
         }
 
         [HttpPost]
-        public IActionResult Checkout(List<ProductCartViewModel> productList)
+        public IActionResult Checkout( string bankAccount, string bankNumer)
         {
+            var userName = HttpContext.Session.GetString("UserName");
+            Transaction transaction = new Transaction();
+            transaction.BankName = bankAccount;
+            transaction.BankAccount = bankNumer;
+            transaction.PaymentStatus = "pending";
+          
+            double totalPrice = 0;
 
+            var productList = new List<ProductCartViewModel>();
+
+         
+            foreach (var c in _cartRepo.GetAll())
+            {
+                foreach (var p in _prodRepo.GetAll()) {  
+                if (c.UserName == userName && c.ProductID == p.ProductKey)
+                {
+                        productList.Add(new ProductCartViewModel
+                        {
+                            Product = p,
+                            Cart = c
+                        });
+                }
+                }
+            }
+
+            var last = 1;
+            try { 
+             last = _transactionRepo.GetAll().LastOrDefault().TransactionKey++;
+            }
+            catch (Exception   e)
+            {
+
+            }
+
+
+
+            foreach (var prod in productList)
+            {
+                if(prod.Cart.UserName == userName) { 
+                totalPrice += prod.Product.Price * prod.Cart.Quantity;
+                _orders.Create(new OrderedProducts
+                {
+                   ProductID = prod.Product.ProductKey,
+                   ProductName = prod.Product.ProductName,
+                   Quantity = prod.Cart.Quantity,
+                   TransactionID = last
+                });
+                }
+            }
+            transaction.TotalPrice = totalPrice;
+            transaction.UserName = userName;
+            _transactionRepo.Create(transaction);
+            
+           var cart = _cartRepo.GetAll();
+            foreach (var c in cart)
+            {
+
+                if (c.UserName == userName)
+                    _cartRepo.Delete(c);
+            }
+            return RedirectToAction("CheckoutSuccess");
+        }
+
+        public IActionResult CheckoutSuccess()
+        {
             return View();
         }
 
@@ -103,6 +171,34 @@ namespace JPP_CAPROJ2.Controllers
 
             
             return View(productCartVM);
+        }
+
+
+        public IActionResult MyOrders()
+        {
+            var userName = HttpContext.Session.GetString("UserName");
+            var transaction = _transactionRepo.GetAll();
+            var orders = _orders.GetAll();
+            List<MyOrdersViewModel> myOrdersVM = new List<MyOrdersViewModel>();
+            foreach (var trans in transaction)
+            {
+                if(trans.UserName == userName) { 
+                List<OrderedProducts> listProd = new List<OrderedProducts>();
+                foreach (var order in orders)
+                {
+                    if(order.TransactionID == trans.TransactionKey)
+                        listProd.Add(order); 
+
+                }
+                myOrdersVM.Add(new MyOrdersViewModel
+                {
+                    Transactions = trans,
+                    Orders = listProd
+                });
+                }
+            }
+            
+            return View(myOrdersVM);
         }
     }
 }
