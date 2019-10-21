@@ -63,7 +63,29 @@ namespace JPP_CAPROJ2.Controllers
             return View("Index", _prodRepo.GetAll());
         }
 
-      
+
+        public IActionResult Checkout()
+        {
+            List<ProductCartViewModel> productCartVM = new List<ProductCartViewModel>();
+
+            foreach (var cart in _cartRepo.GetAll())
+            {
+                foreach (var product in _prodRepo.GetAll())
+                {
+                    if (cart.ProductID == product.ProductKey)
+                        productCartVM.Add(new ProductCartViewModel { Product = product, Cart = cart });
+
+                }
+            }
+            return View(productCartVM);
+        }
+
+        [HttpPost]
+        public IActionResult Checkout(List<ProductCartViewModel> productList)
+        {
+
+            return View();
+        }
 
         public IActionResult Cart()
         {

@@ -1,0 +1,135 @@
+﻿@model IEnumerable<ProductCartViewModel>
+@{
+    ViewData["Title"] = "Privacy Policy";
+    Layout = "Client";
+}
+
+<section id="main-content">
+    <div class="wrapper">
+        <div class="row mt">
+            <div class="col-lg-8">
+                <div class="form-panel">
+                  <h1>Checkout Page</h1>
+
+                  <form method="post" asp-action="Checkout" asp-controller="Cart">
+
+                      <div id="step1">
+                          COD <input id="cod" name="paytype" type="radio" />
+                          Bank Account <input id="bank" name="paytype" type="radio" />
+
+                          <br />
+                          <div id="COD">
+                              <input placeholder="Exact Address" class="form-control" type="text" />
+                          </div>
+
+                          <div id="BankAccount">
+                              <br />
+                              <input type="text" id="bid" placeholder="Bank Account" class="form-control" name="bank_name" /><br />
+                              <input type="text" id="bnum" placeholder="Bank Account Number" class="form-control" name="bank_number" />
+                          </div>
+
+                          <a href="#" id="nextStep">Next Step</a>
+
+                      </div>
+
+                      <div id="step2">
+                          <h3>Are you sure you want to do this transaction ?</h3>
+
+                          <br />
+
+                          <div id="showPayment">
+
+                          </div>
+
+                          <div id="COD">
+                              <input placeholder="Exact Address" class="form-control" type="text" />
+                          </div>
+
+                          <div id="BankAccount">
+                              <br />
+                              <input type="text" placeholder="Bank Account" class="form-control" name="bank_name" /><br />
+                              <input type="text" placeholder="Bank Account Number" class="form-control" name="bank_number" />
+                          </div>
+                          <a href="#" id="previousStep">Previous Step</a>
+                          <button >Confirm Checkout</button>
+                      </div>
+                    
+
+                  </form>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-panel">
+                    <table class="table table-striped table-bordered responsive no-wrap" style="width:100%" id="userList">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var product in Model)
+                                {
+                                <tr>
+                                    <td>@product.Product.ProductName</td>
+                                    <td>@product.Product.Price</td>
+                                    <td>@product.Cart.Quantity</td>
+                                    <td><a return="confirm('are you sure you want to delete?')" asp-route-id="@product.Cart.CartKey" asp-controller="Cart" asp-action="Delete">Remove</a>  </td>
+                                </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</section>
+<br />
+<br />
+
+<script>
+    $('#step2').hide();
+      $('#step1').hide();
+    $('#nextStep').click(function () {
+       
+        $('#step1').hide();
+          $(' #step2').show();
+    });
+        $('#previouStep').click(function () {
+             $('#step2').hide();
+          $(' #step1').show();
+
+    });
+  
+    var paymentType = "";
+
+     $('#BankAccount').hide();
+        $('#COD').hide();
+
+    function MyFunction() {
+        alert("asdasd");
+    }
+
+    $('#bank').click(function () {
+        paymentType = "bank";
+          $('#showPayment').html('<br><p> Bank Account : ' + $('#bid').val() + '</p> <p> Bank Number' + $('#bnum').val() + '</p>' );
+        $('#BankAccount').show();
+        $('#COD').hide();
+           $('#step1').show();
+    })
+
+      $('#cod').click(function () {
+          paymentType = "cod";
+          $('#showPayment').html('<h2>Cash on delivery</h2>');
+           $('#step1').show();
+        $('#COD').show();
+        $('#BankAccount').hide();
+    })
+
+</script>
