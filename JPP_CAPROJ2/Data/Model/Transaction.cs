@@ -15,6 +15,6 @@ namespace JPP_CAPROJ2.Data.Model
 
         public string BankName { get; set; }
 
-
+        public 
     }
 }
