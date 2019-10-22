@@ -11,12 +11,16 @@ namespace JPP_CAPROJ2.Controllers
 {
     public class RequestController : Controller
     {
+        private readonly IOrderRepository _orderedRepository;
+        private readonly ITransactionRepository _transactionRepo;
         private readonly INotificationRepository _notifRepo;
         private readonly IUserRepository _userRepo;
 private readonly IRequestRepository _requestRepo;
-        public RequestController(INotificationRepository notifRepo, IUserRepository userRepo, IRequestRepository requestRepo)
+        public RequestController( IOrderRepository orderedRepository, ITransactionRepository transactionRepo,  INotificationRepository notifRepo, IUserRepository userRepo, IRequestRepository requestRepo)
         {
             _userRepo = userRepo;
+            _orderedRepository = orderedRepository;
+            _transactionRepo = transactionRepo;
             _notifRepo = notifRepo;
             _requestRepo = requestRepo;
         }
@@ -45,7 +49,7 @@ private readonly IRequestRepository _requestRepo;
                     _userRepo.Update(worker);
                     break;
                }
-               request.Description = "";
+               request.Description = serviceType;
                request.Status = "for viewing";
             request.UserName = userName;
                 _requestRepo.Create(request);
@@ -76,6 +80,8 @@ private readonly IRequestRepository _requestRepo;
                     _userRepo.Update(worker);
                     break;
             }
+
+
                req.Description = "";
                 req.Status = "for viewing";
                _requestRepo.Create(requestVM.Requests);
@@ -93,7 +99,59 @@ private readonly IRequestRepository _requestRepo;
             }
             return userList.OrderBy(a => a.NumberOfTask).ToList();
         }
+        [HttpGet]
+        public IActionResult CompleteService(int id)
+        {
+           var service = _requestRepo.GetIdBy(id);
+            service.Status = "Completed";
+            Transaction serviceTransaction = new Transaction();
+            service.Price = service.Price;
+            service.IsPaid = true;
+            serviceTransaction.BankAccount = "COD";
+            serviceTransaction.PaymentStatus = "Accepted";
+            serviceTransaction.TotalPrice = service.Price;
+            serviceTransaction.UserName = service.UserName;
+            serviceTransaction.PaymentTerms = "COD";
+            serviceTransaction.DateTimeStamps = DateTime.Now;
 
+            var last = 1;
+            try
+            {
+                last = _transactionRepo.GetAll().LastOrDefault().TransactionKey;
+                last++;
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            OrderedProducts orderedProd = new OrderedProducts();
+
+            orderedProd.Price = service.Price;
+            orderedProd.ProductName = service.Description + " service";
+            orderedProd.Quantity = 1;
+            orderedProd.TransactionID = last;
+            _orderedRepository.Create(orderedProd);
+            _transactionRepo.Create(serviceTransaction);
+            _requestRepo.Update(service);
+
+            _notifRepo.AddNotification($"Your service has already been completed. Thank you for choosing us.", service.UserName);
+            return View("ServiceCompleted");
+        }
+
+        public IActionResult ServiceCompleted()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CanceledService(int id)
+        {
+            var service = _requestRepo.GetIdBy(id);
+            service.Status = "Canceled";
+            _notifRepo.AddNotification($"Your service has already canceled. ", service.UserName);
+            return View("List",GetList());
+        }
         public IActionResult List(){
 
             return View(GetList());

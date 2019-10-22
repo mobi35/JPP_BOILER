@@ -24,37 +24,49 @@
                                 <th>Payment</th>
                                 <th>Status</th>
                                 <th>Action</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             @{
                                 foreach (var pVM in Model)
                                 {
-                                                    <tr>
-                                                        <td>@pVM.Transactions.BankName</td>
-                                                        <td>@pVM.Transactions.BankAccount</td>
-                                                        <td>
-                                                            @{
-                                                                foreach (var order in pVM.Orders)
-                                                                {
-                                                                    <p>@order.ProductName  X  @order.Quantity</p>
+                                                        <tr>
+                                                            <td>@pVM.Transactions.BankName</td>
+                                                            <td>@pVM.Transactions.BankAccount</td>
+                                                            <td>
+                                                                @{
+                                                                    foreach (var order in pVM.Orders)
+                                                                    {
+                                                                        <p>@order.ProductName  X  @order.Quantity</p>
+                                                                    }
                                                                 }
-                                                            }
 
-                                                        </td>
-                                                        <td>@pVM.Transactions.PaymentTerms</td>
-                                                        <td>@pVM.Transactions.TotalPrice</td>
-                                                        <td>@pVM.Transactions.PaymentStatus</td>
+                                                            </td>
+                                                            <td>@pVM.Transactions.PaymentTerms</td>
+                                                            <td>@pVM.Transactions.TotalPrice</td>
+                                                            <td>@pVM.Transactions.PaymentStatus</td>
 
-                                                        <td>
-                                                            @{
-                                                                if (pVM.Transactions.PaymentStatus == "pending")
-                                                                {
-                                                                    <a asp-route-id="@pVM.Transactions.TransactionKey" asp-action="AcceptPayment" asp-controller="Cart"> Accept Payment</a> <a asp-route-id="@pVM.Transactions.TransactionKey" asp-action="RejectPayment" asp-controller="Cart">Reject Payment</a>
+                                                            <td>
+                                                                @{
+                                                                    if (pVM.Transactions.PaymentStatus == "pending")
+                                                                    {
+                                                                        <a asp-route-id="@pVM.Transactions.TransactionKey" asp-action="AcceptPayment" asp-controller="Cart"> Accept Payment</a> <a asp-route-id="@pVM.Transactions.TransactionKey" asp-action="RejectPayment" asp-controller="Cart">Reject Payment</a>
+                                                                    }
                                                                 }
-                                                            }
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+
+                                                            <td>
+                                                                @{
+                                                                    if (pVM.Transactions.PaymentStatus == "Accepted")
+                                                                    {
+                                                                        <a asp-action="Invoice" asp-controller="Cart" asp-route-id="@pVM.Transactions.TransactionKey">
+                                                                            View Invoice
+                                                                        </a>
+                                                                    }
+                                                                }
+                                                            </td>
+                                                        </tr>
                                 }
                             }
                         </tbody>

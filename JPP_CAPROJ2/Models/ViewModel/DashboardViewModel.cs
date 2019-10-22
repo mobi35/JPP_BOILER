@@ -10,6 +10,12 @@ namespace JPP_CAPROJ2.Models.ViewModel
     {
         public List<double> IncomePerMonth { get; set; }
 
+        public List<double> IncomePerWeek { get; set; }
      
+        public double IncomeToday { get; set; }
+
+        public List<Transaction> NewTransactions { get; set; }
+
+       
     }
 }

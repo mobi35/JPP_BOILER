@@ -42,9 +42,70 @@ namespace JPP_CAPROJ2.Controllers
 
             }
 
+         
+
+
+            ///////// INCOME PER WEEk
+            ///
+
+
+            List<double> listOfIncomePerWeek = new List<double>();
+
+            DateTime today = DateTime.Today;
+            int currentDayOfWeek = (int)today.DayOfWeek;
+            DateTime sunday = today.AddDays(-currentDayOfWeek);
+            DateTime monday = sunday.AddDays(1);
+            // If we started on Sunday, we should actually have gone *back*
+            // 6 days instead of forward 1...
+            if (currentDayOfWeek == 0)
+            {
+                monday = monday.AddDays(-7);
+            }
+            var dates = Enumerable.Range(0, 7).Select(days => monday.AddDays(days)).ToList();
+
+            foreach (var weekDates in dates)
+            {
+                double weekValues = 0;
+                foreach (var transaction in _transactionRepo.GetAll())
+                {
+                    if (transaction.DateTimeStamps.Value.Date == weekDates.Date && transaction.PaymentStatus == "Accepted")
+                    {
+                        weekValues += transaction.TotalPrice;
+                    }
+
+                }
+                listOfIncomePerWeek.Add(weekValues);
+            }
+
+            //// INCOME TODAY HEHE
+            ///
+
+
+            double totalIncomeToday = 0;
+            foreach (var transaction in _transactionRepo.GetAll())
+            {
+                if (transaction.DateTimeStamps.Value.Date == DateTime.Now.Date && transaction.PaymentStatus == "Accepted")
+                {
+                    totalIncomeToday += transaction.TotalPrice;
+                }
+
+            }
+
+
+
+            //// NEW TRANSACTIONS 5
+            ///
+
+            var newTransactions = _transactionRepo.GetAll().OrderByDescending(a => a.TransactionKey).Take(5).ToList();
+
+
+
             DashboardViewModel dashVM = new DashboardViewModel
             {
-                IncomePerMonth = listOfIncomePerMonth
+                IncomePerMonth = listOfIncomePerMonth,
+                IncomePerWeek = listOfIncomePerWeek,
+                IncomeToday = totalIncomeToday,
+                NewTransactions = newTransactions
             };
             return View(dashVM);
         }

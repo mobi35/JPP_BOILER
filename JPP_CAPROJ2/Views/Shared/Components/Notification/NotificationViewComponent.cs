@@ -25,6 +25,7 @@ namespace JPP_CAPROJ2.Controllers
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var userName =  HttpContext.Session.GetString("UserName");
+            ViewBag.EmployeePosition = _userRepo.FindUser(a => a.UserName == userName).Role;
             var findNotif = _notifRepo.FindNotification(a => a.Name == userName);
             List<Notification> notifList = new List<Notification>();
             var allNotif = _notifRepo.GetAll();

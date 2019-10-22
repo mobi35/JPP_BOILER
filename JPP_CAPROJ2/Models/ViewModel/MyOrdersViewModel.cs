@@ -11,5 +11,7 @@ namespace JPP_CAPROJ2.Models.ViewModel
         public List<OrderedProducts> Orders { get; set; }
 
         public Transaction Transactions { get; set; }
+
+        public User User { get; set; }
     }
 }

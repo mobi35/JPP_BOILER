@@ -40,5 +40,24 @@ namespace JPP_CAPROJ2.Controllers
             }
             return Content("baknit");
         }
+
+        public IActionResult AdminNotification()
+        {
+            return View(_notifRepo.GetAll());
+        }
+
+        public IActionResult ClientNotification()
+        {
+            var userName = HttpContext.Session.GetString("UserName");
+            List<Notification> notifications = new List<Notification>();
+            foreach (var notif in _notifRepo.GetAll())
+            {
+                if (notif.Name == userName)
+                    notifications.Add(notif);
+
+            }
+            return View(notifications);
+        }
+
     }
 }

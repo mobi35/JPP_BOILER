@@ -2,11 +2,26 @@
 
 
 <!-- notification dropdown start-->
-<li id="header_notification_bar" class="dropdown">
-    <a data-toggle="dropdown" class="dropdown-toggle" onclick="MyFunction()"  href="index.html#">
-        <i class="fa fa-bell-o"></i>
-        <span class="badge bg-warning"> @Model.Count()  </span>
-    </a>
+    <li id="header_notification_bar" class="dropdown">
+        @{
+
+            if (ViewBag.EmployeePosition == "customer")
+            {
+                <a data-toggle="dropdown" class="dropdown-toggle" onclick="MyFunction()" asp-action="ClientNotification" asp-controller="Notification">
+                    <i class="fa fa-bell-o"></i>
+                    <span class="badge bg-warning"> @Model.Count()  </span>
+                </a>
+            }
+            else
+            {
+                <a data-toggle="dropdown" class="dropdown-toggle" onclick="MyFunction()" asp-action="AdminNotification" asp-controller="Notification">
+                    <i class="fa fa-bell-o"></i>
+                    <span class="badge bg-warning"> @Model.Count()  </span>
+                </a>
+            }
+
+        }
+
     <ul class="dropdown-menu extended notification">
         <div class="notify-arrow notify-arrow-yellow"></div>
         <li>
@@ -17,7 +32,7 @@
             foreach (var notif in Model)
             {
                 <li>
-                    <a href="index.html#">
+                    <a>
                         <span class="label label-warning"><i class="fa fa-bell"></i></span>
                         @notif.Description.Substring(0, 20)..
 
@@ -41,11 +56,28 @@
                 </li>
             }
         }
-        <li>
-            <a href="index.html#">See all notifications</a>
-        </li>
+
+        @{
+
+            if (ViewBag.EmployeePosition == "customer")
+            {
+             
+                <li>
+                    <a asp-action="ClientNotification" asp-controller="Notification">See all notifications</a>
+                </li>
+            }
+            else
+            {
+             
+                <li>
+                    <a asp-action="AdminNotification" asp-controller="Notification">See all notifications</a>
+                </li>
+            }
+
+        }
+
     </ul>
-</li>
+    </li>
 <!-- notification dropdown end -->
 
 <script>

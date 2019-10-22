@@ -22,6 +22,7 @@
                                 <th>Products</th>
                                 <th>Payment</th>
                                 <th>Status</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,6 +43,15 @@
                                         </td>
                                         <td>@pVM.Transactions.TotalPrice</td>
                                         <td>@pVM.Transactions.PaymentStatus</td>
+
+                                        <td>
+                                            @{
+                                                if(pVM.Transactions.PaymentStatus == "Accepted") { 
+                                                <a asp-action="Invoice" asp-controller="Cart" asp-route-id="@pVM.Transactions.TransactionKey">
+                                                </a>
+                                                }
+                                            }
+                                        </td>
                                     </tr>
                                 }
                             }

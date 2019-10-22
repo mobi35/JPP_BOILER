@@ -33,7 +33,7 @@ namespace JPP_CAPROJ2.Data.Model
         [Column(TypeName = "varchar(50)")]
         public string Role { get; set; }
 
-       
+       public string Address { get; set; }
 
         [NotMapped]
         public string ConfirmPassword { get; set; }

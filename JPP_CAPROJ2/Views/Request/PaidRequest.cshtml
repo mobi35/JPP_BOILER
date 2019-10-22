@@ -19,12 +19,11 @@ Layout = "BackEnd";
           <table class="table table-striped table-bordered responsive no-wrap" style="width:100%;margin-top:2%;" id="userList">
     <thead>
         <tr>
-            <th>Account Name</th>
-            <th>Account Number</th>
+         
               <th>Price</th>
               <th>Status</th>
            <th>Assigned By</th>
-                <th>Action</th>
+             
                  <th></th>
         </tr>
     </thead>
@@ -33,47 +32,29 @@ Layout = "BackEnd";
         @{
             foreach (var request in Model)
             {
-            <tr>
-                   <td>@request.AccountName</td>
-                <td>@request.AccountNumber</td>
-                <td>@request.Price</td>
-                 <td>@request.Status</td>
-                 <td>@request.AssignedBy</td>
-                 <td>
-                 
-                 
-                       <span class="label label-warning">@request.Status</span>
-                   
-                     
-                     </td>
-                <td> <a return="confirm('are you sure you want to delete?')" asp-route-id="@request.RequestId" asp-controller="Request" asp-action="Delete">Delete</a> 
-                
-                <a onclick="MyFunction('asdasd')" asp-route-id="@request.RequestId"  asp-controller="Request" asp-action="AcceptService">Accept Service</a>
-                     <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
-                Accept/Reject Service
-                </button>
+                if (request.Status != "for viewing") { 
+                <tr>
 
-                   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                      <h4 class="modal-title" id="myModalLabel">Service Quotation</h4>
-                    </div>
-                    <div class="modal-body">
-                        <h5>Placeholder</h5>
-                       <input type="text" class="form-control" placeholder="placeholder">
-                          <input type="text" class="form-control" placeholder="placeholder">
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-                <a return="confirm('are you sure you want to reject?')" asp-route-id="@request.RequestId" asp-controller="Request" asp-action="RejectService">Reject Service</a> </td>
-            </tr>
+                    <td>@request.Price</td>
+                    <td>  <span class="label label-warning">@request.Status</span></td>
+                    <td>@request.AssignedBy</td>
+
+                    <td>
+                        @{
+
+                            if (request.Status != "Canceled" && request.Status != "Completed")
+                            {
+
+
+                                <a  asp-route-id="@request.RequestId" asp-controller="Request" asp-action="CompleteService">Complete Service</a>
+
+                                <a  asp-route-id="@request.RequestId" asp-controller="Request" asp-action="CancelService">Cancel Service</a>
+                            }
+                        }
+                    </td>
+                      
+                    </tr>
+                    }
             }
         }
     </tbody>

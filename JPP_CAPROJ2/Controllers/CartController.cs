@@ -16,12 +16,16 @@ namespace JPP_CAPROJ2.Controllers
     {
         private IProductRepository _prodRepo;
         private ICartRepository _cartRepo;
+        private readonly IUserRepository _userRepo;
+        private readonly INotificationRepository _notificationRepo;
         private readonly IOrderRepository _orders;
         private ITransactionRepository _transactionRepo;
-        public CartController(IOrderRepository orders, ITransactionRepository transactionRepo, IProductRepository prodRepo, ICartRepository cartRepo)
+        public CartController(IUserRepository userRepo,  INotificationRepository notificationRepo, IOrderRepository orders, ITransactionRepository transactionRepo, IProductRepository prodRepo, ICartRepository cartRepo)
         {
             _prodRepo = prodRepo;
             _cartRepo = cartRepo;
+            _userRepo = userRepo;
+            _notificationRepo = notificationRepo;
             _orders = orders;
             _transactionRepo = transactionRepo;
         }
@@ -126,6 +130,7 @@ namespace JPP_CAPROJ2.Controllers
                    ProductID = prod.Product.ProductKey,
                    ProductName = prod.Product.ProductName,
                    Quantity = prod.Cart.Quantity,
+                   Price = prod.Product.Price,
                    TransactionID = last
                 });
                 }
@@ -144,12 +149,14 @@ namespace JPP_CAPROJ2.Controllers
             _transactionRepo.Create(transaction);
             
            var cart = _cartRepo.GetAll();
+            _notificationRepo.AddNotification($"1 new product order from {transaction.UserName}", transaction.UserName);
             foreach (var c in cart)
             {
 
                 if (c.UserName == userName)
                     _cartRepo.Delete(c);
             }
+
             return RedirectToAction("CheckoutSuccess");
         }
 
@@ -160,8 +167,9 @@ namespace JPP_CAPROJ2.Controllers
 
         public IActionResult Cart()
         {
+            
             List<ProductCartViewModel> productCartVM = new List<ProductCartViewModel>();
-
+          
             foreach (var cart in _cartRepo.GetAll())
             {
                 foreach (var product in _prodRepo.GetAll())
@@ -171,7 +179,16 @@ namespace JPP_CAPROJ2.Controllers
                 
                 }
             }
+            if (productCartVM.ToList().Count() == 0)
+            {
+                return View("NoItemsInCart");
+            }
             return View(productCartVM);
+        }
+
+        public IActionResult NoItemsInCart()
+        {
+            return View();
         }
 
 
@@ -207,6 +224,7 @@ namespace JPP_CAPROJ2.Controllers
            var trans = _transactionRepo.GetIdBy(id);
             trans.PaymentStatus = "Accepted";
             _transactionRepo.Update(trans);
+            _notificationRepo.AddNotification("You're Transaction has been accepted.", trans.UserName);
             return View("ProductOrders", MyOrdersVM());
         }
 
@@ -215,6 +233,7 @@ namespace JPP_CAPROJ2.Controllers
             var trans = _transactionRepo.GetIdBy(id);
             trans.PaymentStatus = "Rejected";
             _transactionRepo.Update(trans);
+            _notificationRepo.AddNotification("You're Transaction is rejected. Please choose a valid bank account", trans.UserName);
             return View("ProductOrders", MyOrdersVM());
 
         }
@@ -249,6 +268,19 @@ namespace JPP_CAPROJ2.Controllers
             }
 
             return myOrdersVM;
+        }
+
+        public IActionResult Invoice(int id)
+        {
+            MyOrdersViewModel myOrdersVM = new MyOrdersViewModel
+            {
+                Transactions = _transactionRepo.GetIdBy(id),
+                Orders = _orders.GetAll().Where(a => a.TransactionID == id).ToList(),
+                User = _userRepo.FindUser(a => a.UserName == _transactionRepo.GetIdBy(id).UserName)
+
+            };
+
+            return View(myOrdersVM);
         }
     }
 }

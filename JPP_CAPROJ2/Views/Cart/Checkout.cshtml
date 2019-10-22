@@ -41,7 +41,7 @@
 
                             </div>
                             <a href="#" id="previousStep">Previous Step</a>
-                            <button>Confirm Checkout</button>
+                            <button onclick="return Validate()">Confirm Checkout</button>
                         </div>
 
 
@@ -85,6 +85,19 @@
 <br />
 
 <script>
+
+    function Validate() {
+        var bankcheck = document.getElementById("bank");
+
+        if (bankcheck.checked) {
+            if ($('#bid').val() == "" || $('#bnum').val() == "") { 
+                alert("Please put details");
+                return false;
+             }
+        }
+    }
+
+
     var paymentType = "";
     $('#step2').hide();
     $('#step1').hide();
