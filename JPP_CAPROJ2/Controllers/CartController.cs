@@ -58,8 +58,6 @@ namespace JPP_CAPROJ2.Controllers
             return View();
         }
 
-    
-
         public IActionResult Delete(int id)
         {
             var product = _prodRepo.GetIdBy(id);
@@ -67,11 +65,9 @@ namespace JPP_CAPROJ2.Controllers
             return View("Index", _prodRepo.GetAll());
         }
 
-
         public IActionResult Checkout()
         {
             List<ProductCartViewModel> productCartVM = new List<ProductCartViewModel>();
-
             foreach (var cart in _cartRepo.GetAll())
             {
                 foreach (var product in _prodRepo.GetAll())
@@ -85,7 +81,7 @@ namespace JPP_CAPROJ2.Controllers
         }
 
         [HttpPost]
-        public IActionResult Checkout( string bankAccount, string bankNumer)
+        public IActionResult Checkout( string bankAccount, string bankNumer, string paytype)
         {
             var userName = HttpContext.Session.GetString("UserName");
             Transaction transaction = new Transaction();
@@ -114,15 +110,13 @@ namespace JPP_CAPROJ2.Controllers
 
             var last = 1;
             try { 
-             last = _transactionRepo.GetAll().LastOrDefault().TransactionKey++;
+             last = _transactionRepo.GetAll().LastOrDefault().TransactionKey;
+                last++;
             }
             catch (Exception   e)
             {
 
             }
-
-
-
             foreach (var prod in productList)
             {
                 if(prod.Cart.UserName == userName) { 
@@ -136,8 +130,17 @@ namespace JPP_CAPROJ2.Controllers
                 });
                 }
             }
+            if (paytype == "bank")
+            {
+                transaction.PaymentTerms = "Bank Account";
+            }else
+            {
+                transaction.PaymentTerms = "Cash on delivery";
+                
+            }
             transaction.TotalPrice = totalPrice;
             transaction.UserName = userName;
+            transaction.DateTimeStamps = DateTime.Now;
             _transactionRepo.Create(transaction);
             
            var cart = _cartRepo.GetAll();
@@ -168,8 +171,6 @@ namespace JPP_CAPROJ2.Controllers
                 
                 }
             }
-
-            
             return View(productCartVM);
         }
 
@@ -199,6 +200,55 @@ namespace JPP_CAPROJ2.Controllers
             }
             
             return View(myOrdersVM);
+        }
+
+        public IActionResult AcceptPayment(int id)
+        {
+           var trans = _transactionRepo.GetIdBy(id);
+            trans.PaymentStatus = "Accepted";
+            _transactionRepo.Update(trans);
+            return View("ProductOrders", MyOrdersVM());
+        }
+
+        public IActionResult RejectPayment(int id)
+        {
+            var trans = _transactionRepo.GetIdBy(id);
+            trans.PaymentStatus = "Rejected";
+            _transactionRepo.Update(trans);
+            return View("ProductOrders", MyOrdersVM());
+
+        }
+        public IActionResult ProductOrders()
+        {
+            return View(MyOrdersVM());
+         
+        }
+
+        public List<MyOrdersViewModel> MyOrdersVM()
+        {
+
+            var transaction = _transactionRepo.GetAll();
+            var orders = _orders.GetAll();
+            List<MyOrdersViewModel> myOrdersVM = new List<MyOrdersViewModel>();
+            foreach (var trans in transaction)
+            {
+
+                List<OrderedProducts> listProd = new List<OrderedProducts>();
+                foreach (var order in orders)
+                {
+                    if (order.TransactionID == trans.TransactionKey)
+                        listProd.Add(order);
+
+                }
+                myOrdersVM.Add(new MyOrdersViewModel
+                {
+                    Transactions = trans,
+                    Orders = listProd
+                });
+
+            }
+
+            return myOrdersVM;
         }
     }
 }

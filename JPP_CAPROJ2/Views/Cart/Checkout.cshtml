@@ -12,14 +12,14 @@
                         <h1>Checkout Page</h1>
 
 
-                        COD <input id="cod" name="paytype" type="radio" />
-                        Bank Account <input id="bank" name="paytype" type="radio" />
+                        COD <input id="cod" value="cod" name="paytype" type="radio" />
+                        Bank Account <input id="bank" value="bank" name="paytype" type="radio" />
                         <div id="step1">
 
 
                             <br />
                             <div id="COD">
-                                <input placeholder="Exact Address" class="form-control" type="text" />
+                               
                             </div>
 
                             <div id="BankAccount">
@@ -40,7 +40,6 @@
                             <div id="showPayment">
 
                             </div>
-
                             <a href="#" id="previousStep">Previous Step</a>
                             <button>Confirm Checkout</button>
                         </div>
@@ -129,7 +128,8 @@
 
     $('#cod').click(function () {
         paymentType = "cod";
-
+        $('#bid').val('');
+        $('#bnum').val(''); 
         $('#step1').show();
         $('#COD').show();
         $('#BankAccount').hide();

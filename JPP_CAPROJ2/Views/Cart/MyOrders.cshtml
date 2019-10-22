@@ -21,31 +21,34 @@
                                 <th>Bank Number</th>
                                 <th>Products</th>
                                 <th>Payment</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             @{
                                 foreach (var pVM in Model)
                                 {
-                                                        <tr>
-                                                            <td>@pVM.Transactions.BankName</td>
-                                                            <td>@pVM.Transactions.BankAccount</td>
-                                                            <td>
-                                                                @{
-                                                                    foreach (var order in pVM.Orders)
-                                                                    {
-                                                                        <p>@order.ProductName  X  @order.Quantity</p>
-                                                                    }
-                                                                }
+                                    <tr>
+                                        <td>@pVM.Transactions.BankName</td>
+                                        <td>@pVM.Transactions.BankAccount</td>
+                                        <td>
+                                            @{
+                                                foreach (var order in pVM.Orders)
+                                                {
+                                                    <p>@order.ProductName  X  @order.Quantity</p>
+                                                }
+                                            }
 
-                                                            </td>
-                                                            <td>@pVM.Transactions.TotalPrice</td>
-                                                        </tr>
+                                        </td>
+                                        <td>@pVM.Transactions.TotalPrice</td>
+                                        <td>@pVM.Transactions.PaymentStatus</td>
+                                    </tr>
                                 }
                             }
                         </tbody>
                     </table>
                 </div>
+            </div>
             </div>
         </div>
 </section>

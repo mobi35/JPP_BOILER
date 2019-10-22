@@ -24,5 +24,7 @@ namespace JPP_CAPROJ2.Data.Model
         public double TotalPrice { get; set; }
 
         public string UserName { get; set; }
+
+        public DateTime? DateTimeStamps { get; set; }
     }
 }
