@@ -51,7 +51,7 @@
                                                                 @{
                                                                     if (pVM.Transactions.PaymentStatus == "pending")
                                                                     {
-                                                                        <a asp-route-id="@pVM.Transactions.TransactionKey" asp-action="AcceptPayment" asp-controller="Cart"> Accept Payment</a> <a asp-route-id="@pVM.Transactions.TransactionKey" asp-action="RejectPayment" asp-controller="Cart">Reject Payment</a>
+                                                                        <a onclick="return confirm('Are you sure you want to accept this transaction?')" asp-route-id="@pVM.Transactions.TransactionKey" asp-action="AcceptPayment" asp-controller="Cart"> Accept Payment</a> <a asp-route-id="@pVM.Transactions.TransactionKey" c asp-action="RejectPayment" asp-controller="Cart">Reject Payment</a>
                                                                     }
                                                                 }
                                                             </td>

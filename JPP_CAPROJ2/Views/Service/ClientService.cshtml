@@ -1,91 +1,92 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
-Layout = "Client";
+    Layout = "Client";
 }
 @model IEnumerable<Service>
 
-<div class="container"> 
-   <div class="row">
-          <center> <h1>Quotation Services</h1></center>
-            <div class="col-md-4">
-                <div class="card-box-c foo">
-                    <div class="card-header-c d-flex">
-                        <div class="card-box-ico">
-                        <img src="~/img/plumbing.png"/>
-                        </div>
-                     
+
+<section id="main-content">
+    <div class="wrapper">
+        <center> <h1>Quotation Services</h1></center>
+        <div class="col-md-4">
+            <div class="card-box-c foo">
+                <div class="card-header-c d-flex">
+                    <div class="card-box-ico">
+                        <img src="~/img/plumbing.png" />
                     </div>
-                    <div class="card-body-c">
-                        
-                        <p class="content-c">
-                              <h2>Plumbing</h2>
-                          With over 50 years’ experience across all aspects of domestic and commercial plumbing and heating services we’re here to solve your plumbing problems.
-                        </p>
-                          <a  style="padding:5px;  border: 2px solid #2eca6a; border-radius:5px" asp-action="QuotationService" asp-controller="Service" asp-route-id="plumbing" >Apply</a>  <br><br>
-                    </div>
-                    <div class="card-footer-c">
-                        <a href="#" class="link-c link-icon">
-                           
-                            <span class="ion-ios-arrow-forward"></span>
-                        </a>
-                    </div>
+
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card-box-c foo">
-                    <div class="card-header-c d-flex">
-                         <div class="card-box-ico">
-                           <img src="~/img/installations.png"/>
-                    </div>
-                        <div class="card-title-c align-self-center">
-                          
-                         
-                        </div>
-                    </div>
-                    <div class="card-body-c">
-                         
-                        <p class="content-c">
-                              <h2>Boiler Installations</h2>
-                           Our Installations team are experienced in all central heating-related installations ensuring we can cater for your exact needs.
-                        </p>
-                        <a  style="padding:5px;  border: 2px solid #2eca6a; border-radius:5px" asp-action="QuotationService" asp-controller="Service" asp-route-id="boiler" >Apply</a>  <br><br>
-                    </div>
-                    <div class="card-footer-c">
-                        <a href="#" class="link-c link-icon">
-                           
-                            <span class="ion-ios-arrow-forward"></span>
-                        </a>
-                    </div>
+                <div class="card-body-c">
+
+                    <p class="content-c">
+                        <h2>Plumbing</h2>
+                        With over 50 years’ experience across all aspects of domestic and commercial plumbing and heating services we’re here to solve your plumbing problems.
+                    </p>
+                    <a style="padding:5px;  border: 2px solid #2eca6a; border-radius:5px" asp-action="QuotationService" asp-controller="Service" asp-route-id="plumbing">Apply</a>  <br><br>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card-box-c foo">
-                    <div class="card-header-c d-flex">
-                        <div class="card-box-ico">
-                              <img src="~/img/servicingbreakdown.png"/>
-                        </div>
-                        <div class="card-title-c align-self-center">
-                         
-                        </div>
-                    </div>
-                    <div class="card-body-c">
-                        <p class="content-c">
-                              <h2>Servicing & Breakdown</h2>
-                           Annual servicing and safety checks are vital to the continued safe, economical and effective operation of your gas boiler and heating and hot water system.
-                        </p>
-                    </div>
-                    <div class="card-footer-c">
-                        <a href="#" class="link-c link-icon">
-                         
-                            <span class="ion-ios-arrow-forward"></span>
-                        </a>
-                    </div>
+                <div class="card-footer-c">
+                    <a href="#" class="link-c link-icon">
+
+                        <span class="ion-ios-arrow-forward"></span>
+                    </a>
                 </div>
             </div>
         </div>
-</div>
+        <div class="col-md-4">
+            <div class="card-box-c foo">
+                <div class="card-header-c d-flex">
+                    <div class="card-box-ico">
+                        <img src="~/img/installations.png" />
+                    </div>
+                    <div class="card-title-c align-self-center">
 
-<hr>
 
-<br /><br /><br /><br />
+                    </div>
+                </div>
+                <div class="card-body-c">
+
+                    <p class="content-c">
+                        <h2>Boiler Installations</h2>
+                        Our Installations team are experienced in all central heating-related installations ensuring we can cater for your exact needs.
+                    </p>
+                    <a style="padding:5px;  border: 2px solid #2eca6a; border-radius:5px" asp-action="QuotationService" asp-controller="Service" asp-route-id="boiler">Apply</a>  <br><br>
+                </div>
+                <div class="card-footer-c">
+                    <a href="#" class="link-c link-icon">
+
+                        <span class="ion-ios-arrow-forward"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card-box-c foo">
+                <div class="card-header-c d-flex">
+                    <div class="card-box-ico">
+                        <img src="~/img/servicingbreakdown.png" />
+                    </div>
+                    <div class="card-title-c align-self-center">
+
+                    </div>
+                </div>
+                <div class="card-body-c">
+                    <p class="content-c">
+                        <h2>Servicing & Breakdown</h2>
+                        Annual servicing and safety checks are vital to the continued safe, economical and effective operation of your gas boiler and heating and hot water system.
+                    </p>
+                </div>
+                <div class="card-footer-c">
+                    <a href="#" class="link-c link-icon">
+
+                        <span class="ion-ios-arrow-forward"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <hr>
+
+    <br /><br /><br /><br />
 

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<Product>
+
+@{
     ViewData["Title"] = "Home Page";
     Layout = "FrontEnd";
 }
@@ -17,12 +19,12 @@
                             <div class="col-lg-8">
                                 <div class="intro-body">
                                     <p class="intro-title-top">
-                                       JPP Boiler Repair & Services
-                                   
+                                        JPP Boiler Repair & Services
+
                                     </p>
                                     <h1 class="intro-title mb-4">
                                         <span class="color-b">BOILER  </span> REPAIR
-                                        
+
                                     </h1>
                                     <p class="intro-subtitle intro-price">
                                         <a href="#"><span class="price-a">LOGIN</span></a>
@@ -38,17 +40,17 @@
             <div class="overlay overlay-a"></div>
             <div class="intro-content display-table">
                 <div class="table-cell">
-                       <div class="container">
+                    <div class="container">
                         <div class="row">
                             <div class="col-lg-8">
                                 <div class="intro-body">
                                     <p class="intro-title-top">
-                                       JPP Boiler Repair & Services
-                                   
+                                        JPP Boiler Repair & Services
+
                                     </p>
                                     <h1 class="intro-title mb-4">
                                         <span class="color-b">BOILER  </span> INSTALLATION
-                                        
+
                                     </h1>
                                     <p class="intro-subtitle intro-price">
                                         <a href="#"><span class="price-a">LOGIN</span></a>
@@ -64,17 +66,17 @@
             <div class="overlay overlay-a"></div>
             <div class="intro-content display-table">
                 <div class="table-cell">
-                     <div class="container">
+                    <div class="container">
                         <div class="row">
                             <div class="col-lg-8">
                                 <div class="intro-body">
                                     <p class="intro-title-top">
-                                       JPP Boiler Repair & Services
-                                   
+                                        JPP Boiler Repair & Services
+
                                     </p>
                                     <h1 class="intro-title mb-4">
                                         <span class="color-b">PLUMBING  </span> SERVICES
-                                        
+
                                     </h1>
                                     <p class="intro-subtitle intro-price">
                                         <a href="#"><span class="price-a">LOGIN</span></a>
@@ -106,44 +108,17 @@
                 <div class="card-box-c foo">
                     <div class="card-header-c d-flex">
                         <div class="card-box-ico">
-                        <img src="~/img/plumbing.png"/>
+                            <img src="~/img/plumbing.png" />
                         </div>
-                     
+
                     </div>
                     <div class="card-body-c">
-                        
+
                         <p class="content-c">
-                              <h2>Plumbing</h2>
-                          With over 50 years’ experience across all aspects of domestic and commercial plumbing and heating services we’re here to solve your plumbing problems.
+                            <h2>Plumbing</h2>
+                            With over 50 years’ experience across all aspects of domestic and commercial plumbing and heating services we’re here to solve your plumbing problems.
                         </p>
-                          <a  style="padding:5px;  border: 2px solid #2eca6a; border-radius:5px" asp-action="QuotationService" asp-controller="Service" asp-route-id="plumbing" >Apply</a>  <br><br>
-                    </div>
-                    <div class="card-footer-c">
-                        <a href="#" class="link-c link-icon">
-                            Read more
-                            <span class="ion-ios-arrow-forward"></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card-box-c foo">
-                    <div class="card-header-c d-flex">
-                         <div class="card-box-ico">
-                           <img src="~/img/installations.png"/>
-                    </div>
-                        <div class="card-title-c align-self-center">
-                          
-                         
-                        </div>
-                    </div>
-                    <div class="card-body-c">
-                         
-                        <p class="content-c">
-                              <h2>Boiler Installations</h2>
-                           Our Installations team are experienced in all central heating-related installations ensuring we can cater for your exact needs.
-                        </p>
-                        <a  style="padding:5px;  border: 2px solid #2eca6a; border-radius:5px" asp-action="QuotationService" asp-controller="Service" asp-route-id="boiler" >Apply</a>  <br><br>
+                        <a style="padding:5px;  border: 2px solid #2eca6a; border-radius:5px" asp-action="QuotationService" asp-controller="Service" asp-route-id="plumbing">Apply</a>  <br><br>
                     </div>
                     <div class="card-footer-c">
                         <a href="#" class="link-c link-icon">
@@ -157,16 +132,43 @@
                 <div class="card-box-c foo">
                     <div class="card-header-c d-flex">
                         <div class="card-box-ico">
-                              <img src="~/img/servicingbreakdown.png"/>
+                            <img src="~/img/installations.png" />
                         </div>
                         <div class="card-title-c align-self-center">
-                         
+
+
+                        </div>
+                    </div>
+                    <div class="card-body-c">
+
+                        <p class="content-c">
+                            <h2>Boiler Installations</h2>
+                            Our Installations team are experienced in all central heating-related installations ensuring we can cater for your exact needs.
+                        </p>
+                        <a style="padding:5px;  border: 2px solid #2eca6a; border-radius:5px" asp-action="QuotationService" asp-controller="Service" asp-route-id="boiler">Apply</a>  <br><br>
+                    </div>
+                    <div class="card-footer-c">
+                        <a href="#" class="link-c link-icon">
+                            Read more
+                            <span class="ion-ios-arrow-forward"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-box-c foo">
+                    <div class="card-header-c d-flex">
+                        <div class="card-box-ico">
+                            <img src="~/img/servicingbreakdown.png" />
+                        </div>
+                        <div class="card-title-c align-self-center">
+
                         </div>
                     </div>
                     <div class="card-body-c">
                         <p class="content-c">
-                              <h2>Servicing & Breakdown</h2>
-                           Annual servicing and safety checks are vital to the continued safe, economical and effective operation of your gas boiler and heating and hot water system.
+                            <h2>Servicing & Breakdown</h2>
+                            Annual servicing and safety checks are vital to the continued safe, economical and effective operation of your gas boiler and heating and hot water system.
                         </p>
                     </div>
                     <div class="card-footer-c">
@@ -177,6 +179,59 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+<!--/ Services End /-->
+<!--/ Services Star /-->
+<section class="section-services section-t8">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-wrap d-flex justify-content-between">
+                    <div class="title-box">
+                        <h2 class="title-a">Our Products</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            @{
+                foreach (var mod in Model)
+                {
+
+                    <div class="col-md-4">
+                        <div class="card-box-c foo">
+                            <div class="card-header-c d-flex">
+                                <div class="card-box-ico">
+                                    <img src="~/Images/@mod.Image" />
+                                </div>
+                                <div class="card-title-c align-self-center">
+
+                                </div>
+                            </div>
+                            <div class="card-body-c">
+
+                                <p class="content-c">
+                                    <h2>@mod.ProductName</h2>
+                                   @mod.Description
+                                </p>
+                                <a style="padding:5px;  border: 2px solid #2eca6a; border-radius:5px" asp-action="QuotationService" asp-controller="Service" asp-route-id="boiler">Apply</a>  <br><br>
+                            </div>
+                            <div class="card-footer-c">
+                                <a asp-controller="Login" asp-action="Index" class="link-c link-icon">
+                                    Read more
+                                    <span class="ion-ios-arrow-forward"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+            }
+
         </div>
     </div>
 </section>

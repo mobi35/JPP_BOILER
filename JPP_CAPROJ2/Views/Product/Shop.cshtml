@@ -6,38 +6,42 @@
 
 
 
-<section id="main-content">
-    <div class="wrapper">
+    <section id="main-content">
+        <div class="wrapper">
 
-        @{ foreach (var prod in Model)
-            {
+            @{ foreach (var prod in Model)
+                {
 
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                    <div class="custom-box">
-                        <div class="servicetitle">
-                                    <h4>@prod.ProductName</h4>
-                            <hr>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+
+                        <div class="custom-box">
+
+                            <div class="servicetitle">
+                                <h4>@prod.ProductName</h4>
+
+                                <img style="width:50%" src="~/Images/@prod.Image" />
+                                <hr>
+                            </div>
+                            <div class="icn-main-container">
+                                <span class="icn-container">P @prod.Price</span>
+                            </div>
+                            <p>@prod.Description</p>
+                            <ul class="pricing">
+                                <li><a asp-route-id="@prod.ProductKey" asp-action="ProductView" asp-controller="Product">View Product</a></li>
+                                <li></li>
+
+                            </ul>
+                            <a class="btn btn-theme" asp-route-id="@prod.ProductKey" asp-action="AddToCart" asp-controller="Cart">Order Now</a>
                         </div>
-                        <div class="icn-main-container">
-                            <span class="icn-container">P @prod.Price</span>
-                        </div>
-                        <p>@prod.Description</p>
-                        <ul class="pricing">
-                            <li><a asp-route-id="@prod.ProductKey" asp-action="ProductView" asp-controller="Product">View Product</a></li>
-                            <li></li>
-                         
-                        </ul>
-                        <a class="btn btn-theme" asp-route-id="@prod.ProductKey" asp-action="AddToCart" asp-controller="Cart">Order Now</a>
+                        <!-- end custombox -->
                     </div>
-                    <!-- end custombox -->
-                </div>
 
 
+                }
             }
-        }
 
         </div>
-</section>
+    </section>
 <br />
 <br />
 <br />

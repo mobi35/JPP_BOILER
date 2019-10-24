@@ -139,6 +139,15 @@ private readonly IRequestRepository _requestRepo;
             return View("ServiceCompleted");
         }
 
+        
+        [HttpGet]
+        public IActionResult RejectQuotation(int id)
+        {
+           var user =  _requestRepo.GetIdBy(id);
+            user.Status = "rejected";
+            _notifRepo.AddNotification($"Your request for viewing has been rejected. ", user.UserName);
+            return View("List",GetList());
+        }
         public IActionResult ServiceCompleted()
         {
             return View();
