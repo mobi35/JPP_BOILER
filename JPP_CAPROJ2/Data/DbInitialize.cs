@@ -16,11 +16,11 @@ namespace JPP_CAPROJ2.Data
             {
                 var context = serviceScope.ServiceProvider.GetService<JPPDbContext>();
 
-                var admin = new User {FullName="Bagito",PhoneNumber="09198882900" ,UserName = "admin", Password = "admin", Email = "Maeee",  Role = "employee" };
+                var admin = new User {FullName="Bagito",PhoneNumber="09198882900" ,UserName = "admin", Password = "YWRtaW5hZG1pbg==", Email = "Maeee",  Role = "employee", Status = "Activated" };
          
                 context.Users.Add(admin);
 
-                 var worker = new User {FullName="Worker",PhoneNumber="09198882900" ,UserName = "worker", Password = "worker", Email = "mobistyle35@gmail.com",  Role = "worker" };
+                 var worker = new User {FullName="Worker",PhoneNumber="09198882900" ,UserName = "worker", Password = "worker", Email = "mobistyle35@gmail.com", Status = "Activated", Role = "worker" };
          
                 context.Users.Add(worker);
 

@@ -173,7 +173,8 @@ namespace JPP_CAPROJ2.Controllers
             var loginUser = new User();
             foreach (var usr in search)
             {
-                if(user.UserName == usr.UserName && user.Password == base64Decode2(usr.Password))
+                string encoded = base64Encode(user.Password);
+                if(user.UserName == usr.UserName && encoded == usr.Password)
                 {
                     loginUser = usr;
                     matched = true;
