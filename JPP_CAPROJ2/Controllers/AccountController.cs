@@ -55,7 +55,7 @@ namespace JPP_CAPROJ2.Controllers
         {
             user.Message = "";
             if (ModelState.IsValid) {
-                var getEmail = _userRepo.FindUser(a => a.Email == user.Email).Email;
+                var getEmail = _userRepo.FindUser(a => a.Email == user.Email);
                 if(getEmail != null)
                 {
                     user.Message = "Email already exists";
@@ -83,7 +83,15 @@ namespace JPP_CAPROJ2.Controllers
         }
         public IActionResult List()
         {
-           
+            
+                var newRepo = _userRepo.GetAll().AsQueryable().ToList();
+                foreach (var s in newRepo)
+                {
+                    s.isRead = true;
+                    _userRepo.Update(s);
+                }
+          
+
             return View(GetList());
         }
 
@@ -112,13 +120,15 @@ namespace JPP_CAPROJ2.Controllers
         public List<User> GetList()
         {
             List<User> user = new List<User>();
-            var list = _userRepo.GetAll();
+            var list = _userRepo.GetAll().AsQueryable().ToList();
             foreach (var l in list)
             {
-                l.isRead = true;
-                _userRepo.Update(l);
+               // l.isRead = true;
+               // _userRepo.Update(l);
                 user.Add(l);
             }
+
+          
             return user;
         }
 

@@ -34,7 +34,7 @@
                                                         <li><a asp-route-id="@prod.ProductKey" asp-action="ProductView" asp-controller="Product">View Product</a></li>
                                                         <li></li>
 
-                                                        <center> <p>Quantity</p> <input value="1" name="qty" class="form-control" style="width:50%;  margin:4px;" type="text" /></center>
+                                                        <center> <p>Quantity</p><a class="btn bg-primary" id="minus">-</a> <input id="quantity" value="1" name="qty" class="form-inline" style="width:50%;  margin:4px;" type="text" /><a class="btn bg-primary" id="add">+</a></center>
                                                     </ul>
 
                                                     <input class="btn btn-theme" value="Order Now" type="submit" />
@@ -111,3 +111,27 @@
 <link href="~/DataTables-1.10.18/css/button.css" rel="stylesheet" />
 <script src="~/DataTables-1.10.18/js/dataTables.bootstrap4.js"></script>
 
+<script>
+
+    $('#add').click(function (d) {
+        var min = parseInt($('#quantity').val());
+        min++;
+        $("#quantity").val(min);
+    });
+
+     $('#minus').click(function () {
+         var min = parseInt($('#quantity').val());
+         if (min > 1) {
+              min--;
+         }
+         $("#quantity").val(min);
+    });
+     $("#quantity").keypress(function (e)
+     {
+     //if the letter is not digit then display error and don't type anything
+     if( e.which!=8 && e.which!=0 && (e.which<48 || e.which>57))
+     {
+     return false;
+     }
+     });
+</script>

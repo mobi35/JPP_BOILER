@@ -28,7 +28,7 @@ namespace JPP_CAPROJ2.Controllers
             ViewBag.EmployeePosition = _userRepo.FindUser(a => a.UserName == userName).Role;
             var findNotif = _notifRepo.FindNotification(a => a.Name == userName);
             List<Notification> notifList = new List<Notification>();
-            var allNotif = _notifRepo.GetAll();
+            var allNotif = _notifRepo.GetAll().AsQueryable().ToList();
             foreach(var noti in allNotif){
                 if (noti.Name == userName && noti.Read == false) { 
                 notifList.Add(noti);

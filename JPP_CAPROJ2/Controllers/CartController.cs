@@ -96,9 +96,9 @@ namespace JPP_CAPROJ2.Controllers
         public IActionResult Checkout()
         {
             List<ProductCartViewModel> productCartVM = new List<ProductCartViewModel>();
-            foreach (var cart in _cartRepo.GetAll())
+            foreach (var cart in _cartRepo.GetAll().AsQueryable().ToList())
             {
-                foreach (var product in _prodRepo.GetAll())
+                foreach (var product in _prodRepo.GetAll().AsQueryable().ToList())
                 {
                     if (cart.ProductID == product.ProductKey)
                         productCartVM.Add(new ProductCartViewModel { Product = product, Cart = cart });
@@ -122,9 +122,9 @@ namespace JPP_CAPROJ2.Controllers
             var productList = new List<ProductCartViewModel>();
 
          
-            foreach (var c in _cartRepo.GetAll())
+            foreach (var c in _cartRepo.GetAll().AsQueryable().ToList())
             {
-                foreach (var p in _prodRepo.GetAll()) {  
+                foreach (var p in _prodRepo.GetAll().AsQueryable().ToList()) {  
                 if (c.UserName == userName && c.ProductID == p.ProductKey)
                 {
                         productList.Add(new ProductCartViewModel
@@ -175,7 +175,7 @@ namespace JPP_CAPROJ2.Controllers
             transaction.DateTimeStamps = DateTime.Now;
             _transactionRepo.Create(transaction);
             
-           var cart = _cartRepo.GetAll();
+           var cart = _cartRepo.GetAll().AsQueryable().ToList();
             _notificationRepo.AddNotification($"1 new product order from {transaction.UserName}", transaction.UserName);
             foreach (var c in cart)
             {
@@ -199,9 +199,9 @@ namespace JPP_CAPROJ2.Controllers
             
             List<ProductCartViewModel> productCartVM = new List<ProductCartViewModel>();
           
-            foreach (var cart in _cartRepo.GetAll())
+            foreach (var cart in _cartRepo.GetAll().AsQueryable().ToList())
             {
-                foreach (var product in _prodRepo.GetAll())
+                foreach (var product in _prodRepo.GetAll().AsQueryable().ToList())
                 {
                     if(cart.ProductID == product.ProductKey)
                     productCartVM.Add(new ProductCartViewModel { Product = product, Cart = cart });
@@ -255,8 +255,8 @@ namespace JPP_CAPROJ2.Controllers
         public List<MyOrdersViewModel> MyOrdersVM()
         {
 
-            var transaction = _transactionRepo.GetAll();
-            var orders = _orders.GetAll();
+            var transaction = _transactionRepo.GetAll().AsQueryable().ToList();
+            var orders = _orders.GetAll().AsQueryable().ToList();
             List<MyOrdersViewModel> myOrdersVM = new List<MyOrdersViewModel>();
             foreach (var trans in transaction)
             {

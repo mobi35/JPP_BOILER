@@ -29,7 +29,7 @@ namespace JPP_CAPROJ2.Controllers
         {
             var userName = HttpContext.Session.GetString("UserName");
        
-           var notifs = _notifRepo.GetAll();
+           var notifs = _notifRepo.GetAll().AsQueryable().ToList();
             foreach (var n in notifs)
             {
                 if (n.Name == userName)
@@ -50,7 +50,7 @@ namespace JPP_CAPROJ2.Controllers
         {
             var userName = HttpContext.Session.GetString("UserName");
             List<Notification> notifications = new List<Notification>();
-            foreach (var notif in _notifRepo.GetAll())
+            foreach (var notif in _notifRepo.GetAll().AsQueryable().ToList())
             {
                 if (notif.Name == userName)
                     notifications.Add(notif);

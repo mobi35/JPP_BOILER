@@ -171,7 +171,7 @@ private readonly IRequestRepository _requestRepo;
 
         public List<Request> GetList(){
             List<Request> req = new List<Request>();
-            var allReq = _requestRepo.GetAll();
+            var allReq = _requestRepo.GetAll().AsQueryable().ToList();
 
             foreach(var eachReq in allReq){
                 eachReq.isRead = true;
