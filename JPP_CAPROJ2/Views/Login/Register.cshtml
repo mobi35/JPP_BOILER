@@ -42,7 +42,11 @@ Layout = null;
             <form class="form-login" asp-controller="Login" method="post" asp-action="RegisterExecute" >
                 <h2 class="form-login-heading">sign up now</h2>
                 <div class="login-wrap">
-                    <input asp-for="FullName" type="text" class="form-control" placeholder="Full Name" autofocus>
+                    <input asp-for="FirstName" type="text" class="form-control" placeholder="First Name" autofocus>
+                    <br>
+                    <input asp-for="MiddleName" type="text" class="form-control" placeholder="Middle Name" autofocus>
+                    <br>
+                    <input asp-for="LastName" type="text" class="form-control" placeholder="Last Name" autofocus>
                     <br>
                     <input asp-for="UserName" type="text" class="form-control" placeholder="Username" autofocus>
                     <br>
@@ -54,7 +58,7 @@ Layout = null;
                     <br>
                     <input asp-for="Address" type="text" class="form-control" placeholder="Address" autofocus>
                     <br>
-                    <input asp-for="PhoneNumber" type="text" class="form-control" placeholder="Phone Number" autofocus>
+                    <input asp-for="PhoneNumber" type="text" id="phoneNumber" class="form-control" placeholder="Phone Number" autofocus>
                     <br>
                     <input type="hidden" asp-for="Role" value="customer" />
                     <center>
@@ -134,5 +138,14 @@ Layout = null;
     }
 
 
+      $("#phoneNumber").keypress(function (e)
+     {
+     //if the letter is not digit then display error and don't type anything
+     if( e.which!=8 && e.which!=0 && (e.which<48 || e.which>57))
+     {
+     return false;
+     }
+     });
 
 </script>
+

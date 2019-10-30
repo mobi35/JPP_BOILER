@@ -170,13 +170,16 @@ private readonly IRequestRepository _requestRepo;
         }
 
         public List<Request> GetList(){
+            var userName = HttpContext.Session.GetString("UserName");
             List<Request> req = new List<Request>();
             var allReq = _requestRepo.GetAll().AsQueryable().ToList();
 
             foreach(var eachReq in allReq){
+                if (eachReq.AssignedBy == userName) { 
                 eachReq.isRead = true;
                 _requestRepo.Update(eachReq);
                 req.Add(eachReq);
+                }
             }
             return req;
             

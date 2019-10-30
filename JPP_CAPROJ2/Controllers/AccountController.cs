@@ -56,12 +56,18 @@ namespace JPP_CAPROJ2.Controllers
             user.Message = "";
             if (ModelState.IsValid) {
                 var getEmail = _userRepo.FindUser(a => a.Email == user.Email);
-                if(getEmail != null)
+                var getUser = _userRepo.FindUser(a => a.UserName == user.UserName);
+                if (getEmail != null)
                 {
                     user.Message = "Email already exists";
                     return View("Create", user);
                 }
 
+                if (getUser != null)
+                {
+                    user.Message = "Username already exists";
+                    return View("Create", user);
+                }
 
                 if (user.ConfirmPassword != user.Password)
                 {

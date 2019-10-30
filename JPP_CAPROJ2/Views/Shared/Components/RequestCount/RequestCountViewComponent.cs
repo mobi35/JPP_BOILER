@@ -25,7 +25,8 @@ namespace JPP_CAPROJ2.Controllers
       
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var serviceCount = _requestRepo.GetAll().Where(a => a.isRead == false);
+            var userName = HttpContext.Session.GetString("UserName");
+            var serviceCount = _requestRepo.GetAll().Where(a => a.isRead == false && a.AssignedBy == userName);
             return View((int)serviceCount.Count()) ;
         }
       

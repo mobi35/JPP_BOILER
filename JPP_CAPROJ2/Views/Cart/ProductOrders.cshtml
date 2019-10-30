@@ -87,11 +87,11 @@ height: 850px;
                                                                     if (pVM.Transactions.DeliveryDate != null )
                                                                     {
                                                                         @pVM.Transactions.DeliveryDate
-                                                                    }else if(pVM.Transactions.PaymentStatus == "Accepted" && pVM.Transactions.PaymentTerms == "Service")
+                                                                    }else if(pVM.Transactions.PaymentStatus == "Accepted" )
                                                                     {
                                                                         <form method="post" asp-action="SetDeliveryDate" asp-controller="Cart">
                                                                             <input type="hidden" value="@pVM.Transactions.TransactionKey" name="id" />
-                                                                            <input type="date" name="dateTime"/>
+                                                                            <input type="date" id="dateTime" name="dateTime"/>
                                                                             <input type="submit"/>
                                                                         </form>
                                                                     }
@@ -197,8 +197,16 @@ height: 850px;
 
 <script>
 
+    var now = new Date();
+    var otherDate = new Date();
+    now.setDate(otherDate.getDate() + 2);
 
-  
+    var minDate = now.toISOString().substring(0, 10);
+
+    $('#dateTime').prop('min', minDate);
+
+   
+
 
     function ImageView(img) {
         

@@ -33,11 +33,11 @@ Layout = "BackEnd";
             {   
                 <tr>
                       <td>@user.NumberOfTask</td>
-                    <td>@user.FullName</td>
+                      <td>@user.FirstName @Html.Raw(", ") @user.LastName @Html.Raw(" ")  @user.MiddleName</td>
                     <td>@user.Role</td>
                     <td>@user.PhoneNumber</td>
                     <td>@user.Email</td>
-                    <td><a asp-route-id="@user.UserId" asp-controller="Account" asp-action="Edit">Edit</a> <a return="confirm('are you sure you want to delete?')" asp-route-id="@user.UserId" asp-controller="Account" asp-action="Delete" >Delete</a>  </td>
+                    <td> <a return="confirm('are you sure you want to delete?')" asp-route-id="@user.UserId" asp-controller="Account" asp-action="Delete" >Delete</a>  </td>
                 </tr>
             }
         }

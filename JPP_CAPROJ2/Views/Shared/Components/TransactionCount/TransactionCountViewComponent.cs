@@ -25,7 +25,7 @@ namespace JPP_CAPROJ2.Controllers
       
         public async Task<IViewComponentResult> InvokeAsync()
         {
-
+           
             var transactionCount = _transactionRepo.GetAll().Where(a => a.isRead == false);
             return View((int)transactionCount.Count()) ;
         }

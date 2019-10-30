@@ -13,10 +13,11 @@ namespace JPP_CAPROJ2.Controllers
     public class LoginController : Controller
     {
         private readonly IUserRepository _userRepo;
-
-        public LoginController(IUserRepository userRepo)
+        private readonly ITransactionRepository _transactionRepo;
+        public LoginController(IUserRepository userRepo, ITransactionRepository transactionRepository)
         {
             _userRepo = userRepo;
+            _transactionRepo = transactionRepository;
         }
         public IActionResult Logout()
         {
@@ -26,6 +27,17 @@ namespace JPP_CAPROJ2.Controllers
         }
         public IActionResult Index()
         {
+            var listOfTransaction = _transactionRepo.GetAll().AsQueryable().ToList();
+
+            foreach (var list in listOfTransaction)
+            {
+                if (list.PaymentStatus == "pending" && DateTime.Now > list.DateTimeStamps.Value.AddDays(15).Date)
+                {
+                    list.PaymentStatus = "Rejected";
+                    _transactionRepo.Update(list);
+                }
+            }
+
             return View(new User { });
         }
 
@@ -123,16 +135,21 @@ namespace JPP_CAPROJ2.Controllers
         public IActionResult RegisterExecute(User user)
         {
             user.Message = "";
-
-         
-
             if (ModelState.IsValid)
             {
                 var getEmail = _userRepo.FindUser(a => a.Email == user.Email);
+                var getUser = _userRepo.FindUser(a => a.UserName == user.UserName);
                 if (getEmail != null)
                 {
                     user.Message = "Email already exists";
                     return View("Register",user);
+                }
+
+
+                if (getUser != null)
+                {
+                    user.Message = "Username already exists";
+                    return View("Register", user);
                 }
 
                 if (user.ConfirmPassword != user.Password)

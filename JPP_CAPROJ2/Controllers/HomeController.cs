@@ -13,13 +13,27 @@ namespace JPP_CAPROJ2.Controllers
     public class HomeController : Controller
     {
         private readonly IProductRepository _prodRep;
+        private readonly ITransactionRepository _transactionRepo;
 
-        public HomeController(IProductRepository prodRep)
+        public HomeController(IProductRepository prodRep, ITransactionRepository transactionRepo)
         {
             _prodRep = prodRep;
+           _transactionRepo = transactionRepo;
         }
         public IActionResult Index()
         {
+
+            var listOfTransaction = _transactionRepo.GetAll().AsQueryable().ToList();
+
+            foreach (var list in listOfTransaction)
+            {
+                if (list.PaymentStatus == "pending" && DateTime.Now > list.DateTimeStamps.Value.AddDays(15).Date  )
+                {
+                    list.PaymentStatus = "Rejected";
+                    _transactionRepo.Update(list);
+                }
+            }
+
             return View(GetProducts());
         }
 

@@ -16,15 +16,15 @@ namespace JPP_CAPROJ2.Data
             {
                 var context = serviceScope.ServiceProvider.GetService<JPPDbContext>();
 
-                var admin = new User {FullName="Bagito",PhoneNumber="09198882900" ,UserName = "admin", Password = "YWRtaW5hZG1pbg==", Email = "Maeee",  Role = "employee", Status = "Activated" };
+                var admin = new User {FirstName ="Bagito",PhoneNumber="09198882900" ,UserName = "admin", Password = "YWRtaW5hZG1pbg==", Email = "Maeee",  Role = "employee", Status = "Activated" };
          
                 context.Users.Add(admin);
 
-                 var worker = new User {FullName="Worker",PhoneNumber="09198882900" ,UserName = "worker", Password = "YWRtaW5hZG1pbg==", Email = "mobixxstyle35@gmail.com", Status = "Activated", Role = "worker" };
+                 var worker = new User {FirstName="Worker",PhoneNumber="09198882900" ,UserName = "worker", Password = "YWRtaW5hZG1pbg==", Email = "mobixxstyle35@gmail.com", Status = "Activated", Role = "worker" };
          
                 context.Users.Add(worker);
 
-                  var customer = new User {FullName="customer",PhoneNumber="09198882900" ,UserName = "customer", Password = "YWRtaW5hZG1pbg==", Email = "Maeee", Status = "Activated", Role = "customer" };
+                  var customer = new User {FirstName="customer",PhoneNumber="09198882900" ,UserName = "customer", Password = "YWRtaW5hZG1pbg==", Email = "Maeee", Status = "Activated", Role = "customer" };
          
                 context.Users.Add(customer);
 

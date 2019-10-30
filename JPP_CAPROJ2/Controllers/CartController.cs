@@ -84,7 +84,7 @@ namespace JPP_CAPROJ2.Controllers
             var transaction = _transactionRepo.GetIdBy(id);
             transaction.DeliveryDate = dateTime;
             _transactionRepo.Update(transaction);
-            return View("MyOrders", MyOrdersVM());
+            return View("ProductOrders", MyOrdersVM());
         }
         public IActionResult Delete(int id)
         {
@@ -116,7 +116,7 @@ namespace JPP_CAPROJ2.Controllers
             transaction.BankName = bankAccount;
             transaction.BankAccount = bankNumer;
             transaction.PaymentStatus = "pending";
-          
+            transaction.DateTimeStamps = DateTime.Now;
             double totalPrice = 0;
 
             var productList = new List<ProductCartViewModel>();
@@ -223,7 +223,7 @@ namespace JPP_CAPROJ2.Controllers
 
         public IActionResult MyOrders()
         {
-            return View(MyOrdersVM());
+            return View(MyClientOrdersVM());
         }
 
        
@@ -275,6 +275,34 @@ namespace JPP_CAPROJ2.Controllers
                     Orders = listProd
                 });
 
+            }
+
+            return myOrdersVM;
+        }
+
+
+        public List<MyOrdersViewModel> MyClientOrdersVM()
+        {
+            var userName = HttpContext.Session.GetString("UserName");
+            var transaction = _transactionRepo.GetAll().AsQueryable().ToList();
+            var orders = _orders.GetAll().AsQueryable().ToList();
+            List<MyOrdersViewModel> myOrdersVM = new List<MyOrdersViewModel>();
+            foreach (var trans in transaction)
+            {
+                if(trans.UserName == userName) { 
+                List<OrderedProducts> listProd = new List<OrderedProducts>();
+                foreach (var order in orders)
+                {
+                    if (order.TransactionID == trans.TransactionKey)
+                        listProd.Add(order);
+
+                }
+                myOrdersVM.Add(new MyOrdersViewModel
+                {
+                    Transactions = trans,
+                    Orders = listProd
+                });
+                }
             }
 
             return myOrdersVM;

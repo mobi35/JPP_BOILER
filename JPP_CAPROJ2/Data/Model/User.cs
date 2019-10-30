@@ -13,7 +13,16 @@ namespace JPP_CAPROJ2.Data.Model
         public int UserId { get; set; }
         [Required]
         [Column(TypeName ="nvarchar(100)")]
-        public string FullName { get; set; }
+        public string FirstName { get; set; }
+
+        [Required]
+        [Column(TypeName = "nvarchar(100)")]
+        public string MiddleName { get; set; }
+
+
+        [Required]
+        [Column(TypeName = "nvarchar(100)")]
+        public string LastName { get; set; }
         [Required]
         [Column(TypeName = "varchar(7)")]
         public string Gender { get; set; }

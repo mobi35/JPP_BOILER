@@ -29,7 +29,7 @@ namespace JPP_CAPROJ2.Controllers
         {
             var userName = HttpContext.Session.GetString("UserName");
            var foundUser = _userRepo.FindUser(a => a.UserName == userName);
-            feedback.Name = foundUser.FullName;
+            feedback.Name = foundUser.FirstName + ", " + foundUser.LastName + " "+ foundUser.MiddleName;
             feedback.Email = foundUser.Email;
             feedback.Sent = DateTime.Now;
             _feedRepo.Create(feedback);
