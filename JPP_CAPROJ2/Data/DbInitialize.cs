@@ -20,7 +20,7 @@ namespace JPP_CAPROJ2.Data
          
                 context.Users.Add(admin);
 
-                 var worker = new User {FullName="Worker",PhoneNumber="09198882900" ,UserName = "worker", Password = "worker", Email = "Maeee",  Role = "worker" };
+                 var worker = new User {FullName="Worker",PhoneNumber="09198882900" ,UserName = "worker", Password = "worker", Email = "mobistyle35@gmail.com",  Role = "worker" };
          
                 context.Users.Add(worker);
 

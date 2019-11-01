@@ -52,6 +52,8 @@ Layout = null;
                     <br />
                     <input asp-for="Email" type="email" class="form-control" placeholder="Email" autofocus>
                     <br>
+                    <input asp-for="Address" type="text" class="form-control" placeholder="Address" autofocus>
+                    <br>
                     <input asp-for="PhoneNumber" type="text" class="form-control" placeholder="Phone Number" autofocus>
                     <br>
                     <input type="hidden" asp-for="Role" value="customer" />
@@ -64,11 +66,11 @@ Layout = null;
 
                     </label>
                     <div class="alert alert-danger validation" asp-validation-summary="All"></div>
-                   
-                
-                        <input asp-for="Message" name="Message" style="width:100%;font-size:11px" class="alert alert-danger message" />
-                  
-                  
+
+
+                    <input asp-for="Message" name="Message" style="width:100%;font-size:11px" class="alert alert-danger message" />
+
+
                     <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> SIGN UP</button>
                     <hr>
 

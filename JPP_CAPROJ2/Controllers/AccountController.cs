@@ -31,6 +31,22 @@ namespace JPP_CAPROJ2.Controllers
             user.Message = "";
             return View(user);
         }
+        public string base64Encode(string data)
+        {
+            try
+            {
+                byte[] encData_byte = new byte[data.Length];
+                encData_byte = System.Text.Encoding.UTF8.GetBytes(data);
+                string encodedData = Convert.ToBase64String(encData_byte);
+                return encodedData;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error in base64Encode" + e.Message);
+            }
+        }
+
+
         [HttpPost]
         public IActionResult Create(User user)
         {
@@ -41,6 +57,8 @@ namespace JPP_CAPROJ2.Controllers
                     user.Message = "Password Doesn't Match";
                     return View("Create",user);
                 }
+                user.Status = "Activated";
+                user.Password = base64Encode(user.Password);
                 _userRepo.Create(user);
 
                 _notifRepo.AddNotification("Welcome to JBoiler. You can update your account on the left",user.UserName);
@@ -56,6 +74,13 @@ namespace JPP_CAPROJ2.Controllers
             return View(GetList());
         }
 
+      
+     
+        public IActionResult Message(User user)
+        {
+            return View(user);
+        }
+
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -66,7 +91,7 @@ namespace JPP_CAPROJ2.Controllers
         }
         public IActionResult Edit(User user)
         {
-
+            user.Password = base64Encode(user.Password);
             _userRepo.Update(user);
             return View("List", GetList());
         }

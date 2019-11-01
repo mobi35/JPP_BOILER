@@ -69,6 +69,13 @@
             </div>
 
             <div class="form-group ">
+                <label for="email" class="control-label col-lg-2">Address</label>
+                <div class="col-lg-10">
+                    <input asp-for="Address" class="form-control " id="email"  type="email" />
+                </div>
+            </div>
+
+            <div class="form-group ">
                 <label for="gender" class="control-label col-lg-2">Gender</label>
                 <div class="col-lg-10">
                     Male<input asp-for="Gender" value="Male" id="gender" name="gender" type="radio" />
@@ -81,7 +88,7 @@
                 <div class="col-lg-10">
                     <select asp-for="Role" class="form-control " id="role" name="role">
                         <option>Customer</option>
-                       
+
                     </select>
                 </div>
             </div>

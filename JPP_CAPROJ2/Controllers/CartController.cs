@@ -37,8 +37,8 @@ namespace JPP_CAPROJ2.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult AddToCart(int id)
+        [HttpPost]
+        public IActionResult AddToCart(int id, int qty)
         {
             var userName = HttpContext.Session.GetString("UserName");
             var checkCart = _cartRepo.FindCart(a => a.ProductID == id);
@@ -49,7 +49,7 @@ namespace JPP_CAPROJ2.Controllers
             }else { 
             Cart cart = new Cart();
             cart.ProductID = id;
-            cart.Quantity = 1;
+            cart.Quantity = qty;
             cart.UserName = userName;
             _cartRepo.Create(cart);
             }

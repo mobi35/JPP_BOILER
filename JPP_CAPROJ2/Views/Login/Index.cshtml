@@ -46,14 +46,21 @@ Layout = null;
                     <br>
                     <input asp-for="Password" type="password" class="form-control" placeholder="Password">
                     <label class="checkbox">
-                      
-                      
+
+
                     </label>
-                    <br />
-                    <i style="color:red;" class="alert"></i>
+                    
+                    <center> <i style="color:red;" class="alert">@Model.Message</i></center><br />
+                    
                     <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
+                    <div class="registration">
+                        <br />
+                        <a class="" asp-controller="Login" asp-action="ChangePassword">
+                            Forgot your password?
+                        </a>
+                    </div>
                     <hr>
-                  
+
                     <div class="registration">
                         Don't have an account yet?<br />
                         <a class="" asp-controller="Login" asp-action="Register">

@@ -36,6 +36,20 @@ namespace JPP_CAPROJ2.Controllers
             _userRepo.Delete(userFound);
           return RedirectToAction("Logout", "Login");
         }
+        public string base64Encode(string data)
+        {
+            try
+            {
+                byte[] encData_byte = new byte[data.Length];
+                encData_byte = System.Text.Encoding.UTF8.GetBytes(data);
+                string encodedData = Convert.ToBase64String(encData_byte);
+                return encodedData;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error in base64Encode" + e.Message);
+            }
+        }
 
         public IActionResult Update(User user)
         {
@@ -47,6 +61,7 @@ namespace JPP_CAPROJ2.Controllers
                     user.Message = "Password Doesn't Match";
                     return View("Update", user);
                 }
+                user.Password = base64Encode(user.Password);
                 _userRepo.Update(user);
                 return View("Index");
             }
