@@ -38,30 +38,30 @@ private readonly IRequestRepository _requestRepo;
               
                  return View("ViewError",request);
                 }
+            TimeSpan? dateRemainingDeliver = request.AvailableDate - DateTime.Now;
              var userName = HttpContext.Session.GetString("UserName");
               _notifRepo.AddNotification("1 new service request","admin");
-               _notifRepo.AddNotification("Please wait for 2-3 Days for inspection.",userName);
-
-              
+               _notifRepo.AddNotification($"Please wait for {(int)dateRemainingDeliver.Value.TotalDays} day/s for inspection.",userName);
                 foreach(var worker in Workers()){
                    request.AssignedBy = worker.UserName;
                      worker.NumberOfTask += 1;
                     _userRepo.Update(worker);
                     break;
                }
+
+            request.Address = _userRepo.FindUser(a => a.UserName == userName).Address;
+            request.Requirements = request.Description;
                request.Description = serviceType;
                request.Status = "for viewing";
             request.UserName = userName;
                 _requestRepo.Create(request);
-            request.Message = "You have successfully requested for a service. Please wait for 2-3 days as the inspector will look at your unit";
-              
+            request.Message = $"You have successfully requested for a service. Please wait {(int)dateRemainingDeliver.Value.TotalDays} day/s as the inspector will look at your unit";
                  return View("ViewError",request);
         }
       
         public IActionResult ViewError(Request request){
             return View(request);
         }
-
          [HttpPost]
         public IActionResult CreateFixed(ServiceRequestViewModel requestVM){
             Request req = new Request();
@@ -80,7 +80,6 @@ private readonly IRequestRepository _requestRepo;
                     _userRepo.Update(worker);
                     break;
             }
-
 
                req.Description = "";
                 req.Status = "for viewing";
@@ -175,6 +174,8 @@ private readonly IRequestRepository _requestRepo;
             var allReq = _requestRepo.GetAll();
 
             foreach(var eachReq in allReq){
+                eachReq.isRead = true;
+                _requestRepo.Update(eachReq);
                 req.Add(eachReq);
             }
             return req;

@@ -9,7 +9,7 @@
 <section id="main-content">
     <div class="wrapper">
 
-        <h3><i class="fa fa-angle-right"></i> Form Components</h3>
+        <h3><i class="fa fa-angle-right"></i>Service Requests</h3>
         <!-- BASIC FORM ELELEMNTS -->
         <div class="row mt">
             <div class="col-lg-12">
@@ -20,6 +20,7 @@
                         <thead>
                             <tr>
                                 <th>Address</th>
+                                <th>Problem Encountered</th>
                                 <th>Price</th>
                                 <th>Assigned By</th>
                                 <th>Status</th>
@@ -31,29 +32,30 @@
                             @{
                                 foreach (var request in Model)
                                 {
-                                    <tr>
-                                        <td>@request.Address</td>
-                                        <td>@request.Price</td>
-                                        <td>@request.AssignedBy</td>
-                                        <td>
-                                            @request.Status
+                                                        <tr>
+                                                            <td>@request.Address</td>
+                                                            <td>@request.Requirements</td>
+                                                            <td>@request.Price</td>
+                                                            <td>@request.AssignedBy</td>
+                                                            <td>
+                                                                @request.Status
 
-                                        </td>
+                                                            </td>
 
-                                        <td>
-                                            @{ if (request.Status == "for viewing")
-                                                {
+                                                            <td>
+                                                                @{ if (request.Status == "for viewing")
+                                                                    {
 
-                                                    <button onclick="MyFunction('@request.RequestId')" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">
-                                                        Service Quotation
-                                                    </button>
+                                                                        <button onclick="MyFunction('@request.RequestId')" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">
+                                                                            Service Quotation
+                                                                        </button>
 
-                                                    <a asp-controller="Request" asp-route-id="@request.RequestId"  class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to reject this viewing?')" asp-action="RejectQuotation">Reject</a>
-                                                }
-                                            }
-                                        </td>
+                                                                        <a asp-controller="Request" asp-route-id="@request.RequestId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to reject this viewing?')" asp-action="RejectQuotation">Reject</a>
+                                                                    }
+                                                                }
+                                                            </td>
 
-                                    </tr>
+                                                        </tr>
                                 }
                             }
                         </tbody>

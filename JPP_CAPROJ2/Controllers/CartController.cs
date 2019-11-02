@@ -9,6 +9,8 @@ using JPP_CAPROJ2.Data.Model.Interface;
 using JPP_CAPROJ2.Data.Model;
 using JPP_CAPROJ2.Models.ViewModel;
 using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace JPP_CAPROJ2.Controllers
 {
@@ -16,14 +18,16 @@ namespace JPP_CAPROJ2.Controllers
     {
         private IProductRepository _prodRepo;
         private ICartRepository _cartRepo;
+        private readonly IHostingEnvironment _hosting;
         private readonly IUserRepository _userRepo;
         private readonly INotificationRepository _notificationRepo;
         private readonly IOrderRepository _orders;
         private ITransactionRepository _transactionRepo;
-        public CartController(IUserRepository userRepo,  INotificationRepository notificationRepo, IOrderRepository orders, ITransactionRepository transactionRepo, IProductRepository prodRepo, ICartRepository cartRepo)
+        public CartController(IHostingEnvironment hosting, IUserRepository userRepo,  INotificationRepository notificationRepo, IOrderRepository orders, ITransactionRepository transactionRepo, IProductRepository prodRepo, ICartRepository cartRepo)
         {
             _prodRepo = prodRepo;
             _cartRepo = cartRepo;
+            _hosting = hosting;
             _userRepo = userRepo;
             _notificationRepo = notificationRepo;
             _orders = orders;
@@ -55,13 +59,33 @@ namespace JPP_CAPROJ2.Controllers
             }
             return RedirectToAction("Shop","Product");
         }
+        string uniqueName = null;
+
+        public IActionResult AddDepositSlip(int id, IFormFile imageFile)
+        {
+            var transactionRepo = _transactionRepo.GetIdBy(id);
+            string uploadsFolder = Path.Combine(_hosting.WebRootPath, "Images");
+            uniqueName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
+            string filePath = Path.Combine(uploadsFolder, uniqueName);
+            imageFile.CopyTo(new FileStream(filePath, FileMode.Create));
+            transactionRepo.ImageString = uniqueName;
+            _transactionRepo.Update(transactionRepo);
+            return View("MyOrders",MyOrdersVM());
+        }
 
         public IActionResult UpdateCart(Cart cart)
         {
             _cartRepo.Update(cart);
             return View();
         }
-
+        [HttpPost]
+        public IActionResult SetDeliveryDate(int id, DateTime? dateTime)
+        {
+            var transaction = _transactionRepo.GetIdBy(id);
+            transaction.DeliveryDate = dateTime;
+            _transactionRepo.Update(transaction);
+            return View("MyOrders", MyOrdersVM());
+        }
         public IActionResult Delete(int id)
         {
             var product = _prodRepo.GetIdBy(id);
@@ -135,11 +159,14 @@ namespace JPP_CAPROJ2.Controllers
                 });
                 }
             }
+            string successMessage = "";
             if (paytype == "bank")
             {
-                transaction.PaymentTerms = "Bank Account";
+                successMessage = "Please upload the Bank Deposit Slip within 15 days.If you fail to do so, your order will be cancelled." ;
+               transaction.PaymentTerms = "Bank Account";
             }else
             {
+                successMessage = "Please wait for the admin's response for the date of the delivery.";
                 transaction.PaymentTerms = "Cash on delivery";
                 
             }
@@ -156,13 +183,15 @@ namespace JPP_CAPROJ2.Controllers
                 if (c.UserName == userName)
                     _cartRepo.Delete(c);
             }
-
-            return RedirectToAction("CheckoutSuccess");
+            
+            return View("CheckoutSuccess", successMessage);
         }
 
-        public IActionResult CheckoutSuccess()
+
+        [HttpGet]
+        public IActionResult CheckoutSuccess(string successMessage)
         {
-            return View();
+            return View(successMessage);
         }
 
         public IActionResult Cart()
@@ -194,30 +223,10 @@ namespace JPP_CAPROJ2.Controllers
 
         public IActionResult MyOrders()
         {
-            var userName = HttpContext.Session.GetString("UserName");
-            var transaction = _transactionRepo.GetAll();
-            var orders = _orders.GetAll();
-            List<MyOrdersViewModel> myOrdersVM = new List<MyOrdersViewModel>();
-            foreach (var trans in transaction)
-            {
-                if(trans.UserName == userName) { 
-                List<OrderedProducts> listProd = new List<OrderedProducts>();
-                foreach (var order in orders)
-                {
-                    if(order.TransactionID == trans.TransactionKey)
-                        listProd.Add(order); 
-
-                }
-                myOrdersVM.Add(new MyOrdersViewModel
-                {
-                    Transactions = trans,
-                    Orders = listProd
-                });
-                }
-            }
-            
-            return View(myOrdersVM);
+            return View(MyOrdersVM());
         }
+
+       
 
         public IActionResult AcceptPayment(int id)
         {
@@ -251,7 +260,8 @@ namespace JPP_CAPROJ2.Controllers
             List<MyOrdersViewModel> myOrdersVM = new List<MyOrdersViewModel>();
             foreach (var trans in transaction)
             {
-
+                trans.isRead = true;
+                _transactionRepo.Update(trans);
                 List<OrderedProducts> listProd = new List<OrderedProducts>();
                 foreach (var order in orders)
                 {

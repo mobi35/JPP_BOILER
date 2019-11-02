@@ -1,5 +1,6 @@
 ﻿using JPP_CAPROJ2.Data.Model;
 using JPP_CAPROJ2.Data.Model.Interface;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,10 +12,12 @@ namespace JPP_CAPROJ2.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly IHostingEnvironment _hosting;
         private readonly IUserRepository _userRepo;
-  private readonly INotificationRepository _notifRepo;
-        public AccountController(IUserRepository userRepo, INotificationRepository notifRepo)
+        private readonly INotificationRepository _notifRepo;
+        public AccountController(IHostingEnvironment hosting, IUserRepository userRepo, INotificationRepository notifRepo)
         {
+            _hosting = hosting;
             _userRepo = userRepo;
             _notifRepo = notifRepo;
         }
@@ -52,11 +55,21 @@ namespace JPP_CAPROJ2.Controllers
         {
             user.Message = "";
             if (ModelState.IsValid) {
+                var getEmail = _userRepo.FindUser(a => a.Email == user.Email).Email;
+                if(getEmail != null)
+                {
+                    user.Message = "Email already exists";
+                    return View("Create", user);
+                }
+
+
                 if (user.ConfirmPassword != user.Password)
                 {
                     user.Message = "Password Doesn't Match";
                     return View("Create",user);
                 }
+
+
                 user.Status = "Activated";
                 user.Password = base64Encode(user.Password);
                 _userRepo.Create(user);
@@ -102,10 +115,50 @@ namespace JPP_CAPROJ2.Controllers
             var list = _userRepo.GetAll();
             foreach (var l in list)
             {
+                l.isRead = true;
+                _userRepo.Update(l);
                 user.Add(l);
             }
             return user;
         }
+
+
+        [HttpGet]
+        public IActionResult Update()
+        {
+            var userName = HttpContext.Session.GetString("UserName");
+            var userFound = _userRepo.FindUser(a => a.UserName == userName);
+            return View(userFound);
+        }
+        public IActionResult Delete()
+        {
+            var userName = HttpContext.Session.GetString("UserName");
+            var userFound = _userRepo.FindUser(a => a.UserName == userName);
+            _userRepo.Delete(userFound);
+            return RedirectToAction("Logout", "Login");
+        }
+
+        public IActionResult Update(User user)
+        {
+            user.Message = "";
+            if (ModelState.IsValid)
+            {
+                if (user.ConfirmPassword != user.Password)
+                {
+                    user.Message = "Password Doesn't Match";
+                    return View("Update", user);
+                }
+                user.Password = base64Encode(user.Password);
+                _userRepo.Update(user);
+                return View("Index");
+            }
+
+            return View(user);
+
+        }
+
+     
+
         public IActionResult Delete(int id)
         {
             var user = _userRepo.GetIdBy(id);

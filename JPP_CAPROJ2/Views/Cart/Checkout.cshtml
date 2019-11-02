@@ -24,8 +24,8 @@
 
                             <div id="BankAccount">
                                 <br />
-                                <input type="text" id="bid" placeholder="Bank Account" class="form-control" name="bankNumer" /><br />
-                                <input type="text" id="bnum" placeholder="Bank Account Number" class="form-control" name="bankAccount" />
+                                <input type="hidden" id="bid" value="0" placeholder="Bank Account" class="form-control" name="bankNumer" /><br />
+                                <input type="hidden" id="bnum" value="0" placeholder="Bank Account Number" class="form-control" name="bankAccount" />
                             </div>
 
                             <a href="#" id="nextStep">Next Step</a>
@@ -37,7 +37,7 @@
 
                             <br />
 
-                            <div id="showPayment">
+                            <div  id="showPayment">
 
                             </div>
                             <a href="#" id="previousStep">Previous Step</a>
@@ -112,7 +112,7 @@
         $(' #step2').show();
 
         if (paymentType == "bank") {
-            $('#showPayment').html('<br><p> Bank Account : ' + $('#bid').val() + '</p> <p> Bank Number : ' + $('#bnum').val() + '</p>');
+          
         } else {
             $('#showPayment').html('<h2>Cash on delivery</h2>');
         }

@@ -49,5 +49,7 @@ namespace JPP_CAPROJ2.Data.Model
 
         public string Status { get; set; }
 
+        public bool isRead { get; set; }
+
     }
 }

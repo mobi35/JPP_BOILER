@@ -17,42 +17,68 @@
                     <table class="table table-striped table-bordered responsive no-wrap" style="width:100%" id="userList">
                         <thead>
                             <tr>
-                                <th>Bank account</th>
-                                <th>Bank Number</th>
+
                                 <th>Products</th>
                                 <th>Payment</th>
                                 <th>Status</th>
+                                <th>Delivery Date</th>
                                 <th></th>
+                                <th>Upload</th>
                             </tr>
                         </thead>
                         <tbody>
                             @{
                                 foreach (var pVM in Model)
                                 {
-                                    <tr>
-                                        <td>@pVM.Transactions.BankName</td>
-                                        <td>@pVM.Transactions.BankAccount</td>
-                                        <td>
-                                            @{
-                                                foreach (var order in pVM.Orders)
-                                                {
-                                                    <p>@order.ProductName  X  @order.Quantity</p>
-                                                }
-                                            }
+                                                        <tr>
+                                                         
+                                                            <td>
+                                                                @{
+                                                                    foreach (var order in pVM.Orders)
+                                                                    {
+                                                                        <p>@order.ProductName  X  @order.Quantity</p>
+                                                                    }
+                                                                }
 
-                                        </td>
-                                        <td>@pVM.Transactions.TotalPrice</td>
-                                        <td>@pVM.Transactions.PaymentStatus</td>
+                                                            </td>
+                                                            <td>@pVM.Transactions.TotalPrice</td>
+                                                            <td>@pVM.Transactions.PaymentStatus</td>
+                                                            <td>
+                                                                @{
+                                                                    if (pVM.Transactions.DeliveryDate == null)
+                                                                    {
+                                                                        @Html.Raw("TBA");
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @pVM.Transactions.DeliveryDate
+                                                                    }
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @{
+                                                                    if (pVM.Transactions.PaymentStatus == "Accepted")
+                                                                    {
+                                                                        <a asp-action="Invoice" asp-controller="Cart" asp-route-id="@pVM.Transactions.TransactionKey">
+                                                                        </a>
+                                                                    }
+                                                                }
+                                                            </td>
 
-                                        <td>
-                                            @{
-                                                if(pVM.Transactions.PaymentStatus == "Accepted") { 
-                                                <a asp-action="Invoice" asp-controller="Cart" asp-route-id="@pVM.Transactions.TransactionKey">
-                                                </a>
-                                                }
-                                            }
-                                        </td>
-                                    </tr>
+                                                            <td>
+                                                                @{
+                                                                    if (pVM.Transactions.ImageString == null && pVM.Transactions.PaymentTerms == "Bank Account")
+                                                                    {
+                                                                        <form method="post" enctype="multipart/form-data" asp-controller="Cart" asp-action="AddDepositSlip">
+                                                                            <input name="id" value="@pVM.Transactions.TransactionKey" type="hidden" />
+                                                                            <input name="imageFile" type="file" />
+                                                                            <input type="submit" />
+                                                                        </form>
+                                                                    }
+                                                                }
+                                                            </td>
+
+                                                        </tr>
                                 }
                             }
                         </tbody>

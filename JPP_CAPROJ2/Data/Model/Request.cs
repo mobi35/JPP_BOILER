@@ -41,5 +41,7 @@ namespace JPP_CAPROJ2.Data.Model
 
         public string AssignedBy {get; set;}
 
+        public bool isRead { get; set; }
+
     }
 }

@@ -15,8 +15,9 @@ Layout = "Client";
     <thead>
         <tr>
             <th>Description</th>
+            <th>Problem Encountered</th>
             <th>Price</th>
-           <th>Status</th>
+            <th>Status</th>
         </tr>
     </thead>
 
@@ -26,6 +27,7 @@ Layout = "Client";
             {
                 <tr>
                     <td>@request.Description</td>
+                    <td>@request.Requirements</td>
                     <td>@request.Price</td>
                     <td>@request.Status</td>
                 </tr>

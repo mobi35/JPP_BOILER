@@ -3,12 +3,12 @@
     ViewData["Title"] = "CheckoutSuccess";
     Layout = "~/Views/Shared/Client.cshtml";
 }
-
+@model string
 
 <section id="main-content">
     <section class="wrapper">
 
 
-        <h2>Please upload the Bank Deposit Slip within 15 days. If you fail to do so, your order will be cancelled.</h2>
+        <h2>@Model</h2>
     </section>
 </section>

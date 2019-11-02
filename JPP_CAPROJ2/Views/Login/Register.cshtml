@@ -39,7 +39,7 @@ Layout = null;
         *********************************************************************************************************************************************************** -->
     <div id="login-page">
         <div class="container">
-            <form class="form-login" asp-controller="Register" asp-action="Login" >
+            <form class="form-login" asp-controller="Login" method="post" asp-action="RegisterExecute" >
                 <h2 class="form-login-heading">sign up now</h2>
                 <div class="login-wrap">
                     <input asp-for="FullName" type="text" class="form-control" placeholder="Full Name" autofocus>
@@ -68,8 +68,9 @@ Layout = null;
                     <div class="alert alert-danger validation" asp-validation-summary="All"></div>
 
 
-                    <input asp-for="Message" name="Message" style="width:100%;font-size:11px" class="alert alert-danger message" />
-
+                    <div style="width:100%;font-size:11px" class="alert alert-danger message">
+                        @Html.DisplayFor(a => a.Message)
+                    </div>
 
                     <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> SIGN UP</button>
                     <hr>

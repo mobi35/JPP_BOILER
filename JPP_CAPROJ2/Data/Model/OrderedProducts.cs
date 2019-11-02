@@ -15,5 +15,7 @@ namespace JPP_CAPROJ2.Data.Model
         public int ProductID { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
+
+        public bool isRead { get; set; }
     }
 }

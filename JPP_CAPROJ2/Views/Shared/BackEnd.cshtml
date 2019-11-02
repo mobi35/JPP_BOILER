@@ -90,112 +90,122 @@
                 @{
                     if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "employee")
                     {
-                        <ul class="sidebar-menu" id="nav-accordion">
-                            <p class="centered"><a href="profile.html"></a></p>
-                            <h5 class="centered">@HttpContextAccessor.HttpContext.Session.GetString("UserName")</h5>
-                            <li class="mt">
-                                <a asp-controller="Dashboard" asp-action="Index">
-                                    <i class="fa fa-dashboard"></i>
-                                    <span>Dashboard</span>
-                                </a>
-                            </li>
-                            <li class="sub-menu">
-                                <a href="javascript:;">
-                                    <i class="fa fa-user"></i>
-                                    <span>Requests</span>
-                                </a>
-                                <ul class="sub">
-                                    <li><a asp-controller="Request" asp-action="List">List</a></li>
+                                <ul class="sidebar-menu" id="nav-accordion">
+                                    <p class="centered"><a href="profile.html"></a></p>
+                                    <h5 class="centered">@HttpContextAccessor.HttpContext.Session.GetString("UserName")</h5>
+                                    <li class="mt">
+                                        <a asp-controller="Dashboard" asp-action="Index">
+                                            <i class="fa fa-dashboard"></i>
+                                            <span>Dashboard</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-menu">
+                                        <a href="javascript:;">
+                                            <i class="fa fa-user"></i>
+                                            <span>Requests   @await Component.InvokeAsync("RequestCount") </span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li><a asp-controller="Request" asp-action="List">List</a></li>
+
+
+                                        </ul>
+                                    </li>
+                                    <li class="sub-menu">
+                                        <a href="javascript:;">
+                                            <i class="fa fa-user"></i>
+                                            <span>User  @await Component.InvokeAsync("UserCount")</span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li><a asp-controller="Account" asp-action="Create">Create User</a></li>
+                                            <li><a asp-controller="Account" asp-action="List">Users</a></li>
+
+                                        </ul>
+                                    </li>
+
+
+                                    <li class="sub-menu">
+                                        <a href="javascript:;">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span>Products</span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li><a asp-controller="Product" asp-action="Create">Create Product</a></li>
+                                            <li><a asp-controller="Product" asp-action="Index"> Products</a></li>
+
+                                        </ul>
+                                    </li>
+
+                                    <li class="sub-menu">
+                                        <a href="javascript:;">
+                                            <i class="fa fa-user"></i>
+                                            <span>Payment   @await Component.InvokeAsync("TransactionCount")</span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li><a asp-controller="Cart" asp-action="ProductOrders">Transactions</a></li>
+                                            <li><a asp-controller="Request" asp-action="PaidRequest">Service Payments</a></li>
+
+
+                                        </ul>
+                                    </li>
+
+
+                                    <li class="sub-menu">
+                                        <a href="javascript:;">
+                                            <i class="fa fa-book"></i>
+                                            <span>Feedback</span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li><a asp-controller="Feedback" asp-action="Feedbacks">Feedbacks</a></li>
+
+                                        </ul>
+                                    </li>
+
+                                    <li class="sub-menu">
+                                        <a href="javascript:;">
+                                            <i class="fa fa-user"></i>
+                                            <span>Reports</span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li><a asp-controller="Request" asp-action="PaidRequest">Paid Request</a></li>
+
+                                        </ul>
+                                    </li>
+
+                                  
 
 
                                 </ul>
-                            </li>
-                            <li class="sub-menu">
-                                <a href="javascript:;">
-                                    <i class="fa fa-user"></i>
-                                    <span>User</span>
-                                </a>
-                                <ul class="sub">
-                                    <li><a asp-controller="Account" asp-action="Create">Create User</a></li>
-                                    <li><a asp-controller="Account" asp-action="List">Users</a></li>
-
-                                </ul>
-                            </li>
-
-
-                            <li class="sub-menu">
-                                <a href="javascript:;">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <span>Products</span>
-                                </a>
-                                <ul class="sub">
-                                    <li><a asp-controller="Product" asp-action="Create">Create Product</a></li>
-                                    <li><a asp-controller="Product" asp-action="Index"> Products</a></li>
-
-                                </ul>
-                            </li>
-
-                            <li class="sub-menu">
-                                <a href="javascript:;">
-                                    <i class="fa fa-user"></i>
-                                    <span>Payment</span>
-                                </a>
-                                <ul class="sub">
-                                    <li><a asp-controller="Cart" asp-action="ProductOrders">Transactions</a></li>
-                                    <li><a asp-controller="Request" asp-action="PaidRequest">Service Payments</a></li>
-
-
-                                </ul>
-                            </li>
-
-
-                            <li class="sub-menu">
-                                <a href="javascript:;">
-                                    <i class="fa fa-book"></i>
-                                    <span>Feedback</span>
-                                </a>
-                                <ul class="sub">
-                                    <li><a asp-controller="Feedback" asp-action="Feedbacks">Feedbacks</a></li>
-
-                                </ul>
-                            </li>
-
-                            <li class="sub-menu">
-                                <a href="javascript:;">
-                                    <i class="fa fa-user"></i>
-                                    <span>Reports</span>
-                                </a>
-                                <ul class="sub">
-                                    <li><a asp-controller="Request" asp-action="PaidRequest">Paid Request</a></li>
-
-                                </ul>
-                            </li>
-
-
-                        </ul>
 
                     }
                     else
                     {
-                        <ul class="sidebar-menu" id="nav-accordion">
-                            <p class="centered"><a href="profile.html"></a></p>
-                            <h5 class="centered">@HttpContextAccessor.HttpContext.Session.GetString("UserName")</h5>
-                        
-                            <li class="sub-menu">
-                                <a href="javascript:;">
-                                    <i class="fa fa-user"></i>
-                                    <span>Requests</span>
-                                </a>
-                                <ul class="sub">
-                                    <li><a asp-controller="Request" asp-action="List">List</a></li>
+            <ul class="sidebar-menu" id="nav-accordion">
+                <p class="centered"><a href="profile.html"></a></p>
+                <h5 class="centered">@HttpContextAccessor.HttpContext.Session.GetString("UserName")</h5>
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-user"></i>
+                        <span>Requests</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a asp-controller="Request" asp-action="List">List</a></li>
 
 
-                                </ul>
-                            </li>
-                      
+                    </ul>
+                </li>
 
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-user"></i>
+                        <span>My Account</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a asp-controller="Account" asp-action="Update">Update Account</a></li>
+                    </ul>
+                </li>
 
-                        </ul>
+            </ul>
                     }
                 }
 

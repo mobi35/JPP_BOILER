@@ -31,5 +31,7 @@ namespace JPP_CAPROJ2.Data.Model
         public double Price { get; set; }
         public string Description { get; set; }
         public string Message { get; set; }
+
+        public bool isRead { get; set; }
     }
 }

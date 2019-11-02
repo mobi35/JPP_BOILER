@@ -34,13 +34,13 @@ namespace JPP_CAPROJ2.Controllers
             return View();
         }
 
+    
         public IActionResult Register()
         {
-            var user = new User();
-            user.Message = "";
-            return View(user);
+            return View(new User { });
         }
 
+       
         public string base64Decode2(string sData)
         {
             System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
@@ -85,7 +85,7 @@ namespace JPP_CAPROJ2.Controllers
             email.EmailSend(EmailMessage, user.Email);
             HttpContext.Session.SetString("SecurityCode", randomCharEx);
             HttpContext.Session.SetString("Email", user.Email);
-            return Content($"Hi {user.Email}! Please check your email to recover your account");
+            return View("ForgotPasswordMessage", user.Email);
             
         }
 
@@ -98,7 +98,7 @@ namespace JPP_CAPROJ2.Controllers
                var email = HttpContext.Session.GetString("Email");
 
                 var user = _userRepo.FindUser(a => a.Email == email);
-                user.Password = userAccount.Password;
+                user.Password = base64Encode(userAccount.Password);
                 _userRepo.Update(user);
                 return View("Index",new User { Message = "Password successfully changed." });
                 }
@@ -120,11 +120,21 @@ namespace JPP_CAPROJ2.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(User user)
+        public IActionResult RegisterExecute(User user)
         {
             user.Message = "";
+
+         
+
             if (ModelState.IsValid)
             {
+                var getEmail = _userRepo.FindUser(a => a.Email == user.Email);
+                if (getEmail != null)
+                {
+                    user.Message = "Email already exists";
+                    return View("Register",user);
+                }
+
                 if (user.ConfirmPassword != user.Password)
                 {
                     user.Message = "Password Doesn't Match";
@@ -133,7 +143,7 @@ namespace JPP_CAPROJ2.Controllers
                   Email email = new Email();
 
             string randomCharEx = Guid.NewGuid().ToString("n").Substring(0, 10);
-            string EmailMessage = "Please click this link to recover your account " +
+            string EmailMessage = "Hi " + user.UserName  + " , Please click this link to actiavte your account " +
                 "https://localhost:44358/Login/ActivateAccount?id=" + randomCharEx +
                 "  .Your Email is " + user.Email;
             email.EmailSend(EmailMessage, user.Email);
@@ -145,7 +155,7 @@ namespace JPP_CAPROJ2.Controllers
                 return View("Success");
             }
 
-            return View(user);
+            return View("Register", user);
         }
 
         public IActionResult ActivateAccount(string id)
@@ -165,6 +175,12 @@ namespace JPP_CAPROJ2.Controllers
             }
            
         }
+
+        public IActionResult ForgotPasswordMessage(string email)
+        {
+            return View($"Please check your email : {email}  to verify your account.");
+        }
+
         [HttpPost]
         public IActionResult Login(User user)
         {
@@ -205,7 +221,7 @@ namespace JPP_CAPROJ2.Controllers
             }
             else if(matched && loginUser.Status != "Activated")
             {
-                return View("Index", new User { Message = "Your account has been locked." });
+                return View("Index", new User { Message = "Wrong Information" });
             }else
             {
                 return View("Index", new User { Message = "Wrong Information" });
