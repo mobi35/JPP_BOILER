@@ -18,9 +18,14 @@
         <form class="cmxform form-horizontal style-form" id="signupForm" asp-action="Add" asp-controller="Feedback" method="post">
           
             <div class="form-group ">
+                <input asp-for="Rate" type="radio" value="1" /> Very Bad
+                <input asp-for="Rate" type="radio" value="2" /> Bad
+                <input asp-for="Rate" type="radio" value="3" /> Neutral
+                <input asp-for="Rate" type="radio" value="4" /> Good
+                <input asp-for="Rate" type="radio" value="5"  /> Very Good
                 <label for="password" class="control-label col-lg-2">Message</label>
                 <div class="col-lg-10">
-               <textarea class="form-control" asp-for="Message"></textarea>
+                    <textarea class="form-control" asp-for="Message"></textarea>
                 </div>
             </div>
            <input type="submit"/>

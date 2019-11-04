@@ -20,24 +20,43 @@
         <div class="row">
             <div class="col-lg-9 main-chart">
                 <!--CUSTOM CHART START -->
+                <h3>Sales</h3>
                 <canvas id="myChart" width="400" height="200"></canvas>
+                <h3>Top Customers</h3>
                 <!--custom chart end-->
                 <div class="row mt">
                     <!-- SERVER STATUS PANELS -->
-                   
                     <!-- /col-md-4-->
-                   
                     <!-- /col-md-4 -->
-                   
                     <!-- /col-md-4 -->
+
+                    <canvas id="cartMine" width="400" height="200"></canvas>
+                </div>
+                <h3>Top Products</h3>
+                <div class="row mt">
+                    <!-- SERVER STATUS PANELS -->
+                    <!-- /col-md-4-->
+                    <!-- /col-md-4 -->
+                    <!-- /col-md-4 -->
+
+                    <canvas id="topProduct" width="400" height="200"></canvas>
+                </div>
+
+                <h3>List Of Feedback</h3>
+                <div class="row mt">
+                    <!-- SERVER STATUS PANELS -->
+                    <!-- /col-md-4-->
+                    <!-- /col-md-4 -->
+                    <!-- /col-md-4 -->
+
+                    <canvas id="feedback" width="400" height="200"></canvas>
                 </div>
                 <!-- /row -->
-              
-              
                 <!-- /row -->
-             
                 <!-- /row -->
             </div>
+
+
             <!-- /col-lg-9 END SECTION MIDDLE -->
             <!-- **********************************************************************************************************************************************************
                 RIGHT SIDEBAR CONTENT
@@ -120,7 +139,7 @@
         data: {
             labels: ['Jan', 'Feb', 'March', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             datasets: [{
-                label: '# of Votes',
+                label: 'Sales Per Month',
                 data: incomPerMonth,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -175,7 +194,141 @@
      var myNewChart = new Chart(line , {
         type: "line",
         data: data
-    });
+     });
+
+
+
+        var ctz = document.getElementById('cartMine').getContext('2d');
+    var ds = new Chart(ctz,
+            {
+                type: 'pie',
+                data: {
+                    labels:  JSON.parse('@Html.Raw(Json.Serialize(Model.ListOfTopCustomerModels.UserName))') ,
+                    datasets: [
+                        {
+                            data: JSON.parse('@Html.Raw(Json.Serialize(Model.ListOfTopCustomerModels.Spents))') ,
+                            label: "Inquiries (Yearly)",
+                            backgroundColor: [
+                                "#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f",
+                                "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"
+                            ],
+
+                            borderColor: "#3e95cd",
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
+                        ]
+                    },
+                    title: {
+                        display: true,
+                        maintainAspectRatio: false
+                    }
+                }
+
+
+        });
+
+
+
+
+    
+        var ctz = document.getElementById('topProduct').getContext('2d');
+    var ds = new Chart(ctz,
+            {
+                type: 'pie',
+                data: {
+                    labels:  JSON.parse('@Html.Raw(Json.Serialize(Model.ListOfTopProductModels.Product))') ,
+                    datasets: [
+                        {
+                            data: JSON.parse('@Html.Raw(Json.Serialize(Model.ListOfTopProductModels.Bought))') ,
+                            label: "Top Products",
+                            backgroundColor: [
+                                "#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f",
+                                "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"
+                            ],
+
+                            borderColor: "#3e95cd",
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
+                        ]
+                    },
+                    title: {
+                        display: true,
+                        maintainAspectRatio: false
+                    }
+                }
+
+
+            });
+
+
+
+    
+    
+        var feed = document.getElementById('feedback').getContext('2d');
+    var ds = new Chart(feed,
+            {
+                type: 'pie',
+                data: {
+                    labels:  JSON.parse('@Html.Raw(Json.Serialize(Model.ListOfFeedbackModel.Title))') ,
+                    datasets: [
+                        {
+                            data: JSON.parse('@Html.Raw(Json.Serialize(Model.ListOfFeedbackModel.Votes))') ,
+                            label: "Top Products",
+                            backgroundColor: [
+                                "#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f",
+                                "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"
+                            ],
+
+                            borderColor: "#3e95cd",
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
+                        ]
+                    },
+                    title: {
+                        display: true,
+                        maintainAspectRatio: false
+                    }
+                }
+
+
+            });
+
 </script>
 
 <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>

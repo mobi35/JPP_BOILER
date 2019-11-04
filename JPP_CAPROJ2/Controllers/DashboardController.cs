@@ -10,15 +10,25 @@ using System.Threading.Tasks;
 
 namespace JPP_CAPROJ2.Controllers
 {
+    public class RateNumber
+    {
+
+    }
     public class DashboardController : Controller
     {
+        private readonly IFeedbackRepository _feedRepo;
+        private readonly IOrderRepository _orderRepo;
+        private readonly IProductRepository _prodRepo;
         private readonly ITransactionRepository _transactionRepo;
         private readonly INotificationRepository _notifRepo;
         private readonly IUserRepository _userRepo;
     private readonly IRequestRepository _requestRepo;
-        public DashboardController(ITransactionRepository transactionRepo, INotificationRepository notifRepo, IUserRepository userRepo, IRequestRepository requestRepo)
+        public DashboardController(IFeedbackRepository feedRepo, IOrderRepository orderRepo, IProductRepository prodRepo, ITransactionRepository transactionRepo, INotificationRepository notifRepo, IUserRepository userRepo, IRequestRepository requestRepo)
         {
             _userRepo = userRepo;
+            _feedRepo = feedRepo;
+            _orderRepo = orderRepo;
+            _prodRepo = prodRepo;
             _transactionRepo = transactionRepo;
             _notifRepo = notifRepo;
             _requestRepo = requestRepo;
@@ -100,14 +110,131 @@ namespace JPP_CAPROJ2.Controllers
 
 
 
+          
+            var topCustomer = new TopCustomerModel();
+            List < TopCustomerModel > topCustomerList = new List<TopCustomerModel>();
+
+            foreach (var user in _userRepo.GetAll().ToList()) { 
+            decimal dec = 0;
+            string label = "";
+            foreach (var transRepo in _transactionRepo.GetAll().ToList())
+            {
+
+             if(user.UserName == transRepo.UserName && transRepo.PaymentStatus == "Accepted")
+                    {
+                        dec += (decimal)transRepo.TotalPrice;
+                    }  
+            }
+                label = user.UserName;
+                topCustomerList.Add(new TopCustomerModel
+                {
+                    Spents = dec,
+                    UserName = label
+                });
+            }
+            var listLabel = new List<string>();
+            var listData = new List<decimal>();
+            foreach (var tops in topCustomerList.OrderByDescending(a => a.Spents).Take(5).ToList() )
+            {
+                listLabel.Add(tops.UserName);
+                listData.Add(tops.Spents);
+            }
+
+            var newList = new ListOfTopCustomerModel();
+
+            newList.Spents = listData;
+            newList.UserName = listLabel;
+            var listOfOrders = _transactionRepo.GetAll().Where(a => a.PaymentStatus == "Accepted").ToList();
+
+
+         
+            List<TopProductModel> listOfProd = new List<TopProductModel>();
+
+            foreach(var prod in _prodRepo.GetAll().ToList())
+            {
+                int sold = 0;
+                foreach (var ordered in _orderRepo.GetAll().ToList())
+                {
+                    if(prod.ProductName == ordered.ProductName)
+                    {
+                        sold++;
+                    }
+                }
+                listOfProd.Add(new TopProductModel
+                {
+                    Bought = sold,
+                    Product = prod.ProductName
+                });
+            }
+            List<int> bought = new List<int>();
+            List<string> product = new List<string>();
+
+            foreach (var c in listOfProd)
+            {
+                bought.Add(c.Bought);
+                product.Add(c.Product);
+            }
+
+            ListOfTopProductModel topProd = new ListOfTopProductModel
+            {
+                Bought = bought,
+                Product = product
+            };
+
+            ListOfFeedbackModel listOfFeed = new ListOfFeedbackModel();
+            List<int> f1 = new List<int>();
+            List<int> f2 = new List<int>();
+            List<int> f3 = new List<int>();
+            List<int> f4 = new List<int>();
+            List<int> f5 = new List<int>();
+
+            int if1 = 0, if2 = 0, if3 = 0, if4 = 0, if5 = 0;
+            foreach (var feed in _feedRepo.GetAll().ToList())
+            {
+                if (feed.Rate == 1)
+                {
+                    if1++;
+                  
+                }
+                else if (feed.Rate == 2)
+                {
+                    if2++;
+                }
+                else if (feed.Rate == 3)
+                {
+                    if3++;
+                }
+                else if (feed.Rate == 4)
+                {
+                    if4++;
+                }
+                else if (feed.Rate == 5)
+                {
+                    if5++;
+                }
+
+            }
+            listOfFeed.Title = new List<string> { "Very Bad", "Bad", "Neutral", "Good", "Very Good" };
+            listOfFeed.Votes = new List<int> { if1, if2, if3, if4, if5 };
             DashboardViewModel dashVM = new DashboardViewModel
             {
+                ListOfFeedbackModel = listOfFeed,
+                ListOfTopProductModels = topProd,
+                ListOfTopCustomerModels = newList,
                 IncomePerMonth = listOfIncomePerMonth,
                 IncomePerWeek = listOfIncomePerWeek,
                 IncomeToday = totalIncomeToday,
                 NewTransactions = newTransactions
             };
+
+
             return View(dashVM);
+
+
+
+
+            
+
         }
 
          

@@ -16,6 +16,11 @@ namespace JPP_CAPROJ2.Models.ViewModel
 
         public List<Transaction> NewTransactions { get; set; }
 
-       
+       public ListOfTopCustomerModel ListOfTopCustomerModels { get; set; }
+
+       public ListOfTopProductModel ListOfTopProductModels { get; set; }
+
+        public ListOfFeedbackModel ListOfFeedbackModel { get; set; }
+
     }
 }

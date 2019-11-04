@@ -31,6 +31,12 @@ namespace JPP_CAPROJ2.Controllers
            var foundUser = _userRepo.FindUser(a => a.UserName == userName);
             feedback.Name = foundUser.FirstName + ", " + foundUser.LastName + " "+ foundUser.MiddleName;
             feedback.Email = foundUser.Email;
+            if(feedback.Rate.ToString() != null) { 
+            feedback.Rate = feedback.Rate;
+            }else
+            {
+                feedback.Rate = 5;
+            }
             feedback.Sent = DateTime.Now;
             _feedRepo.Create(feedback);
             return RedirectToAction("Index", "Client");

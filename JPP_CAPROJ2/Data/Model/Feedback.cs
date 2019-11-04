@@ -18,6 +18,7 @@ namespace JPP_CAPROJ2.Data.Model
         public DateTime Sent { get; set; }
         public string Message { get; set; }
         public bool IsRead { get; set; }
+        public int Rate { get; set; }
 
     }
 }
