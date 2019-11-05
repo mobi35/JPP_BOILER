@@ -29,5 +29,33 @@ namespace JPP_CAPROJ2.Controllers
         {
             return new ViewAsPdf(name);
         }
+
+        public IActionResult GetThis(string name)
+        {
+            string reportString = $"<h1>{name}" + 
+                $"</h1>" +
+                $"<table id='userList'>" +
+                $"<thead>" +
+                $"<tr>" +
+                $"<th>Heads</th>" +
+                $"<th>Down</th>" +
+                $"</tr>" +
+                $"</thead>" +
+
+                 $"<tbody>" +
+                $"<tr>" +
+               
+                $"<td>" +
+                $"Boo</td>" +
+                $"<td>Rat" +
+                $"</td>" +
+                $"</tr>" +
+                $"</tbody>" +
+                $"</table>" +
+                $"";
+
+            return Content(reportString);
+        }
+
     }
 }

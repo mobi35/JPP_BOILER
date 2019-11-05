@@ -11,13 +11,13 @@
             <!-- BASIC FORM ELELEMNTS -->
             <div class="row mt">
                 <div class="col-lg-12">
-              
+
                     <div class="form-panel">
                         <h1></h1>
                         <div class="row">
                             <div class="col-md-2">
-                               Choose Reports
-                                <select  name="name" class="form-control" style="width:200px;">
+                                Choose Reports
+                                <select id="name" name="name" class="form-control" style="width:200px;">
                                     <option value="User Masterlist">User Masterlist</option>
                                     <option value="Sales Report">Sales Reports</option>
                                     <option value="Products Report">Products Report</option>
@@ -34,39 +34,34 @@
                             </div>
                             <div class="col-md-2">
                                 <br />
-                             <button id="showData">ShowData</button>
+                                <button id="showData">ShowData</button>
                             </div>
                         </div>
-                        </div>
+                        <div id="Reports"></div>
+
+                    </div>
+
                    
-                    
-                    </div></div></div></section>
+                </div>
+                
+                
+             
+                </div></div></section>
 
 
                         <script>
 
                             $('#showData').click(function () {
-
+                                var name = $('#name').val();
                                 $.ajax({
 
-                                    url: '',
+                                    url: 'Reports/GetThis/',
                                     type: 'post',
-                                    data: {}
+                                    data: {name:name},
                                     success: function (x) {
-                                        alert(x)
-                                    }
-
-                                });
-                            });
-
-
-                            function MyFunction() {
-                                alert("asdasd");
-                            }
-
-                            $(document).ready(function () {
+                                        $('#Reports').html(x);
+                                           $(document).ready(function () {
                                 $('#userList').DataTable({
-
                                     responsive: true,
                                     lengthChange: false,
                                     "sScrollX": "100%",
@@ -95,6 +90,16 @@
 
                                 });
                             });
+                                    }
+                                });
+                            });
+
+
+                            function MyFunction() {
+                                alert("asdasd");
+                            }
+
+                         
 
                         </script>
                         <script src="~/DataTables-1.10.18/js/jquery.dataTables.js"></script>
