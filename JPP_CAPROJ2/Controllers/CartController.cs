@@ -183,6 +183,23 @@ namespace JPP_CAPROJ2.Controllers
             return View(productCartVM);
         }
        
+
+        public IActionResult GetProductsInProjects(int id)
+        {
+
+            string htmlThing = "<ul>";
+            foreach (var list in _orders.GetAll().Where(a => a.TransactionID == id).ToList())
+            {
+                htmlThing += $"<li> { list.ProductName  } x price : { list.Price },  qty : {list.Quantity } </li>";
+            }
+            htmlThing += "</ul>";
+            return Content(htmlThing);
+        }
+
+        public IActionResult Projects()
+        {
+            return View(_transactionRepo.GetAll().ToList());
+        }
         public IActionResult AcceptCOD(int id)
         {
             var trans = _transactionRepo.GetIdBy(id);
@@ -213,6 +230,7 @@ namespace JPP_CAPROJ2.Controllers
             transaction.BankAccount = bankNumer;
             transaction.PaymentStatus = "pending";
             transaction.DateTimeStamps = DateTime.Now;
+
             double totalPrice = 0;
             var productList = new List<ProductCartViewModel>();
          

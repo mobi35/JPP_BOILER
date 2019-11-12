@@ -114,13 +114,13 @@ namespace JPP_CAPROJ2.Controllers
             var topCustomer = new TopCustomerModel();
             List < TopCustomerModel > topCustomerList = new List<TopCustomerModel>();
 
-            foreach (var user in _userRepo.GetAll().ToList()) { 
+            foreach (var user in _userRepo.GetAll().Where(a => a.Role == "customer").ToList()) { 
             decimal dec = 0;
             string label = "";
             foreach (var transRepo in _transactionRepo.GetAll().ToList())
             {
 
-             if(user.UserName == transRepo.UserName && transRepo.PaymentStatus == "Accepted")
+             if(user.UserName == transRepo.UserName && transRepo.PaymentStatus == "Accepted" && user.Role == "customer")
                     {
                         dec += (decimal)transRepo.TotalPrice;
                     }  

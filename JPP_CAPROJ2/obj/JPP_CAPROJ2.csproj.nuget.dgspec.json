@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ADRIAN\\Desktop\\ZXCZXC\\jpp_boiler\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj": {}
+    "D:\\Zx\\jppboiler\\jpp_boiler\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ADRIAN\\Desktop\\ZXCZXC\\jpp_boiler\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj": {
+    "D:\\Zx\\jppboiler\\jpp_boiler\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADRIAN\\Desktop\\ZXCZXC\\jpp_boiler\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj",
+        "projectUniqueName": "D:\\Zx\\jppboiler\\jpp_boiler\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj",
         "projectName": "JPP_CAPROJ2",
-        "projectPath": "C:\\Users\\ADRIAN\\Desktop\\ZXCZXC\\jpp_boiler\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj",
+        "projectPath": "D:\\Zx\\jppboiler\\jpp_boiler\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj",
         "packagesPath": "C:\\Users\\ADRIAN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADRIAN\\Desktop\\ZXCZXC\\jpp_boiler\\JPP_CAPROJ2\\obj\\",
+        "outputPath": "D:\\Zx\\jppboiler\\jpp_boiler\\JPP_CAPROJ2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

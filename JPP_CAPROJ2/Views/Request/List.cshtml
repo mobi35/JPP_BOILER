@@ -46,15 +46,26 @@
                                                             </td>
 
                                                             <td>
-                                                                @{ if (request.Status == "for inspection")
+
+                                                                @{
+                                                                    @using Microsoft.AspNetCore.Http;
+                                                                    @inject IHttpContextAccessor HttpContextAccessor
+                                                                    if (Startup.IsSessionAvailable)
                                                                     {
+                                                                        if (HttpContextAccessor.HttpContext.Session.GetString("Role").ToString() != "employee")
+                                                                        {
+                                                                            if (request.Status == "for inspection")
+                                                                            {
 
-                                                                        <button onclick="MyFunction('@request.RequestId')" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">
-                                                                            Service Quotation
-                                                                        </button>
+                                                                                <button onclick="MyFunction('@request.RequestId')" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">
+                                                                                    Service Quotation
+                                                                                </button>
 
-                                                                        <a asp-controller="Request" asp-route-id="@request.RequestId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to reject this viewing?')" asp-action="RejectQuotation">Reject</a>
+                                                                                <a asp-controller="Request" asp-route-id="@request.RequestId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to reject this viewing?')" asp-action="RejectQuotation">Reject</a>
+                                                                            }
+                                                                        }
                                                                     }
+
                                                                 }
                                                             </td>
 
@@ -86,12 +97,22 @@
                 </div>
                 <div class="modal-body">
                     <h5>Service Details</h5>
+                    <input type="checkbox" id="c1" value="5000" /> Boiler Maintenance
+                    <input type="checkbox" id="c2" value="10000" /> Boiler Repair
+                    <input type="checkbox" id="c3" value="5500" /> Cleaning
+                    <input type="checkbox" id="c4" value="15000" /> Plumbing
+                    <input type="checkbox" id="c5" value="12500" /> Rehabilitation
+                    <input type="checkbox" id="c6" value="8500" /> Retubing
+                    <input type="checkbox" id="c7" value="9000" /> Fabrication of Reactors
+                    <input type="checkbox" id="c8" value="15250" /> Fully Retube
+                    <input type="checkbox" id="c9" value="13275" /> Partial Retubing
                     <input type="hidden" id="requestId" name="id" class="form-control" placeholder="placeholder">
-                    <input type="text" name="price" required class="form-control" placeholder="Service Price">
+                    <input type="number" name="price" min="1" id="priceTots" readonly value="0" class="form-control" placeholder="Service Price">
+                    <button id="calculate">Calculate</button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" />
+                    <input type="submit" onclick="return Validate()" class="btn btn-primary" />
                 </div>
             </div>
         </form>
@@ -99,7 +120,109 @@
 </div>
 
 <script>
+    function Validate() {
+        
+        if (parseInt($('#priceTots').val()) == 0) {
+            return false;
+        }
+    }
 
+    $('#calculate').click(function () {
+         $('#priceTots').val(0);
+     
+        if ($('#c1').prop('checked') == true) {
+            var total = $('#priceTots').val();
+            var totalPriceVar = parseInt(total);
+            totalPriceVar += parseInt($('#c1').val() );
+            $('#priceTots').val(totalPriceVar);
+        
+        } 
+
+             if ($('#c2').prop('checked') == true) {
+            var total = $('#priceTots').val();
+            var totalPriceVar = parseInt(total);
+            totalPriceVar += parseInt($('#c2').val() );
+            $('#priceTots').val(totalPriceVar);
+        
+        } 
+
+             if ($('#c3').prop('checked') == true) {
+            var total = $('#priceTots').val();
+            var totalPriceVar = parseInt(total);
+            totalPriceVar += parseInt($('#c3').val() );
+            $('#priceTots').val(totalPriceVar);
+        
+        } 
+
+
+             if ($('#c4').prop('checked') == true) {
+            var total = $('#priceTots').val();
+            var totalPriceVar = parseInt(total);
+            totalPriceVar += parseInt($('#c4').val() );
+            $('#priceTots').val(totalPriceVar);
+        
+        } 
+
+             if ($('#c5').prop('checked') == true) {
+            var total = $('#priceTots').val();
+            var totalPriceVar = parseInt(total);
+            totalPriceVar += parseInt($('#c5').val() );
+            $('#priceTots').val(totalPriceVar);
+        
+        } 
+
+
+             if ($('#c6').prop('checked') == true) {
+            var total = $('#priceTots').val();
+            var totalPriceVar = parseInt(total);
+            totalPriceVar += parseInt($('#c6').val() );
+            $('#priceTots').val(totalPriceVar);
+        
+        } 
+
+             if ($('#c7').prop('checked') == true) {
+            var total = $('#priceTots').val();
+            var totalPriceVar = parseInt(total);
+            totalPriceVar += parseInt($('#c7').val() );
+            $('#priceTots').val(totalPriceVar);
+        
+        } 
+
+             if ($('#c8').prop('checked') == true) {
+            var total = $('#priceTots').val();
+            var totalPriceVar = parseInt(total);
+            totalPriceVar += parseInt($('#c8').val() );
+            $('#priceTots').val(totalPriceVar);
+        
+        } 
+
+             if ($('#c9').prop('checked') == true) {
+            var total = $('#priceTots').val();
+            var totalPriceVar = parseInt(total);
+            totalPriceVar += parseInt($('#c9').val() );
+            $('#priceTots').val(totalPriceVar);
+        
+        } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        return false;
+ 
+    });
 
     function MyFunction(x) {
         $('#requestId').val(x);

@@ -50,15 +50,15 @@ Layout = null;
                     <br>
                     <input asp-for="UserName" type="text" class="form-control" placeholder="Username" autofocus>
                     <br>
-                    <input asp-for="Password" type="password" class="form-control" placeholder="Password">
+                    <input asp-for="Password" type="password" minlength ="6" maxlength="12" class="form-control" placeholder="Password">
                     <br />
-                    <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm Password">
+                    <input asp-for="ConfirmPassword" minlength ="6" maxlength="12" type="password" class="form-control" placeholder="Confirm Password">
                     <br />
                     <input asp-for="Email" type="email" class="form-control" placeholder="Email" autofocus>
                     <br>
                     <input asp-for="Address" type="text" class="form-control" placeholder="Address" autofocus>
                     <br>
-                    <input asp-for="PhoneNumber" type="text" id="phoneNumber" class="form-control" placeholder="Phone Number" autofocus>
+                    <input asp-for="PhoneNumber" type="text" id="phoneNumber" maxlength="12" class="form-control" placeholder="Phone Number" autofocus>
                     <br>
                     <input type="hidden" asp-for="Role" value="customer" />
                     <center>

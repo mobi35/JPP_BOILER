@@ -54,7 +54,19 @@ private readonly IRequestRepository _requestRepo;
                request.Description = serviceType;
                request.Status = "for inspection";
             request.UserName = userName;
-                _requestRepo.Create(request);
+
+
+            Transaction serviceTransaction = new Transaction();
+          
+            serviceTransaction.BankAccount = "COD";
+            serviceTransaction.PaymentStatus = "Pending";
+            serviceTransaction.UserName = userName;
+            serviceTransaction.PaymentTerms = "COD";
+            serviceTransaction.DateTimeStamps = DateTime.Now;
+            serviceTransaction.ServiceType = serviceType;
+
+            _transactionRepo.Create(serviceTransaction);
+            _requestRepo.Create(request);
             request.Message = $"You have successfully requested for a service. Please wait {(int)dateRemainingDeliver.Value.TotalDays} day/s as the inspector will look at your unit";
                  return View("ViewError",request);
         }
@@ -103,16 +115,8 @@ private readonly IRequestRepository _requestRepo;
         {
            var service = _requestRepo.GetIdBy(id);
             service.Status = "Completed";
-            Transaction serviceTransaction = new Transaction();
-            service.Price = service.Price;
-            service.IsPaid = true;
-            serviceTransaction.BankAccount = "COD";
-            serviceTransaction.PaymentStatus = "Accepted";
-            serviceTransaction.DeliveryDate = DateTime.Now;
-            serviceTransaction.TotalPrice = service.Price;
-            serviceTransaction.UserName = service.UserName;
-            serviceTransaction.PaymentTerms = "COD";
-            serviceTransaction.DateTimeStamps = DateTime.Now;
+         
+
 
             var last = 1;
             try
@@ -132,7 +136,7 @@ private readonly IRequestRepository _requestRepo;
             orderedProd.Quantity = 1;
             orderedProd.TransactionID = last;
             _orderedRepository.Create(orderedProd);
-            _transactionRepo.Create(serviceTransaction);
+         
             _requestRepo.Update(service);
 
             _notifRepo.AddNotification($"Your service has already been completed. Thank you for choosing us.", service.UserName);
@@ -163,9 +167,35 @@ private readonly IRequestRepository _requestRepo;
             _notifRepo.AddNotification($"Your service has already canceled. ", service.UserName);
             return View("List",GetList());
         }
-        public IActionResult List(){
 
+        [HttpGet]
+        public IActionResult CustomerCancelService(int id)
+        {
+            var userName = HttpContext.Session.GetString("UserName");
+            var service = _requestRepo.GetIdBy(id);
+            service.Status = "Canceled";
+            _notifRepo.AddNotification($"You cancelled your request", service.UserName);
+           
+            var allRequest = _requestRepo.GetAll();
+            List<Request> requestList = new List<Request>();
+            foreach (var request in allRequest)
+            {
+                if (request.UserName == userName)
+                    requestList.Add(request);
+            }
+            return View("EmployeeService", requestList);
+        }
+
+        public IActionResult List(){
+            var role = HttpContext.Session.GetString("Role");
+           
+            if (role == "employee")
+            {
+                return View(AdminList());
+            }
+            else { 
             return View(GetList());
+            }
         }
 
         public IActionResult Billing(){
@@ -187,6 +217,18 @@ private readonly IRequestRepository _requestRepo;
             return req;
             
         }
+
+        public List<Request> AdminList()
+        {
+          
+            var allReq = _requestRepo.GetAll().AsQueryable().ToList();
+          
+            return allReq;
+
+        }
+
+
+
         [HttpPost]
          public IActionResult AcceptService(int id, float price){
             var request = _requestRepo.GetIdBy(id);

@@ -18,6 +18,8 @@ Layout = "Client";
             <th>Problem Encountered</th>
             <th>Price</th>
             <th>Status</th>
+
+            <th>Action</th>
         </tr>
     </thead>
 
@@ -30,6 +32,16 @@ Layout = "Client";
                     <td>@request.Requirements</td>
                     <td>@request.Price</td>
                     <td>@request.Status</td>
+                    <td>
+                        @{
+                            if (request.Price != 0 && request.Status != "Canceled")
+                            {
+
+                                <a asp-action="CustomerCancelService" asp-controller="Request" asp-route-id="@request.RequestId">Cancel Service</a>
+
+                            }
+                        }
+                    </td>
                 </tr>
             }
         }

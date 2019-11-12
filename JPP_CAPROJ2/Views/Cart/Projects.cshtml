@@ -1,0 +1,219 @@
+﻿@model IEnumerable<Transaction>
+@using Microsoft.AspNetCore.Http;
+@using JPP_CAPROJ2.Data.Model.Interface;
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOrderRepository OrderedProduct
+@{
+    ViewData["Title"] = "MyOrders";
+    Layout = "~/Views/Shared/Client.cshtml";
+}
+
+
+    <section id="main-content">
+        <div class="wrapper">
+
+            <h3><i class="fa fa-angle-right"></i>My Projects</h3>
+            <!-- BASIC FORM ELELEMNTS -->
+            <div class="row mt">
+                <div class="col-lg-12">
+                    <div class="form-panel">
+
+                        <table class="table table-striped table-bordered responsive no-wrap" style="width:100%" id="userList">
+                            <thead>
+                                <tr>
+
+                                    <th>Project Number</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <th>Details</th>
+                                    <th>User</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @{
+                                    foreach (var trans in Model)
+                                    {
+
+                                        var projectNumber = String.Format("{0:D5}", trans.TransactionKey);
+                                        <tr>
+                                            <td>@Html.Raw("P")@projectNumber</td>
+                                            <td>
+                                                @{
+                                                    if (trans.ServiceType != null)
+                                                    {
+                                                        <p>@trans.ServiceType Service</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        @OrderedProduct.GetIdBy(1)
+                                                    }
+                                                }
+
+
+                                            </td>
+
+                                            <td> <span class="badge-danger badge">@trans.PaymentStatus.ToLower() </span></td>
+                                            <td>
+                                                @{
+                                                    if (trans.ServiceType != null)
+                                                    {
+                                                        <button class="btn btn-success btn-sm" onclick="Service('@trans.ServiceType')" data-toggle="modal" data-target="#ServiceModel">
+                                                            Show
+                                                        </button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button class="btn btn-success btn-sm" onclick="Product('@trans.TransactionKey')" data-toggle="modal" data-target="#ProductModal">
+                                                            Show
+                                                        </button>
+                                                    }
+                                                }
+
+
+
+                                            </td>
+                                            <td>@trans.UserName</td>
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="ServiceModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Service Modal</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Placeholder</h5>
+                        <input type="text" id="requestId" class="form-control" placeholder="placeholder">
+                        <input type="text" class="form-control" placeholder="placeholder">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="ProductModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Product Model</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Placeholder</h5>
+                        <input type="text" id="requestId" class="form-control" placeholder="placeholder">
+                        <input type="text" class="form-control" placeholder="placeholder">
+                        <div class="productOutput"></div>
+                   
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>
+
+
+
+              </div>
+<br />
+<br />
+<br />
+<br />
+
+
+<script>
+
+    function Product(id) {
+
+        $.ajax({
+
+            url: '/Cart/GetProductsInProjects',
+            type: 'get',
+            data: {id:id},
+            success: function (e) {
+                $('.productOutput').html(e);
+            }
+        });
+
+
+    }
+
+    var now = new Date();
+    var otherDate = new Date();
+    now.setDate(otherDate.getDate() + 2);
+
+    var minDate = now.toISOString().substring(0, 10);
+
+    $('#dateTime').prop('min', minDate);
+
+
+    $(document).ready(function () {
+        $('#userList').DataTable({
+
+            responsive: true,
+            lengthChange: false,
+            "sScrollX": "100%",
+            "scrollCollapse": true,
+            dom: 'lBfrtip',
+            buttons: [
+                {
+                    extend: 'print',
+
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css({ 'font-size': '10pt' })
+                            .prepend(
+                                '<img style= src="~/Images/activefinancelogo.png"  style="position:absolute; height:500px; z-index:5000; width:500px; top:0; left:0;" />'
+                            );
+
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    }
+                }, 'excelHtml5', {
+                    extend: 'pdf',
+                    download: 'open',
+                }
+            ]
+
+        });
+    });
+
+</script>
+<script src="~/DataTables-1.10.18/js/jquery.dataTables.js"></script>
+<script src="~/DataTables-1.10.18/js/dataTables.buttons.min.js"></script>
+<script src="~/DataTables-1.10.18/js/buttons.print.min.js"></script>
+
+<script src="~/DataTables-1.10.18/js/pdfmake.min.js"></script>
+<script src="~/DataTables-1.10.18/js/vfs_fonts.js"></script>
+<script src="~/DataTables-1.10.18/js/buttons.html5.min.js"></script>
+<script src="~/DataTables-1.10.18/js/jszip.min.js"></script>
+<script src="~/DataTables-1.10.18/js/dataTables.responsive.min.js"></script>
+<script src="~/DataTables-1.10.18/js/responsive.bootstrap4.min.js"></script>
+
+<link href="~/DataTables-1.10.18/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+<link href="~/DataTables-1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<link href="~/DataTables-1.10.18/css/button.css" rel="stylesheet" />
+<script src="~/DataTables-1.10.18/js/dataTables.bootstrap4.js"></script>
+

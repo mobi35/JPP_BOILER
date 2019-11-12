@@ -35,7 +35,7 @@
             <div class="form-group ">
                 <label for="username" class="control-label col-lg-2">Password</label>
                 <div class="col-lg-10">
-                    <input asp-for="Password" class="form-control " id="username" name="Password" type="password" />
+                    <input asp-for="Password" minlength ="6" maxlength="12" class="form-control " id="username" name="Password" type="password" />
                 </div>
             </div>
 
@@ -43,7 +43,7 @@
             <div class="form-group ">
                 <label for="username" class="control-label col-lg-2">Confirm Password</label>
                 <div class="col-lg-10">
-                    <input asp-for="ConfirmPassword" class="form-control " id="username" name="ConfirmPassword" type="password" />
+                    <input asp-for="ConfirmPassword" minlength ="6" maxlength="12" class="form-control " id="username" name="ConfirmPassword" type="password" />
                 </div>
             </div>
 
@@ -53,7 +53,7 @@
             <div class="form-group ">
                 <label for="phone" class="control-label col-lg-2">Phone Number</label>
                 <div class="col-lg-10">
-                    <input asp-for="PhoneNumber" class="form-control " id="phone" name="PhoneNumber" type="text" />
+                    <input asp-for="PhoneNumber" class="form-control " id="phone" maxlength="12" name="PhoneNumber" type="text" />
                 </div>
             </div>
             <div class="form-group ">

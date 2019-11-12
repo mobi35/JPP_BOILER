@@ -13,6 +13,8 @@ namespace JPP_CAPROJ2.Data.Model
         [Key]
         public int TransactionKey { get; set; }
 
+        public string ServiceType { get; set; }
+
         public string BankAccount { get; set; }
 
         public string BankName { get; set; }
