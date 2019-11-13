@@ -1,77 +1,114 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Privacy Policy";
-Layout = "BackEnd";
+    Layout = "BackEnd";
 }
 
+    <section id="main-content">
+        <div class="wrapper">
+
+            <h3><i class="fa fa-angle-right"></i>Reports </h3>
+            <!-- BASIC FORM ELELEMNTS -->
+            <div class="row mt">
+                <div class="col-lg-12">
+              
+                    <div class="form-panel">
+                        <h1></h1>
+                        <div class="row">
+                            <div class="col-md-2">
+                               Choose Reports
+                                <select  name="name" class="form-control" style="width:200px;">
+                                    <option value="User Masterlist">User Masterlist</option>
+                                    <option value="Sales Report">Sales Reports</option>
+                                    <option value="Products Report">Products Report</option>
+                                    <option value="Top Customer">Top Customer</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                Start Date
+                                <input id="startDate" name="start" class="form-control" style="width:200px;" type="date" />
+                            </div>
+                            <div class="col-md-2">
+                                End Date
+                                <input id="endDate" name="end" class="form-control" style="width:200px;" type="date" />
+                            </div>
+                            <div class="col-md-2">
+                                <br />
+                             <button id="showData">ShowData</button>
+                            </div>
+                        </div>
+                        </div>
+                   
+                    
+                    </div></div></div></section>
 
 
-    
-    <section id="main-content"> 
-         <div class="wrapper">
+                        <script>
 
-               <h3><i class="fa fa-angle-right"></i>Reports</h3>
-     
-       
-asd
+                            $('#showData').click(function () {
 
-</div>  
-</section>
-<br /><br /><br /><br />
+                                $.ajax({
+
+                                    url: '',
+                                    type: 'post',
+                                    data: {}
+                                    success: function (x) {
+                                        alert(x)
+                                    }
+
+                                });
+                            });
 
 
-<script>
+                            function MyFunction() {
+                                alert("asdasd");
+                            }
 
+                            $(document).ready(function () {
+                                $('#userList').DataTable({
 
-function MyFunction(){
-    alert("asdasd");
-}
+                                    responsive: true,
+                                    lengthChange: false,
+                                    "sScrollX": "100%",
+                                    "scrollCollapse": true,
+                                    dom: 'lBfrtip',
+                                    buttons: [
+                                        {
+                                            extend: 'print',
 
-    $(document).ready(function () {
-        $('#userList').DataTable({
+                                            customize: function (win) {
+                                                $(win.document.body)
+                                                    .css({ 'font-size': '10pt' })
+                                                    .prepend(
+                                                        '<img style= src="~/Images/activefinancelogo.png"  style="position:absolute; height:500px; z-index:5000; width:500px; top:0; left:0;" />'
+                                                    );
 
-            responsive: true,
-            lengthChange: false,
-            "sScrollX": "100%",
-            "scrollCollapse": true,
-            dom: 'lBfrtip',
-            buttons: [
-                {
-                    extend: 'print',
+                                                $(win.document.body).find('table')
+                                                    .addClass('compact')
+                                                    .css('font-size', 'inherit');
+                                            }
+                                        }, 'excelHtml5', {
+                                            extend: 'pdf',
+                                            download: 'open',
+                                        }
+                                    ]
 
-                    customize: function (win) {
-                        $(win.document.body)
-                            .css({ 'font-size': '10pt' })
-                            .prepend(
-                                '<img style= src="~/Images/activefinancelogo.png"  style="position:absolute; height:500px; z-index:5000; width:500px; top:0; left:0;" />'
-                            );
+                                });
+                            });
 
-                        $(win.document.body).find('table')
-                            .addClass('compact')
-                            .css('font-size', 'inherit');
-                    }
-                }, 'excelHtml5', {
-                    extend: 'pdf',
-                    download: 'open',
-                }
-            ]
+                        </script>
+                        <script src="~/DataTables-1.10.18/js/jquery.dataTables.js"></script>
+                        <script src="~/DataTables-1.10.18/js/dataTables.buttons.min.js"></script>
+                        <script src="~/DataTables-1.10.18/js/buttons.print.min.js"></script>
 
-        });
-    });
+                        <script src="~/DataTables-1.10.18/js/pdfmake.min.js"></script>
+                        <script src="~/DataTables-1.10.18/js/vfs_fonts.js"></script>
+                        <script src="~/DataTables-1.10.18/js/buttons.html5.min.js"></script>
+                        <script src="~/DataTables-1.10.18/js/jszip.min.js"></script>
+                        <script src="~/DataTables-1.10.18/js/dataTables.responsive.min.js"></script>
+                        <script src="~/DataTables-1.10.18/js/responsive.bootstrap4.min.js"></script>
 
-</script>
-<script src="~/DataTables-1.10.18/js/jquery.dataTables.js"></script>
-<script src="~/DataTables-1.10.18/js/dataTables.buttons.min.js"></script>
-<script src="~/DataTables-1.10.18/js/buttons.print.min.js"></script>
-
-<script src="~/DataTables-1.10.18/js/pdfmake.min.js"></script>
-<script src="~/DataTables-1.10.18/js/vfs_fonts.js"></script>
-<script src="~/DataTables-1.10.18/js/buttons.html5.min.js"></script>
-<script src="~/DataTables-1.10.18/js/jszip.min.js"></script>
-<script src="~/DataTables-1.10.18/js/dataTables.responsive.min.js"></script>
-<script src="~/DataTables-1.10.18/js/responsive.bootstrap4.min.js"></script>
-
-<link href="~/DataTables-1.10.18/css/responsive.bootstrap4.min.css" rel="stylesheet" />
-<link href="~/DataTables-1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-<link href="~/DataTables-1.10.18/css/button.css" rel="stylesheet" />
-<script src="~/DataTables-1.10.18/js/dataTables.bootstrap4.js"></script>
-
+                        <link href="~/DataTables-1.10.18/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+                        <link href="~/DataTables-1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+                        <link href="~/DataTables-1.10.18/css/button.css" rel="stylesheet" />
+                        <script src="~/DataTables-1.10.18/js/dataTables.bootstrap4.js"></script>

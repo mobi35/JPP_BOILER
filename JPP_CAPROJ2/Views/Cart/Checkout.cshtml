@@ -70,7 +70,7 @@
                                                     <td>@product.Cart.Quantity</td>
 
                                                     <td>@product.Product.Price.ToString("N")</td>
-                                                    <td><a return="confirm('are you sure you want to delete?')" asp-route-id="@product.Cart.CartKey" asp-controller="Cart" asp-action="Delete">Remove</a>  </td>
+                                                    <td><a return="confirm('are you sure you want to delete?')" asp-route-id="@product.Cart.CartKey" asp-controller="Cart" asp-action="RemoveItemCart">Remove</a>  </td>
                                                 </tr>
                                     }
                                 }

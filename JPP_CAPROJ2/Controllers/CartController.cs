@@ -70,7 +70,16 @@ namespace JPP_CAPROJ2.Controllers
             imageFile.CopyTo(new FileStream(filePath, FileMode.Create));
             transactionRepo.ImageString = uniqueName;
             _transactionRepo.Update(transactionRepo);
+            _notificationRepo.AddNotification($"{transactionRepo.UserName} has added a deposit slip. Please check transaction.", transactionRepo.UserName);
             return View("MyOrders",MyOrdersVM());
+        }
+
+        public IActionResult DoneDelivery(int id)
+        {
+            var delivery = _transactionRepo.GetIdBy(id);
+            delivery.DeliveryStatus = "Delivered";
+            _transactionRepo.Update(delivery);
+            return View("ProductOrders", MyOrdersVM());
         }
 
         public IActionResult UpdateCart(Cart cart)
@@ -78,12 +87,66 @@ namespace JPP_CAPROJ2.Controllers
             _cartRepo.Update(cart);
             return View();
         }
+        
+        public IActionResult AdminAcceptDelivery(int id)
+        {
+            var userName = HttpContext.Session.GetString("UserName");
+            var delivery = _transactionRepo.GetIdBy(id);
+            delivery.DeliveryStatus = "Accepted";
+            delivery.WhoCanModify = userName;
+            _transactionRepo.Update(delivery);
+            return View("ProductOrders", MyOrdersVM());
+        }
+
+        public IActionResult AdminRejectDelivery(int id)
+        {
+            var userName = HttpContext.Session.GetString("UserName");
+            var delivery = _transactionRepo.GetIdBy(id);
+            delivery.DeliveryDate = null;
+            delivery.WhoCanModify = userName;
+            _transactionRepo.Update(delivery);
+            return View("ProductOrders", MyOrdersVM());
+        }
+
+        public IActionResult AcceptDelivery(int id)
+        {
+            var userName = HttpContext.Session.GetString("UserName");
+            var delivery = _transactionRepo.GetIdBy(id);
+            delivery.DeliveryStatus = "Accepted";
+            delivery.WhoCanModify = userName;
+            _transactionRepo.Update(delivery);
+            return View("MyOrders", MyOrdersVM());
+        }
+
+        public IActionResult RejectDelivery(int id)
+        {
+            var userName = HttpContext.Session.GetString("UserName");
+            var delivery = _transactionRepo.GetIdBy(id);
+            delivery.DeliveryDate = null;
+            delivery.WhoCanModify = userName;
+            _transactionRepo.Update(delivery);
+            return View("MyOrders", MyOrdersVM());
+        }
+        [HttpPost]
+        public IActionResult CustomerPreferredDate(int id, DateTime? dateTime)
+        {
+            var userName = HttpContext.Session.GetString("UserName");
+            var transaction = _transactionRepo.GetIdBy(id);
+            transaction.DeliveryDate = dateTime;
+            transaction.WhoCanModify = userName;
+            _transactionRepo.Update(transaction);
+            return View("MyOrders", MyOrdersVM());
+        }
+
         [HttpPost]
         public IActionResult SetDeliveryDate(int id, DateTime? dateTime)
         {
+            var userName = HttpContext.Session.GetString("UserName");
             var transaction = _transactionRepo.GetIdBy(id);
             transaction.DeliveryDate = dateTime;
+            transaction.WhoCanModify = userName;
             _transactionRepo.Update(transaction);
+
             return View("ProductOrders", MyOrdersVM());
         }
         public IActionResult Delete(int id)
@@ -120,7 +183,6 @@ namespace JPP_CAPROJ2.Controllers
             double totalPrice = 0;
 
             var productList = new List<ProductCartViewModel>();
-
          
             foreach (var c in _cartRepo.GetAll().AsQueryable().ToList())
             {
@@ -186,8 +248,12 @@ namespace JPP_CAPROJ2.Controllers
             
             return View("CheckoutSuccess", successMessage);
         }
-
-
+       
+       public IActionResult RemoveItemCart(int id)
+        {
+            _cartRepo.Delete(_cartRepo.GetIdBy(id));
+            return RedirectToAction("Cart", "Cart");
+        }
         [HttpGet]
         public IActionResult CheckoutSuccess(string successMessage)
         {
@@ -232,6 +298,7 @@ namespace JPP_CAPROJ2.Controllers
         {
            var trans = _transactionRepo.GetIdBy(id);
             trans.PaymentStatus = "Accepted";
+            trans.DeliveryStatus = "Pending";
             _transactionRepo.Update(trans);
             _notificationRepo.AddNotification("You're Transaction has been accepted.", trans.UserName);
             return View("ProductOrders", MyOrdersVM());

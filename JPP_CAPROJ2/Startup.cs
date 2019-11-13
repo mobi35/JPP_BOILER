@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Rotativa.AspNetCore;
 
 namespace JPP_CAPROJ2
 {
@@ -46,6 +47,7 @@ namespace JPP_CAPROJ2
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IQuotationRepository, QuotationRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSession(so => so.IdleTimeout = TimeSpan.FromSeconds(5000));
             services.Configure<CookiePolicyOptions>(options =>
@@ -85,6 +87,7 @@ namespace JPP_CAPROJ2
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
            DbInitialize.Seed(app);
+            RotativaConfiguration.Setup(env);
         }
     }
 }

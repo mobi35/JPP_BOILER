@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<MyOrdersViewModel>
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "MyOrders";
     Layout = "~/Views/Shared/Client.cshtml";
@@ -30,63 +32,90 @@
                             @{
                                 foreach (var pVM in Model)
                                 {
-                                                        <tr>
-                                                         
-                                                            <td>
-                                                                @{
-                                                                    foreach (var order in pVM.Orders)
-                                                                    {
-                                                                        <p>@order.ProductName  X  @order.Quantity</p>
-                                                                    }
-                                                                }
+                                    <tr>
 
-                                                            </td>
-                                                            <td>@pVM.Transactions.TotalPrice</td>
-                                                            <td>@pVM.Transactions.PaymentStatus</td>
-                                                            <td>
-                                                                @{
-                                                                    if (pVM.Transactions.DeliveryDate == null)
-                                                                    {
-                                                                        @Html.Raw("TBA");
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        @pVM.Transactions.DeliveryDate
-                                                                    }
-                                                                }
-                                                            </td>
-                                                            <td>
-                                                                @{
-                                                                    if (pVM.Transactions.PaymentStatus == "Accepted")
-                                                                    {
-                                                                        <a asp-action="Invoice" asp-controller="Cart" asp-route-id="@pVM.Transactions.TransactionKey">
-                                                                        </a>
-                                                                    }
-                                                                }
-                                                            </td>
+                                        <td>
+                                            @{
+                                                foreach (var order in pVM.Orders)
+                                                {
+                                                    <p>@order.ProductName  X  @order.Quantity</p>
+                                                }
+                                            }
 
-                                                            <td>
-                                                                @{
-                                                                    if (pVM.Transactions.ImageString == null && pVM.Transactions.PaymentTerms == "Bank Account")
-                                                                    {
-                                                                        <form method="post" enctype="multipart/form-data" asp-controller="Cart" asp-action="AddDepositSlip">
-                                                                            <input name="id" value="@pVM.Transactions.TransactionKey" type="hidden" />
-                                                                            <input name="imageFile" type="file" />
-                                                                            <input type="submit" />
-                                                                        </form>
-                                                                    }
-                                                                }
-                                                            </td>
+                                        </td>
+                                        <td>@pVM.Transactions.TotalPrice</td>
+                                        <td><span class="badge badge-pill"> @pVM.Transactions.PaymentStatus</td>
+                                        <td>
+                                            @{
+                                                if (pVM.Transactions.DeliveryDate == null)
+                                                {
+                                                    @Html.Raw("TBA");
+                                                }
+                                                else if (pVM.Transactions.DeliveryStatus != "Accepted" &&  pVM.Transactions.DeliveryStatus != "Delivered" && HttpContextAccessor.HttpContext.Session.GetString("UserName") != pVM.Transactions.WhoCanModify)
+                                                {
+                                                    @pVM.Transactions.DeliveryDate.Value.ToString("D")<br />
 
-                                                        </tr>
+                                                    <span class="badge badge-pill">@pVM.Transactions.DeliveryStatus</span><br /><br />
+
+                                                    <p>Do you want to accept this delivery?</p>
+                                                    if (pVM.Transactions.DeliveryDate != null)
+                                                    {
+                                                        <a asp-route-id="@pVM.Transactions.TransactionKey" class="btn-sm btn-primary" asp-action="AcceptDelivery" asp-controller="Cart">Accept</a>
+                                                        <a asp-route-id="@pVM.Transactions.TransactionKey" class="btn-sm btn-danger" asp-action="RejectDelivery" asp-controller="Cart">Reject</a>
+                                                    }
+                                                    <br /><br />
+                                                    <span style="color:gray;">or you can choose your preferred date</span>
+                                                    <form method="post" asp-action="CustomerPreferredDate" asp-controller="Cart">
+                                                        <input type="hidden" value="@pVM.Transactions.TransactionKey" name="id" />
+                                                        <input class="form-control" type="date" id="dateTime" name="dateTime" />
+                                                        <br />
+                                                        <input class="btn btn-sm" type="submit" />
+                                                    </form>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge badge-pill">@pVM.Transactions.DeliveryStatus</span>
+                                                    @pVM.Transactions.DeliveryDate.Value.ToString("D")
+
+                                                    if (DateTime.Now >= pVM.Transactions.DeliveryDate)
+                                                    {
+                                                        <a class="btn btn-success" asp-action="DoneDelivery" asp-controller="Cart" asp-route-id="@pVM.Transactions.TransactionKey">Done Delivery</a>
+                                                    }
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @{
+                                                if (pVM.Transactions.PaymentStatus == "Accepted")
+                                                {
+                                                    <a asp-action="Invoice" asp-controller="Cart" asp-route-id="@pVM.Transactions.TransactionKey">
+                                                    </a>
+                                                }
+                                            }
+                                        </td>
+
+                                        <td>
+                                            @{
+                                                if (pVM.Transactions.ImageString == null && pVM.Transactions.PaymentTerms == "Bank Account")
+                                                {
+                                                    <form method="post" enctype="multipart/form-data" asp-controller="Cart" asp-action="AddDepositSlip">
+                                                        <input name="id" value="@pVM.Transactions.TransactionKey" type="hidden" />
+                                                        <input name="imageFile" type="file" />
+                                                        <input type="submit" />
+                                                    </form>
+                                                }
+                                            }
+                                        </td>
+
+                                    </tr>
                                 }
                             }
                         </tbody>
                     </table>
                 </div>
             </div>
-            </div>
         </div>
+    </div>
 </section>
 <br />
 <br />
@@ -95,6 +124,16 @@
 
 
 <script>
+
+    var now = new Date();
+    var otherDate = new Date();
+    now.setDate(otherDate.getDate() + 2);
+
+    var minDate = now.toISOString().substring(0, 10);
+
+    $('#dateTime').prop('min', minDate);
+
+
     $(document).ready(function () {
         $('#userList').DataTable({
 

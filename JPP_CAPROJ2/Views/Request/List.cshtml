@@ -24,6 +24,7 @@
                                 <th>Price</th>
                                 <th>Assigned By</th>
                                 <th>Status</th>
+                                <th>Inspection Date</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -39,11 +40,13 @@
                                                             <td>@request.AssignedBy</td>
                                                             <td>
                                                                 @request.Status
-
+                                                            </td>
+                                                            <td>
+                                                                @request.AvailableDate.ToString("D")
                                                             </td>
 
                                                             <td>
-                                                                @{ if (request.Status == "for viewing")
+                                                                @{ if (request.Status == "for inspection")
                                                                     {
 
                                                                         <button onclick="MyFunction('@request.RequestId')" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">

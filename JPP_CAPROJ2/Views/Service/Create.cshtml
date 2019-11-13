@@ -2,7 +2,7 @@
     ViewData["Title"] = "Privacy Policy";
     Layout = "BackEnd";
 }
-@model Service
+@model List<Quotations>
 
     <section id="main-content"> 
          <div class="wrapper">
@@ -11,58 +11,49 @@
         <div class="col-lg-12">
 
             <div class="form-panel">
-                <div class="form">
-                    <div class="alert alert-danger validation" asp-validation-summary="All"></div>
-                    
-                    <form class="cmxform form-horizontal style-form" id="signupForm" asp-action="Create" asp-controller="Service" method="post">
-                        <div class="form-group ">
-                            <label for="firstname" class="control-label col-lg-2">Name</label>
-                            <div class="col-lg-10">
-                                <input asp-for="Name" class="form-control" id="firstname" type="text" />
-                            </div>
-                        </div>
-                    <div class="form-group ">
-                            <label for="username" class="control-label col-lg-2">Price per workers</label>
-                            <div class="col-lg-10">
-                                <input asp-for="Price" class="form-control " id="username"  type="text" />
-                            </div>
-                    </div>
-                       <div class="form-group ">
-                            <label for="username" class="control-label col-lg-2">Requirements</label>
-                            <div class="col-lg-10">
-                                <input asp-for="Price" class="form-control " id="username"  type="text" />
-                            </div>
-                    </div>
 
-                    <div class="form-group ">
-                            <label for="username" class="control-label col-lg-2"></label>
-                            <div class="col-lg-10">
-                                <input asp-for="Price" class="form-control " id="username"  type="text" />
-                            </div>
-                    </div>
+                <h1>Boiler</h1>
+                <form method="post" asp-action="CreateQuotation" asp-controller="Service">
+                    <ul>
+                        @{
+                            foreach (var c in Model)
+                            {
+                                if (c.ServiceName == "Boiler")
+                                {
+                                    <li class="badge badge-info">@c.QuotationName : @c.Price.ToString("N")  <a class="btn-sm btn-danger" asp-route-id="@c.QuotationPK" asp-controller="Service" asp-action="DeleteQuotation" >X</a>  </li> 
+                                }
+                            }
+                        }
 
+                    </ul>
 
-                        <div class="form-group ">
-                            <label for="username" class="control-label col-lg-2">Service Price</label>
-                            <div class="col-lg-10">
-                                <input asp-for="Price" class="form-control " id="username"  type="text" />
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="password" class="control-label col-lg-2">Description</label>
-                            <div class="col-lg-10">
-                                <input asp-for="Description" class="form-control " id="password"  type="text" />
-                            </div>
-                        </div>
-                      
-                        <div class="form-group">
-                            <div class="col-lg-offset-2 col-lg-10">
-                                <button class="btn btn-theme" type="submit">Save</button>
-                                <button class="btn btn-theme04" type="button">Cancel</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    <input type="text" placeholder="Title" name="title" style="width:200px;" class="form-control" />
+                    <input type="number" name="price" style="width:200px;" placeholder="Price" class="form-control" />
+                    <input type="hidden" name="serviceType" value="Boiler" />
+                    <input type="submit" class="btn btn-primary" />
+                </form>
+                <h1>Plumbing</h1>
+                <form method="post" asp-action="CreateQuotation" asp-controller="Service">
+                    <ul>
+                        @{
+                            foreach (var c in Model)
+                            {
+                                if (c.ServiceName == "Plumbing")
+                                {
+                                    <li class="badge badge-info">@c.QuotationName : @c.Price.ToString("N")  <a class="btn-sm btn-danger" asp-route-id="@c.QuotationPK" asp-controller="Service" asp-action="DeleteQuotation">X</a>  </li>
+
+                                }
+                            }
+                        }
+                    </ul>
+
+                    <input type="text" placeholder="Title" name="title" style="width:200px;" class="form-control" />
+                    <input type="number" name="price" style="width:200px;" placeholder="Price" class="form-control" />
+                    <input type="hidden" name="serviceType" value="Plumbing" />
+                    <input type="submit" class="btn btn-primary" />
+                </form>
+
+                
             </div>
             <!-- /form-panel -->
         </div>

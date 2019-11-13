@@ -2,6 +2,7 @@
 using JPP_CAPROJ2.Data.Model.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Rotativa.AspNetCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +19,15 @@ namespace JPP_CAPROJ2.Controllers
             _userRepo = userRepo;
         }
      
+
         public IActionResult Index()
         {
-            
             return View();
         }
-
-     
-      
+        
+        public IActionResult ReportThis(string name)
+        {
+            return new ViewAsPdf(name);
+        }
     }
 }

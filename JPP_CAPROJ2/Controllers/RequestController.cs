@@ -52,7 +52,7 @@ private readonly IRequestRepository _requestRepo;
             request.Address = _userRepo.FindUser(a => a.UserName == userName).Address;
             request.Requirements = request.Description;
                request.Description = serviceType;
-               request.Status = "for viewing";
+               request.Status = "for inspection";
             request.UserName = userName;
                 _requestRepo.Create(request);
             request.Message = $"You have successfully requested for a service. Please wait {(int)dateRemainingDeliver.Value.TotalDays} day/s as the inspector will look at your unit";
@@ -82,7 +82,7 @@ private readonly IRequestRepository _requestRepo;
             }
 
                req.Description = "";
-                req.Status = "for viewing";
+                req.Status = "for inspection";
                _requestRepo.Create(requestVM.Requests);
              req.Message = "You have successfully requested for a service. Please wait for 2-3 days as the inspector will look at your unit";
                  return View("ViewError",req);

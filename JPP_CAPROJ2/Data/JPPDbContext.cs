@@ -26,6 +26,7 @@ namespace JPP_CAPROJ2.Data
         public DbSet<Transaction> Transactions { get; set; }
 
         public DbSet<OrderedProducts> Orders { get; set; }
+        public DbSet<Quotations> Quotations { get; set; }
     }
 }
 

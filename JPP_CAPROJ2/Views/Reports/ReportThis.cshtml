@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+    Layout = null;
+}
+@model string
+@{
+    var service = Context.RequestServices.GetService(typeof(Microsoft.AspNetCore.Hosting.IHostingEnvironment)) as Microsoft.AspNetCore.Hosting.IHostingEnvironment;
+    var fileImage = $"{service.WebRootPath}/img/420665_382726511841144_1933970102_n.jpg";
+}
+
+    <body>
+
+        <img id="image" src="@fileImage" />
+        <div style="margin-top:2px;" class="header">
+
+            <span style="margin-top:-100px;"></span>
+            <div>
+                <h1 style="margin-top:50px;">John Paul & Peter Boiler Repair & Services</h1>
+            </div>
+            <p>
+                016 Purok 6 Lawa Calamba, Laguna / jpp_boiler@yahoo.com.ph
+            </p>
+            <br /><br /><br />
+                <h1 style="margin-left:350px;">@ViewBag.Reports</h1>
+            <br />
+        </div>
+
+      
+        <div class="content">
+
+            <table id="table" border="1">
+                <tr>
+                    <th>@ViewBag.Reports</th>
+                    <th>Common Name/City</th>
+                </tr>
+                <tr>
+                    <td>CWA</td>
+                    <td>Central Wisconsin Airport</td>
+                </tr>
+                <tr>
+                    <td>ORD</td>
+                    <td>Chicago O'Hare</td>
+                </tr>
+                <tr>
+                    <td>LHR</td>
+                    <td>London Heathrow</td>
+                </tr>
+                <tr>
+                    <td>LHR</td>
+                    <td>London Heathrow</td>
+                </tr>
+            </table>
+        </div>
+    </body>
+
+
+<style>
+    #table{
+        font-size:20px;
+        
+        border-collapse:collapse;
+    }
+    #table tr td,th{
+        padding:10px;
+    }
+    .content{
+        margin-bottom:-200px;
+    }
+    #image {
+        margin-bottom: 80px;
+        position: absolute;
+        width:18%;
+    }
+
+    .header {
+        float: left;
+    }
+
+        .header h1 {
+            font-size: 34px;
+            margin-left: 200px;
+        }
+
+        .header p {
+            margin-left: 200px;
+        }
+</style>

@@ -137,6 +137,17 @@
 
                                     <li class="sub-menu">
                                         <a href="javascript:;">
+                                            <i class="fa fa-wrench"></i>
+                                            <span>Service Quotations</span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li><a asp-controller="Service" asp-action="Create">Create Quotation</a></li>
+
+                                        </ul>
+                                    </li>
+
+                                    <li class="sub-menu">
+                                        <a href="javascript:;">
                                             <i class="fa fa-user"></i>
                                             <span>Payment   @await Component.InvokeAsync("TransactionCount")</span>
                                         </a>
@@ -160,9 +171,9 @@
                                         </ul>
                                     </li>
 
-                                  
 
-                                  
+
+
 
 
                                 </ul>

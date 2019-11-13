@@ -37,5 +37,9 @@ namespace JPP_CAPROJ2.Data.Model
         public DateTime? DeliveryDate { get; set; }
 
         public bool isRead { get; set; }
+
+        public string DeliveryStatus { get; set; }
+
+        public string WhoCanModify { get; set; }
     }
 }

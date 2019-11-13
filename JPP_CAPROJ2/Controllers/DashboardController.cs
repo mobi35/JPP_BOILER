@@ -155,7 +155,8 @@ namespace JPP_CAPROJ2.Controllers
                 int sold = 0;
                 foreach (var ordered in _orderRepo.GetAll().ToList())
                 {
-                    if(prod.ProductName == ordered.ProductName)
+                   
+                    if(prod.ProductName == ordered.ProductName && _transactionRepo.FindTransaction(a => a.TransactionKey == ordered.TransactionID).PaymentStatus == "Accepted")
                     {
                         sold++;
                     }

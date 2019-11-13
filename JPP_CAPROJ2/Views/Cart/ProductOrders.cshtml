@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<MyOrdersViewModel>
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "ProductOrders";
     Layout = "~/Views/Shared/BackEnd.cshtml";
@@ -6,31 +8,28 @@
 
 <style>
     #background {
-        background-color:rgba(0,0,0,0.3);
-        width:100%;
-        height:100%;
-        position:absolute;
-        z-index:999;
-        
+        background-color: rgba(0,0,0,0.3);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 999;
     }
 
-    #picture{
-       position: absolute;
-       top:7%;
-left: 50%;
-margin-left: -280px;
-width: 800px;
-height: 850px;
-
+    #picture {
+        position: absolute;
+        top: 7%;
+        left: 50%;
+        margin-left: -280px;
+        width: 800px;
+        height: 850px;
     }
 
     #imageSize {
-        max-width:100%;
-        max-height:100%;
-        width:100%;
-        height:100%;
-        object-fit:contain;
-     
+        max-width: 100%;
+        max-height: 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 </style>
 
@@ -54,7 +53,7 @@ height: 850px;
                     <table class="table table-striped table-bordered responsive no-wrap" style="width:100%" id="userList">
                         <thead>
                             <tr>
-                               
+
                                 <th>Products</th>
                                 <th>Payment Terms</th>
                                 <th>Payment</th>
@@ -69,68 +68,81 @@ height: 850px;
                             @{
                                 foreach (var pVM in Model)
                                 {
-                                                        <tr>
-                                                          
-                                                            <td>
-                                                                @{
-                                                                    foreach (var order in pVM.Orders)
-                                                                    {
-                                                                        <p>@order.ProductName  X  @order.Quantity</p>
-                                                                    }
-                                                                }
+                                    <tr>
 
-                                                            </td>
-                                                            <td>@pVM.Transactions.PaymentTerms</td>
-                                                            <td>@pVM.Transactions.TotalPrice.ToString("N")</td>
-                                                            <td>
-                                                                @{
-                                                                    if (pVM.Transactions.DeliveryDate != null )
-                                                                    {
-                                                                        @pVM.Transactions.DeliveryDate
-                                                                    }else if(pVM.Transactions.PaymentStatus == "Accepted" )
-                                                                    {
-                                                                        <form method="post" asp-action="SetDeliveryDate" asp-controller="Cart">
-                                                                            <input type="hidden" value="@pVM.Transactions.TransactionKey" name="id" />
-                                                                            <input type="date" id="dateTime" name="dateTime"/>
-                                                                            <input type="submit"/>
-                                                                        </form>
-                                                                    }
-                                                                }
+                                        <td>
+                                            @{
+                                                foreach (var order in pVM.Orders)
+                                                {
+                                                    <p>@order.ProductName  X  @order.Quantity</p>
+                                                }
+                                            }
 
+                                        </td>
+                                        <td>@pVM.Transactions.PaymentTerms</td>
+                                        <td>@pVM.Transactions.TotalPrice.ToString("N")</td>
+                                        <td>
+                                            @{
+                                                if (pVM.Transactions.DeliveryDate != null)
+                                                {
+                                                    <span> @pVM.Transactions.DeliveryDate.Value.ToString("D")</span>
+                                                }
+                                                else if (pVM.Transactions.PaymentStatus == "Accepted" && pVM.Transactions.DeliveryStatus != "Accepted" && pVM.Transactions.DeliveryStatus != "Delivered" && HttpContextAccessor.HttpContext.Session.GetString("UserName") != pVM.Transactions.WhoCanModify)
+                                                {
+                                                    @pVM.Transactions.DeliveryDate
 
-                                                            </td>
-                                                            <td>@pVM.Transactions.PaymentStatus</td>
+                                                    <span class="badge badge-pill">@pVM.Transactions.DeliveryStatus</span>
 
-                                                            <td>
-                                                                @{
-                                                                    if (pVM.Transactions.PaymentStatus == "pending")
-                                                                    {
-                                                                        <a onclick="return confirm('Are you sure you want to accept this transaction?')" asp-route-id="@pVM.Transactions.TransactionKey" asp-action="AcceptPayment" asp-controller="Cart"> Accept Payment</a> <a asp-route-id="@pVM.Transactions.TransactionKey" c asp-action="RejectPayment" asp-controller="Cart">Reject Payment</a>
-                                                                    }
-                                                                }
-                                                            </td>
-                                                            <td>
-                                                                @{
-                                                                    if (pVM.Transactions.ImageString != null)
-                                                                    {
-                                                                        <a onclick="ImageView('@pVM.Transactions.ImageString');" href="#">View Image</a>
-
-                                                                    }
-                                                                }
+                                                    if (pVM.Transactions.DeliveryDate != null)
+                                                    {
+                                                        <a asp-route-id="@pVM.Transactions.TransactionKey" class="btn-sm btn-primary" asp-action="AdminAcceptDelivery" asp-controller="Cart">Accept</a>
+                                                        <a asp-route-id="@pVM.Transactions.TransactionKey" class="btn-sm btn-danger" asp-action="AdminRejectDelivery" asp-controller="Cart">Reject</a>
+                                                    }
+                                                    <br /><br />
+                                                    <span style="color:gray;">Choose Date</span>
+                                                    <form method="post" asp-action="CustomerPreferredDate" asp-controller="Cart">
+                                                        <input type="hidden" value="@pVM.Transactions.TransactionKey" name="id" />
+                                                        <input class="form-control" type="date" id="dateTime" name="dateTime" />
+                                                        <br />
+                                                        <input class="btn btn-sm" type="submit" />
+                                                    </form>
+                                                }
+                                            }
 
 
-                                                            </td>
+                                        </td>
+                                        <td><span class="badge badge-pill">@pVM.Transactions.PaymentStatus</span> </td>
 
-                                                            <td>
-                                                                @{
-                                                                  
-                                                                        <a asp-action="Invoice" asp-controller="Cart" asp-route-id="@pVM.Transactions.TransactionKey">
-                                                                            View Invoice
-                                                                        </a>
-                                                                  
-                                                                }
-                                                            </td>
-                                                        </tr>
+                                        <td>
+                                            @{
+                                                if (pVM.Transactions.PaymentStatus == "pending" && pVM.Transactions.ImageString != null)
+                                                {
+                                                    <a onclick="return confirm('Are you sure you want to accept this transaction?')" asp-route-id="@pVM.Transactions.TransactionKey" asp-action="AcceptPayment" asp-controller="Cart"> Accept Payment</a> <a asp-route-id="@pVM.Transactions.TransactionKey" onclick="return confirm('Are you sure you want to reject this transaction?')" asp-action="RejectPayment" asp-controller="Cart">Reject Payment</a>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @{
+                                                if (pVM.Transactions.ImageString != null)
+                                                {
+                                                    <a onclick="ImageView('@pVM.Transactions.ImageString');" href="#">View Image</a>
+
+                                                }
+                                            }
+
+
+                                        </td>
+
+                                        <td>
+                                            @{
+
+                                                <a asp-action="Invoice" asp-controller="Cart" asp-route-id="@pVM.Transactions.TransactionKey">
+                                                    View Invoice
+                                                </a>
+
+                                            }
+                                        </td>
+                                    </tr>
                                 }
                             }
                         </tbody>
@@ -175,7 +187,7 @@ height: 850px;
         });
     });
 
-  
+
 
 </script>
 <script src="~/DataTables-1.10.18/js/jquery.dataTables.js"></script>
@@ -205,18 +217,18 @@ height: 850px;
 
     $('#dateTime').prop('min', minDate);
 
-   
+
 
 
     function ImageView(img) {
-        
+
         $('#background').show();
         $('#picture').html("<img id='imageSize' src = '../../Images/" + img + "'/> ");
-         
+
     }
 
 
-      function HidePicture() {
+    function HidePicture() {
         $('#background').hide();
     }
 

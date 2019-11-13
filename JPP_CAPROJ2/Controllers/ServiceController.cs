@@ -11,11 +11,13 @@ namespace JPP_CAPROJ2.Controllers
 {
     public class ServiceController : Controller
     {
+        private readonly IQuotationRepository _quotationRepo;
         private readonly IServiceRepository _serviceRepo;
         private readonly IRequestRepository _requestRepo;
 
-        public ServiceController(IServiceRepository serviceRepo, IRequestRepository requestRepo)
+        public ServiceController(IQuotationRepository quotationRepo, IServiceRepository serviceRepo, IRequestRepository requestRepo)
         {
+            _quotationRepo = quotationRepo;
             _serviceRepo = serviceRepo;
             _requestRepo = requestRepo;
         }
@@ -29,9 +31,8 @@ namespace JPP_CAPROJ2.Controllers
         }
         public IActionResult Create()
         {
-            var service = new Service();
-            service.Message = "";
-            return View(service);
+            
+            return View(_quotationRepo.GetAll().ToList());
         }
         [HttpPost]
         public IActionResult Create(Service service)
@@ -106,5 +107,28 @@ namespace JPP_CAPROJ2.Controllers
         
              return View(serviceVM);
          }
+        
+
+             
+        public IActionResult DeleteQuotation(int id)
+        {
+            _quotationRepo.Delete(_quotationRepo.GetIdBy(id));
+            return View("Create", _quotationRepo.GetAll().ToList());
+        }
+        [HttpPost]
+        public IActionResult CreateQuotation(string title, int price,  string serviceType)
+        {
+            Quotations quotation = new Quotations();
+
+            quotation.Price = price;
+            quotation.QuotationName = title;
+            quotation.ServiceName = serviceType;
+
+            _quotationRepo.Create(quotation);
+            return View("Create",_quotationRepo.GetAll().ToList());
+        }
+
+
+
     }
 }
