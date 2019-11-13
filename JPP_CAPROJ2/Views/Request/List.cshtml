@@ -97,17 +97,18 @@
                 </div>
                 <div class="modal-body">
                     <h5>Service Details</h5>
-                    <input type="checkbox" id="c1" value="5000" /> Boiler Maintenance
-                    <input type="checkbox" id="c2" value="10000" /> Boiler Repair
-                    <input type="checkbox" id="c3" value="5500" /> Cleaning
-                    <input type="checkbox" id="c4" value="15000" /> Plumbing
-                    <input type="checkbox" id="c5" value="12500" /> Rehabilitation
-                    <input type="checkbox" id="c6" value="8500" /> Retubing
-                    <input type="checkbox" id="c7" value="9000" /> Fabrication of Reactors
-                    <input type="checkbox" id="c8" value="15250" /> Fully Retube
-                    <input type="checkbox" id="c9" value="13275" /> Partial Retubing
+                    <input style="display:none;" type="checkbox" checked="checked" name="c0" id="c0" value="1000" />
+                    <input type="checkbox" name="c1" id="c1" value="5000" /> Boiler Maintenance <br />
+                    <input type="checkbox" name="c2" id="c2" value="10000" /> Boiler Repair<br />
+                    <input type="checkbox" name="c3" id="c3" value="5500" /> Cleaning<br />
+                    <input type="checkbox" name="c4" id="c4" value="15000" /> Plumbing<br />
+                    <input type="checkbox" name="c5" id="c5" value="12500" /> Rehabilitation<br />
+                    <input type="checkbox" name="c6" id="c6" value="8500" /> Retubing<br />
+                    <input type="checkbox" name="c7" id="c7" value="9000" /> Fabrication of Reactors<br />
+                    <input type="checkbox" name="c8" id="c8" value="15250" /> Fully Retube<br />
+                    <input type="checkbox" name="c9" id="c9" value="13275" /> Partial Retubing
                     <input type="hidden" id="requestId" name="id" class="form-control" placeholder="placeholder">
-                    <input type="number" name="price" min="1" id="priceTots" readonly value="0" class="form-control" placeholder="Service Price">
+                    <input type="number" name="price" min="1" id="priceTots" readonly value="1000" class="form-control" placeholder="Service Price">
                     <button id="calculate">Calculate</button>
                 </div>
                 <div class="modal-footer">
@@ -204,6 +205,13 @@
         
         } 
 
+            if ($('#c0').prop('checked') == true) {
+            var total = $('#priceTots').val();
+            var totalPriceVar = parseInt(total);
+            totalPriceVar += parseInt($('#c0').val() );
+            $('#priceTots').val(totalPriceVar);
+        
+        } 
 
 
 

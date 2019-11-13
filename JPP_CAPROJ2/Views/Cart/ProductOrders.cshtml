@@ -82,7 +82,9 @@
                                         <td>@pVM.Transactions.TotalPrice.ToString("N")</td>
                                         <td>
                                             @{
-                                                if (pVM.Transactions.PaymentStatus != "Accepted" && pVM.Transactions.PaymentTerms == "Cash on delivery" && DateTime.Now > pVM.Transactions.DateTimeStamps.Value.AddDays(5).Date)
+
+
+                                                if (pVM.Transactions.PaymentStatus != "Completed" && pVM.Transactions.PaymentTerms == "Cash on delivery" && DateTime.Now > pVM.Transactions.DateTimeStamps.Value.AddDays(5).Date)
                                                 {
                                                     <a asp-route-id="@pVM.Transactions.TransactionKey" class="btn-sm btn-primary" asp-action="AcceptCOD" asp-controller="Cart">Complete Order</a>
                                                 }
@@ -91,7 +93,7 @@
                                                 {
                                                     <span class="badge badge-today">Delivered</span> <span>@pVM.Transactions.DeliveryDate.Value.ToString("D")</span>
                                                 }
-                                                else if (pVM.Transactions.PaymentTerms != "COD" && pVM.Transactions.PaymentStatus == "Accepted" && pVM.Transactions.DeliveryStatus != "Accepted" && pVM.Transactions.DeliveryStatus != "Delivered" && HttpContextAccessor.HttpContext.Session.GetString("UserName") != pVM.Transactions.WhoCanModify)
+                                                 else if (pVM.Transactions.PaymentStatus == "Completed" && pVM.Transactions.DeliveryStatus != "Completed" && pVM.Transactions.DeliveryStatus != "Delivered" && HttpContextAccessor.HttpContext.Session.GetString("UserName") != pVM.Transactions.WhoCanModify)
                                                 {
                                                     @pVM.Transactions.DeliveryDate
 
@@ -111,9 +113,13 @@
                                                         <input class="btn btn-sm" type="submit" />
                                                     </form>
                                                 }
-                                                else if (pVM.Transactions.PaymentTerms == "COD" && pVM.Transactions.PaymentStatus == "Accepted")
+                                                else if (pVM.Transactions.PaymentTerms == "COD" && pVM.Transactions.PaymentStatus == "Completed")
                                                 {
-                                                    <span class="badge badge-pill">Service Completed </span> @pVM.Transactions.DateTimeStamps.Value.ToString("D")
+                                                    <span class="badge badge-pill">Service Completed </span>
+                                                 
+                                                    @pVM.Transactions.TransactionCompletion.Value.ToString("D")
+                                                      
+
                                                 }
                                             }
 
@@ -122,9 +128,9 @@
 
                                         <td>
                                             @{
-                                                if (pVM.Transactions.PaymentStatus == "pending" && pVM.Transactions.ImageString != null)
+                                                if (pVM.Transactions.PaymentStatus == "pending" && pVM.Transactions.ImageString != null || pVM.Transactions.PaymentStatus == "Accepted by customer" && pVM.Transactions.ImageString != null)
                                                 {
-                                                    <a onclick="return confirm('Are you sure you want to accept this transaction?')" asp-route-id="@pVM.Transactions.TransactionKey" asp-action="AcceptPayment" asp-controller="Cart"> Accept Payment</a> <a asp-route-id="@pVM.Transactions.TransactionKey" onclick="return confirm('Are you sure you want to reject this transaction?')" asp-action="RejectPayment" asp-controller="Cart">Reject Payment</a>
+                                                    <a  onclick="return confirm('Are you sure you want to accept this transaction?')" asp-route-id="@pVM.Transactions.TransactionKey" asp-action="AcceptPayment" asp-controller="Cart" class="btn-success btn" > Accept Payment</a> <a class="btn-danger btn" asp-route-id="@pVM.Transactions.TransactionKey" onclick="return confirm('Are you sure you want to reject this transaction?')" asp-action="RejectPayment" asp-controller="Cart">Reject Payment</a>
                                                 }
                                             }
                                         </td>

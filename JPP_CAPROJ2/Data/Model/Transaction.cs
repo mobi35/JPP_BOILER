@@ -13,6 +13,8 @@ namespace JPP_CAPROJ2.Data.Model
         [Key]
         public int TransactionKey { get; set; }
 
+        public int ServiceID { get; set; }
+
         public string ServiceType { get; set; }
 
         public string BankAccount { get; set; }
@@ -43,5 +45,7 @@ namespace JPP_CAPROJ2.Data.Model
         public string DeliveryStatus { get; set; }
 
         public string WhoCanModify { get; set; }
+
+        public DateTime? TransactionCompletion { get; set; }
     }
 }

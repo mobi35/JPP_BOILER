@@ -36,23 +36,39 @@
 
                                         <td>
                                             @{
+
+                                                if (pVM.Orders.Count == 0)
+                                                {
+                                                    <p>Inspection Cost</p>
+                                                }
+
                                                 foreach (var order in pVM.Orders)
                                                 {
                                                     <p>@order.ProductName  X  @order.Quantity</p>
+                                                 
+
                                                 }
+
+                                             
                                             }
 
                                         </td>
-                                        <td>@pVM.Transactions.TotalPrice</td>
+                                        <td>P @pVM.Transactions.TotalPrice.ToString("N")</td>
                                         <td><span class="badge badge-pill"> @pVM.Transactions.PaymentStatus</td>
                                         <td>
                                             @{
-                                               
+
+                                                if (pVM.Transactions.PaymentStatus == "On-going")
+                                                {
+                                                    <a asp-route-id="@pVM.Transactions.TransactionKey" class="btn-sm btn-primary" asp-action="AcceptService" asp-controller="Cart">Accept Service</a>
+                                                    <a asp-route-id="@pVM.Transactions.TransactionKey" class="btn-sm btn-danger" asp-action="RejectService" asp-controller="Cart">Reject Service</a>
+                                                }
+
                                                 if (pVM.Transactions.DeliveryDate == null)
                                                 {
                                                     @Html.Raw("TBA");
                                                 }
-                                                else if (pVM.Transactions.DeliveryStatus != "Accepted" && pVM.Transactions.DeliveryStatus != "Delivered" && HttpContextAccessor.HttpContext.Session.GetString("UserName") != pVM.Transactions.WhoCanModify)
+                                                else if (pVM.Transactions.DeliveryStatus != "Completed" && pVM.Transactions.DeliveryStatus != "Delivered" && HttpContextAccessor.HttpContext.Session.GetString("UserName") != pVM.Transactions.WhoCanModify)
                                                 {
                                                     @pVM.Transactions.DeliveryDate.Value.ToString("D")<br />
 
@@ -87,7 +103,7 @@
                                         </td>
                                         <td>
                                             @{
-                                                if (pVM.Transactions.PaymentStatus == "Accepted")
+                                                if (pVM.Transactions.PaymentStatus == "Completed")
                                                 {
                                                     <a asp-action="Invoice" asp-controller="Cart" asp-route-id="@pVM.Transactions.TransactionKey">
                                                     </a>
@@ -97,7 +113,7 @@
 
                                         <td>
                                             @{
-                                                if (pVM.Transactions.ImageString == null && pVM.Transactions.PaymentTerms == "Bank Account")
+                                                if (pVM.Transactions.ImageString == null &&  pVM.Transactions.PaymentStatus != "Rejected by customer")
                                                 {
                                                     <form method="post" enctype="multipart/form-data" asp-controller="Cart" asp-action="AddDepositSlip">
                                                         <input name="id" value="@pVM.Transactions.TransactionKey" type="hidden" />

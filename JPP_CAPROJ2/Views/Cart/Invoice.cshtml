@@ -76,7 +76,10 @@
                                         <br>
                                         <div>
                                             <div class="pull-left"> INVOICE NO : </div>
-                                            <div class="pull-right"> J- @Model.Transactions.TransactionKey </div>
+                                            @{ 
+                                                var tstring = String.Format("{0:D5}", Model.Transactions.TransactionKey);
+                                            }
+                                            <div class="pull-right"> T- @tstring </div>
                                             <div class="clearfix"></div>
                                         </div>
                                         <div>

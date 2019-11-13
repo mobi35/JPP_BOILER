@@ -41,7 +41,7 @@ namespace JPP_CAPROJ2.Controllers
                 double totalValue = 0;
             foreach (var transaction in _transactionRepo.GetAll())
             {
-                    if (transaction.DateTimeStamps.Value.Month == i && transaction.PaymentStatus == "Accepted")
+                    if (transaction.DateTimeStamps.Value.Month == i && transaction.PaymentStatus == "Completed")
                     {
 
                         totalValue += transaction.TotalPrice;
@@ -78,7 +78,7 @@ namespace JPP_CAPROJ2.Controllers
                 double weekValues = 0;
                 foreach (var transaction in _transactionRepo.GetAll())
                 {
-                    if (transaction.DateTimeStamps.Value.Date == weekDates.Date && transaction.PaymentStatus == "Accepted")
+                    if (transaction.DateTimeStamps.Value.Date == weekDates.Date && transaction.PaymentStatus == "Completed")
                     {
                         weekValues += transaction.TotalPrice;
                     }
@@ -94,7 +94,7 @@ namespace JPP_CAPROJ2.Controllers
             double totalIncomeToday = 0;
             foreach (var transaction in _transactionRepo.GetAll())
             {
-                if (transaction.DateTimeStamps.Value.Date == DateTime.Now.Date && transaction.PaymentStatus == "Accepted")
+                if (transaction.DateTimeStamps.Value.Date == DateTime.Now.Date && transaction.PaymentStatus == "Completed")
                 {
                     totalIncomeToday += transaction.TotalPrice;
                 }
@@ -120,7 +120,7 @@ namespace JPP_CAPROJ2.Controllers
             foreach (var transRepo in _transactionRepo.GetAll().ToList())
             {
 
-             if(user.UserName == transRepo.UserName && transRepo.PaymentStatus == "Accepted" && user.Role == "customer")
+             if(user.UserName == transRepo.UserName && transRepo.PaymentStatus == "Completed" && user.Role == "customer")
                     {
                         dec += (decimal)transRepo.TotalPrice;
                     }  
@@ -144,7 +144,7 @@ namespace JPP_CAPROJ2.Controllers
 
             newList.Spents = listData;
             newList.UserName = listLabel;
-            var listOfOrders = _transactionRepo.GetAll().Where(a => a.PaymentStatus == "Accepted").ToList();
+            var listOfOrders = _transactionRepo.GetAll().Where(a => a.PaymentStatus == "Completed").ToList();
 
 
          
@@ -156,7 +156,7 @@ namespace JPP_CAPROJ2.Controllers
                 foreach (var ordered in _orderRepo.GetAll().ToList())
                 {
                    
-                    if(prod.ProductName == ordered.ProductName && _transactionRepo.FindTransaction(a => a.TransactionKey == ordered.TransactionID).PaymentStatus == "Accepted")
+                    if(prod.ProductName == ordered.ProductName && _transactionRepo.FindTransaction(a => a.TransactionKey == ordered.TransactionID).PaymentStatus == "Completed")
                     {
                         sold++;
                     }

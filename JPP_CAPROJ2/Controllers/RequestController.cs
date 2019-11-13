@@ -54,7 +54,7 @@ private readonly IRequestRepository _requestRepo;
                request.Description = serviceType;
                request.Status = "for inspection";
             request.UserName = userName;
-
+            _requestRepo.Create(request);
 
             Transaction serviceTransaction = new Transaction();
           
@@ -64,9 +64,10 @@ private readonly IRequestRepository _requestRepo;
             serviceTransaction.PaymentTerms = "COD";
             serviceTransaction.DateTimeStamps = DateTime.Now;
             serviceTransaction.ServiceType = serviceType;
-
+            serviceTransaction.ServiceID = _requestRepo.GetAll().LastOrDefault().RequestId;
+            serviceTransaction.TotalPrice = 1000;
             _transactionRepo.Create(serviceTransaction);
-            _requestRepo.Create(request);
+           
             request.Message = $"You have successfully requested for a service. Please wait {(int)dateRemainingDeliver.Value.TotalDays} day/s as the inspector will look at your unit";
                  return View("ViewError",request);
         }
@@ -115,9 +116,7 @@ private readonly IRequestRepository _requestRepo;
         {
            var service = _requestRepo.GetIdBy(id);
             service.Status = "Completed";
-         
-
-
+       
             var last = 1;
             try
             {
@@ -230,10 +229,118 @@ private readonly IRequestRepository _requestRepo;
 
 
         [HttpPost]
-         public IActionResult AcceptService(int id, float price){
+         public IActionResult AcceptService(int id, float price,double c1, double c2, double c3, double c4, double c5, double c6, double c7, double c8, double c9)
+        {
+            double totalAmount = 1000;
+
+
+            OrderedProducts defaultOrder = new OrderedProducts();
+            defaultOrder.Price = 1000;
+            defaultOrder.ProductName = "Inspection Cost";
+            defaultOrder.Quantity = 1;
+            defaultOrder.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
+            _orderedRepository.Create(defaultOrder);
+
+            if (c1 != 0)
+            {
+                OrderedProducts orp = new OrderedProducts();
+                totalAmount += orp.Price = c1;
+                orp.ProductName = "Boiler Maintenance";
+                orp.Quantity = 1;
+                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
+                _orderedRepository.Create(orp);
+            }
+
+            if (c2 != 0)
+            {
+                OrderedProducts orp = new OrderedProducts();
+                totalAmount += orp.Price = c2;
+                orp.ProductName = "Boiler Repair";
+                orp.Quantity = 1;
+                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
+                _orderedRepository.Create(orp);
+            }
+
+            if (c3 != 0)
+            {
+                OrderedProducts orp = new OrderedProducts();
+                totalAmount += orp.Price = c3;
+                orp.ProductName = "Cleaning";
+                orp.Quantity = 1;
+                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
+                _orderedRepository.Create(orp);
+            }
+
+            if (c4 != 0)
+            {
+                OrderedProducts orp = new OrderedProducts();
+                totalAmount += orp.Price = c4;
+                orp.ProductName = "Plumbing";
+                orp.Quantity = 1;
+                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
+                _orderedRepository.Create(orp);
+            }
+
+            if (c5 != 0)
+            {
+                OrderedProducts orp = new OrderedProducts();
+                totalAmount += orp.Price = c5;
+                orp.ProductName = "Rehabilitation";
+                orp.Quantity = 1;
+                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
+                _orderedRepository.Create(orp);
+            }
+
+            if (c6 != 0)
+            {
+                OrderedProducts orp = new OrderedProducts();
+                totalAmount += orp.Price = c6;
+                orp.ProductName = "Retubing";
+                orp.Quantity = 1;
+                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
+                _orderedRepository.Create(orp);
+            }
+
+            if (c7 != 0)
+            {
+                OrderedProducts orp = new OrderedProducts();
+                totalAmount += orp.Price = c7;
+                orp.ProductName = "Fabrication of Reactors";
+                orp.Quantity = 1;
+                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
+                _orderedRepository.Create(orp);
+            }
+
+            if (c8 != 0)
+            {
+                OrderedProducts orp = new OrderedProducts();
+                totalAmount += orp.Price = c8;
+                orp.ProductName = "Fully Retube";
+                orp.Quantity = 1;
+                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
+                _orderedRepository.Create(orp);
+            }
+
+            if (c9 != 0)
+            {
+                OrderedProducts orp = new OrderedProducts();
+                totalAmount += orp.Price = c9;
+                orp.ProductName = "Partial Retubing";
+                orp.Quantity = 1;
+                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
+                _orderedRepository.Create(orp);
+            }
+
+
+
             var request = _requestRepo.GetIdBy(id);
             request.Status = "accepted";
-            request.Price = price;
+            request.Price = (float)totalAmount;
+           var trans = _transactionRepo.GetIdBy(defaultOrder.TransactionID);
+            trans.PaymentStatus = "On-going";
+            trans.TotalPrice = totalAmount;
+            trans.ImageString = null;
+            _transactionRepo.Update(trans);
              _requestRepo.Update(request);  
             return RedirectToAction("List","Request");
          }

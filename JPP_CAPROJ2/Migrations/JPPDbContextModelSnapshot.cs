@@ -248,9 +248,13 @@ namespace JPP_CAPROJ2.Migrations
 
                     b.Property<string>("PaymentTerms");
 
+                    b.Property<int>("ServiceID");
+
                     b.Property<string>("ServiceType");
 
                     b.Property<double>("TotalPrice");
+
+                    b.Property<DateTime?>("TransactionCompletion");
 
                     b.Property<string>("UserName");
 

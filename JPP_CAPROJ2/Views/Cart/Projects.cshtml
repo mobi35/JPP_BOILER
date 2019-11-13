@@ -5,7 +5,7 @@
 @inject IOrderRepository OrderedProduct
 @{
     ViewData["Title"] = "MyOrders";
-    Layout = "~/Views/Shared/Client.cshtml";
+    Layout = "~/Views/Shared/BackEnd.cshtml";
 }
 
 
@@ -55,22 +55,9 @@
 
                                             <td> <span class="badge-danger badge">@trans.PaymentStatus.ToLower() </span></td>
                                             <td>
-                                                @{
-                                                    if (trans.ServiceType != null)
-                                                    {
-                                                        <button class="btn btn-success btn-sm" onclick="Service('@trans.ServiceType')" data-toggle="modal" data-target="#ServiceModel">
-                                                            Show
-                                                        </button>
-                                                    }
-                                                    else
-                                                    {
-                                                        <button class="btn btn-success btn-sm" onclick="Product('@trans.TransactionKey')" data-toggle="modal" data-target="#ProductModal">
-                                                            Show
-                                                        </button>
-                                                    }
-                                                }
-
-
+                                                <button class="btn btn-success btn-sm" onclick="Product('@trans.TransactionKey')" data-toggle="modal" data-target="#ProductModal">
+                                                    Show
+                                                </button>
 
                                             </td>
                                             <td>@trans.UserName</td>
@@ -84,25 +71,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="ServiceModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Service Modal</h4>
-                    </div>
-                    <div class="modal-body">
-                        <h5>Placeholder</h5>
-                        <input type="text" id="requestId" class="form-control" placeholder="placeholder">
-                        <input type="text" class="form-control" placeholder="placeholder">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+      
 
 
 
@@ -114,9 +83,7 @@
                         <h4 class="modal-title" id="myModalLabel">Product Model</h4>
                     </div>
                     <div class="modal-body">
-                        <h5>Placeholder</h5>
-                        <input type="text" id="requestId" class="form-control" placeholder="placeholder">
-                        <input type="text" class="form-control" placeholder="placeholder">
+                      
                         <div class="productOutput"></div>
                    
 
@@ -158,6 +125,9 @@
 
 
     }
+
+
+  
 
     var now = new Date();
     var otherDate = new Date();

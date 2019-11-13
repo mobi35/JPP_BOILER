@@ -104,7 +104,7 @@ namespace JPP_CAPROJ2.Controllers
         {
             var userName = HttpContext.Session.GetString("UserName");
             var delivery = _transactionRepo.GetIdBy(id);
-            delivery.DeliveryStatus = "Accepted";
+            delivery.DeliveryStatus = "Completed";
             delivery.WhoCanModify = userName;
             _transactionRepo.Update(delivery);
             return View("ProductOrders", MyOrdersVM());
@@ -124,7 +124,7 @@ namespace JPP_CAPROJ2.Controllers
         {
             var userName = HttpContext.Session.GetString("UserName");
             var delivery = _transactionRepo.GetIdBy(id);
-            delivery.DeliveryStatus = "Accepted";
+            delivery.DeliveryStatus = "Completed";
             delivery.WhoCanModify = userName;
             _transactionRepo.Update(delivery);
             return View("MyOrders", MyClientOrdersVM());
@@ -187,14 +187,16 @@ namespace JPP_CAPROJ2.Controllers
         public IActionResult GetProductsInProjects(int id)
         {
 
-            string htmlThing = "<ul>";
+            string htmlThing = "<table class='table'><thead> <tr><th> Item </th>   <th> Price</th>   <th>Qty</th> </tr> <tbody> ";
             foreach (var list in _orders.GetAll().Where(a => a.TransactionID == id).ToList())
             {
-                htmlThing += $"<li> { list.ProductName  } x price : { list.Price },  qty : {list.Quantity } </li>";
+                htmlThing += $"<tr>  <td> { list.ProductName  } </td>   <td>{ list.Price }</td>   <td> {list.Quantity }</td>   </tr>";
             }
-            htmlThing += "</ul>";
+            htmlThing += "</tbody> </table>";
             return Content(htmlThing);
         }
+
+      
 
         public IActionResult Projects()
         {
@@ -213,8 +215,8 @@ namespace JPP_CAPROJ2.Controllers
                 }
             }
             var transaction = _transactionRepo.GetIdBy(id);
-            transaction.PaymentStatus = "Accepted";
-            transaction.DeliveryStatus = "Accepted";
+            transaction.PaymentStatus = "Completed";
+            transaction.DeliveryStatus = "Completed";
             transaction.DeliveryDate = DateTime.Now;
             _transactionRepo.Update(transaction);
             return View("ProductOrders", MyOrdersVM());
@@ -348,15 +350,16 @@ namespace JPP_CAPROJ2.Controllers
             foreach (var order in _orders.GetAll().ToList())
             {
                 var product = _prodRepo.GetIdBy(order.ProductID);
-                if (trans.TransactionKey == order.TransactionID)
+                if (trans.TransactionKey == order.TransactionID && trans.ServiceID == 0)
                 {
                     product.Stocks -= order.Quantity;
                     _prodRepo.Update(product);
                 }
             }
            
-            trans.PaymentStatus = "Accepted";
+            trans.PaymentStatus = "Completed";
             trans.DeliveryStatus = "Pending";
+            trans.TransactionCompletion = DateTime.Now;
             _transactionRepo.Update(trans);
             _notificationRepo.AddNotification("You're Transaction has been accepted.", trans.UserName);
             return View("ProductOrders", MyOrdersVM());
@@ -375,6 +378,25 @@ namespace JPP_CAPROJ2.Controllers
         {
             return View(MyOrdersVM());
          
+        }
+
+
+        public IActionResult AcceptService(int id)
+        {
+            var trans = _transactionRepo.GetIdBy(id);
+            trans.PaymentStatus = "Accepted by customer";
+            _transactionRepo.Update(trans);
+            //  _notificationRepo.AddNotification("You're Transaction is rejected. Please choose a valid bank account", trans.UserName);
+            return View("MyOrders", MyClientOrdersVM());
+        }
+
+        public IActionResult RejectService(int id)
+        {
+            var trans = _transactionRepo.GetIdBy(id);
+            trans.PaymentStatus = "Rejected by customer";
+            _transactionRepo.Update(trans);
+            //  _notificationRepo.AddNotification("You're Transaction is rejected. Please choose a valid bank account", trans.UserName);
+            return View("MyOrders", MyClientOrdersVM());
         }
 
         public List<MyOrdersViewModel> MyOrdersVM()
