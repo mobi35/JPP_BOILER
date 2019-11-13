@@ -22,5 +22,7 @@ namespace JPP_CAPROJ2.Models.ViewModel
 
         public ListOfFeedbackModel ListOfFeedbackModel { get; set; }
 
+        public List<User> ListOfUsers { get; set; }
+
     }
 }

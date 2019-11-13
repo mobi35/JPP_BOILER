@@ -19,10 +19,8 @@ namespace JPP_CAPROJ2.Data
         public DbSet<Service> Services { get; set; }
            public DbSet<Request> Requests { get; set; }
           public DbSet<Notification> Notifications { get; set; }
-
         public DbSet<Product> Products { get; set; }
         public DbSet<Cart> Carts { get; set; }
-
         public DbSet<Transaction> Transactions { get; set; }
 
         public DbSet<OrderedProducts> Orders { get; set; }

@@ -12,6 +12,7 @@ namespace JPP_CAPROJ2.Data.Model
     {
         [Key]
         public int ProductKey { get; set; }
+        [Required]
         public string ProductName { get; set; }
         [NotMapped]
         public IFormFile img1 { get; set; }
@@ -28,10 +29,12 @@ namespace JPP_CAPROJ2.Data.Model
         public string OtherImage2 { get; set; }
         public string OtherImage3 { get; set; }
         public string OtherImage4 { get; set; }
+        [Required]
         public double Price { get; set; }
+        [Required]
         public string Description { get; set; }
         public string Message { get; set; }
-
         public bool isRead { get; set; }
+        public int Stocks { get; set; }
     }
 }

@@ -42,13 +42,13 @@ Layout = "BackEnd";
                     <td>
                         @{
 
-                            if (request.Status != "Canceled" && request.Status != "Completed")
+                            if (request.Status != "Canceled" && request.Status != "Completed" && request.Price != 0)
                             {
 
 
-                                <a  asp-route-id="@request.RequestId" asp-controller="Request" asp-action="CompleteService">Complete Service</a>
+                                <a onclick="return confirm('Are you sure you want to complete this service?')"  asp-route-id="@request.RequestId" asp-controller="Request" asp-action="CompleteService">Complete Service</a>
 
-                                <a  asp-route-id="@request.RequestId" asp-controller="Request" asp-action="CancelService">Cancel Service</a>
+                                <a  onclick="return confirm('Are you sure you want to cancel this service?')" asp-route-id="@request.RequestId" asp-controller="Request" asp-action="CancelService">Cancel Service</a>
                             }
                         }
                     </td>

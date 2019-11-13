@@ -3,10 +3,8 @@
     ViewData["Title"] = "Privacy Policy";
     Layout = "BackEnd";
 }
-@{
-    var service = Context.RequestServices.GetService(typeof(Microsoft.AspNetCore.Hosting.IHostingEnvironment)) as Microsoft.AspNetCore.Hosting.IHostingEnvironment;
-    var fileImage = $"{service.WebRootPath}/img/logo.jpg";
-}
+
+
 
 <section id="main-content">
     <div class="wrapper">
@@ -21,11 +19,11 @@
                     <div class="row">
                         <div class="col-md-2">
                             Choose Reports
-                            <select id="name" name="name" class="form-control" style="width:200px;">
+                            <select id="report" name="name" class="form-control" style="width:200px;">
                                 <option value="User Masterlist">User Masterlist</option>
                                 <option value="Sales Report">Sales Reports</option>
                                 <option value="Products Report">Products Report</option>
-                                <option value="Top Customer">Top Customer</option>
+                                <option value="Top Customers">Top Customer</option>
                             </select>
                         </div>
                         <div class="col-md-2">
@@ -48,64 +46,81 @@
 
             </div>
 
-            <img style="width:500px;" src="@fileImage" />
-
         </div>
     </div>
 </section>
+<style>
+    thead, th {text-align: center;}
+    .dt-head-center {text-align: center;}
+/* OR */
 
+.table thead,
+.table th {text-align: center;}
+</style>
 
 <script>
 
-                            $('#showData').click(function () {
-                                alert("@service.WebRootPath");
-                                var name = $('#name').val();
-                                $.ajax({
+    $('#showData').click(function () {
 
-                                    url: 'Reports/GetThis/',
-                                    type: 'post',
-                                    data: {name:name},
-                                    success: function (x) {
+        var report = $('#report').val();
+        var d1 = $('#startDate').val();
+         var d2 = $('#endDate').val();
+        $.ajax({
 
-                                        $(document).ready(function () {
-                                                $('#Reports').html(x);
-                                $('#userList').DataTable({
-                                    responsive: true,
-                                    lengthChange: false,
-                                    "sScrollX": "100%",
-                                    "scrollCollapse": true,
-                                    dom: 'lBfrtip',
-                                    buttons: [
-                                        {
-                                            extend: 'print',
-                                            customize: function (win) {
-                                                $(win.document.body)
-                                                    .css({ 'font-size': '10pt' })
-                                                    .prepend(
-                                                        '<img  style="width:100px;height:100px;z-index:99999;" src="~/img/logo.jpg" />'
-                                                    );
+            url: 'Reports/GetThis/',
+            type: 'get',
+            data: { name: report, start : d1, end : d2 },
+            success: function (x) {
 
-                                                $(win.document.body).find('table')
-                                                    .addClass('compact')
-                                                    .css('font-size', 'inherit');
-                                            }
-                                        }, 'excelHtml5', {
-                                            extend: 'pdf',
-                                            download: 'open',
-                                        }
-                                    ]
+                $(document).ready(function () {
+                    $('#Reports').html(x);
 
-                                });
-                            });
-                                    }
-                                });
+                });
+                $('#userList').DataTable({
+
+                    responsive: true,
+                    lengthChange: false,
+                     "order": [],
+                    "sScrollX": "100%",
+                    "scrollCollapse": true,
+                    dom: 'lBfrtip',
+                    buttons: [
+                        {
+                            extend: 'print',
+                            title: '',
+                            customize: function (win) {
+                                $(win.document.body)
+                                    .css({ 'font-size': '15pt' })
+                                    .prepend(
+                                        '<h1 id="header"></h1><img  style="margin-left:250px; height:150px; text-align:center; z-index:5000; width:150px; top:0; left:0;" src="https://i.ibb.co/kMCSXcL/jpp.jpg" />'
+                                    );
+
+                                $(win.document.body).find('table')
+                                    .addClass('compact')
+                                   
+                            }
+                        }, 'excelHtml5', {
+                            extend: 'pdf',
+                            download: 'open',
+                        }
+                    ]
+
+                });
+
+            }
+        });
 
 
-                            });
+
+    });
 
 
 
 
+
+</script>
+
+<script>
 
 </script>
 <script src="~/DataTables-1.10.18/js/jquery.dataTables.js"></script>

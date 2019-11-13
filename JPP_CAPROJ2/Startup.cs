@@ -36,8 +36,8 @@ namespace JPP_CAPROJ2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-          services.AddDbContext<JPPDbContext>(options => options.UseInMemoryDatabase("JPPDbContext"));
-           // services.AddDbContext<JPPDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DBConnection")));
+         // services.AddDbContext<JPPDbContext>(options => options.UseInMemoryDatabase("JPPDbContext"));
+           services.AddDbContext<JPPDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DBConnection")));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
             services.AddScoped<IServiceRepository, ServiceRepository>();
@@ -86,8 +86,8 @@ namespace JPP_CAPROJ2
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-           DbInitialize.Seed(app);
-            RotativaConfiguration.Setup(env);
+          // DbInitialize.Seed(app);
+            //RotativaConfiguration.Setup(env);
         }
     }
 }

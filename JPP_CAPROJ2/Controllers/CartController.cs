@@ -41,12 +41,24 @@ namespace JPP_CAPROJ2.Controllers
             return View();
         }
 
+        public IActionResult NoStocks()
+        {
+
+            return View();
+        }
+        
         [HttpPost]
         public IActionResult AddToCart(int id, int qty)
         {
             var userName = HttpContext.Session.GetString("UserName");
             var checkCart = _cartRepo.FindCart(a => a.ProductID == id);
-            if (checkCart != null)
+
+            var product = _prodRepo.GetIdBy(id);
+            if (qty > product.Stocks)
+            {
+                return View("NoStocks");
+            }
+            else if (checkCart != null)
             {
                 checkCart.Quantity++;
                 _cartRepo.Update(checkCart);
@@ -71,7 +83,7 @@ namespace JPP_CAPROJ2.Controllers
             transactionRepo.ImageString = uniqueName;
             _transactionRepo.Update(transactionRepo);
             _notificationRepo.AddNotification($"{transactionRepo.UserName} has added a deposit slip. Please check transaction.", transactionRepo.UserName);
-            return View("MyOrders",MyOrdersVM());
+            return View("MyOrders", MyClientOrdersVM());
         }
 
         public IActionResult DoneDelivery(int id)
@@ -115,7 +127,7 @@ namespace JPP_CAPROJ2.Controllers
             delivery.DeliveryStatus = "Accepted";
             delivery.WhoCanModify = userName;
             _transactionRepo.Update(delivery);
-            return View("MyOrders", MyOrdersVM());
+            return View("MyOrders", MyClientOrdersVM());
         }
 
         public IActionResult RejectDelivery(int id)
@@ -125,7 +137,7 @@ namespace JPP_CAPROJ2.Controllers
             delivery.DeliveryDate = null;
             delivery.WhoCanModify = userName;
             _transactionRepo.Update(delivery);
-            return View("MyOrders", MyOrdersVM());
+            return View("MyOrders", MyClientOrdersVM());
         }
         [HttpPost]
         public IActionResult CustomerPreferredDate(int id, DateTime? dateTime)
@@ -135,7 +147,7 @@ namespace JPP_CAPROJ2.Controllers
             transaction.DeliveryDate = dateTime;
             transaction.WhoCanModify = userName;
             _transactionRepo.Update(transaction);
-            return View("MyOrders", MyOrdersVM());
+            return View("MyOrders", MyClientOrdersVM());
         }
 
         [HttpPost]
@@ -170,6 +182,27 @@ namespace JPP_CAPROJ2.Controllers
             }
             return View(productCartVM);
         }
+       
+        public IActionResult AcceptCOD(int id)
+        {
+            var trans = _transactionRepo.GetIdBy(id);
+            foreach (var order in _orders.GetAll().ToList())
+            {
+                var product = _prodRepo.GetIdBy(order.ProductID);
+                if (trans.TransactionKey == order.TransactionID)
+                {
+                    product.Stocks -= order.Quantity;
+                    _prodRepo.Update(product);
+                }
+            }
+            var transaction = _transactionRepo.GetIdBy(id);
+            transaction.PaymentStatus = "Accepted";
+            transaction.DeliveryStatus = "Accepted";
+            transaction.DeliveryDate = DateTime.Now;
+            _transactionRepo.Update(transaction);
+            return View("ProductOrders", MyOrdersVM());
+        }
+
 
         [HttpPost]
         public IActionResult Checkout( string bankAccount, string bankNumer, string paytype)
@@ -181,7 +214,6 @@ namespace JPP_CAPROJ2.Controllers
             transaction.PaymentStatus = "pending";
             transaction.DateTimeStamps = DateTime.Now;
             double totalPrice = 0;
-
             var productList = new List<ProductCartViewModel>();
          
             foreach (var c in _cartRepo.GetAll().AsQueryable().ToList())
@@ -197,7 +229,6 @@ namespace JPP_CAPROJ2.Controllers
                 }
                 }
             }
-
             var last = 1;
             try { 
              last = _transactionRepo.GetAll().LastOrDefault().TransactionKey;
@@ -228,9 +259,8 @@ namespace JPP_CAPROJ2.Controllers
                transaction.PaymentTerms = "Bank Account";
             }else
             {
-                successMessage = "Please wait for the admin's response for the date of the delivery.";
+                successMessage = "Your order will take 5 - 7 days to deliver..";
                 transaction.PaymentTerms = "Cash on delivery";
-                
             }
             transaction.TotalPrice = totalPrice;
             transaction.UserName = userName;
@@ -297,6 +327,16 @@ namespace JPP_CAPROJ2.Controllers
         public IActionResult AcceptPayment(int id)
         {
            var trans = _transactionRepo.GetIdBy(id);
+            foreach (var order in _orders.GetAll().ToList())
+            {
+                var product = _prodRepo.GetIdBy(order.ProductID);
+                if (trans.TransactionKey == order.TransactionID)
+                {
+                    product.Stocks -= order.Quantity;
+                    _prodRepo.Update(product);
+                }
+            }
+           
             trans.PaymentStatus = "Accepted";
             trans.DeliveryStatus = "Pending";
             _transactionRepo.Update(trans);

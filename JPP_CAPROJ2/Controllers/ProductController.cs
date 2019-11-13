@@ -38,6 +38,7 @@ namespace JPP_CAPROJ2.Controllers
         [HttpPost]
         public IActionResult Update(Product product)
         {
+
             var uniqueName = "";
 
             try { 
@@ -111,6 +112,7 @@ namespace JPP_CAPROJ2.Controllers
 
             }
             _prodRepo.Update(product);
+
             return View("Index", _prodRepo.GetAll());
         }
 
@@ -123,55 +125,60 @@ namespace JPP_CAPROJ2.Controllers
         [HttpPost]
         public IActionResult Create(Product product)
         {
-            var uniqueName = "";
-       
-            if(product.img1 != null) { 
-                string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Images");
-                uniqueName = Guid.NewGuid().ToString() + "_" + product.img1.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueName);
-                product.img1.CopyTo(new FileStream(filePath, FileMode.Create));
-                product.Image = uniqueName;
-            }
-          
-            if (product.img2 != null)
+            if (ModelState.IsValid)
             {
-                string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Images");
-                uniqueName = Guid.NewGuid().ToString() + "_" + product.img2.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueName);
-                product.img2.CopyTo(new FileStream(filePath, FileMode.Create));
-                product.OtherImage1 = uniqueName;
-            }
-          
-            if (product.img3 != null)
-            {
-                string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Images");
-                uniqueName = Guid.NewGuid().ToString() + "_" + product.img3.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueName);
-                product.img3.CopyTo(new FileStream(filePath, FileMode.Create));
-                product.OtherImage2 = uniqueName;
-            }
-        
-            if (product.img4 != null)
-            {
-                string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Images");
-                uniqueName = Guid.NewGuid().ToString() + "_" + product.img4.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueName);
-                product.img4.CopyTo(new FileStream(filePath, FileMode.Create));
-                product.OtherImage3 = uniqueName;
-            }
-      
+                var uniqueName = "";
 
-            if (product.img5 != null)
-            {
-                string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Images");
-                uniqueName = Guid.NewGuid().ToString() + "_" + product.img5.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueName);
-                product.img5.CopyTo(new FileStream(filePath, FileMode.Create));
-                product.OtherImage4 = uniqueName;
-            }
+                if (product.img1 != null)
+                {
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Images");
+                    uniqueName = Guid.NewGuid().ToString() + "_" + product.img1.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueName);
+                    product.img1.CopyTo(new FileStream(filePath, FileMode.Create));
+                    product.Image = uniqueName;
+                }
 
-            _prodRepo.Create(product);
-            return View("Index", _prodRepo.GetAll());
+                if (product.img2 != null)
+                {
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Images");
+                    uniqueName = Guid.NewGuid().ToString() + "_" + product.img2.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueName);
+                    product.img2.CopyTo(new FileStream(filePath, FileMode.Create));
+                    product.OtherImage1 = uniqueName;
+                }
+
+                if (product.img3 != null)
+                {
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Images");
+                    uniqueName = Guid.NewGuid().ToString() + "_" + product.img3.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueName);
+                    product.img3.CopyTo(new FileStream(filePath, FileMode.Create));
+                    product.OtherImage2 = uniqueName;
+                }
+
+                if (product.img4 != null)
+                {
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Images");
+                    uniqueName = Guid.NewGuid().ToString() + "_" + product.img4.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueName);
+                    product.img4.CopyTo(new FileStream(filePath, FileMode.Create));
+                    product.OtherImage3 = uniqueName;
+                }
+
+
+                if (product.img5 != null)
+                {
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "Images");
+                    uniqueName = Guid.NewGuid().ToString() + "_" + product.img5.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueName);
+                    product.img5.CopyTo(new FileStream(filePath, FileMode.Create));
+                    product.OtherImage4 = uniqueName;
+                }
+
+                _prodRepo.Create(product);
+                return View("Index", _prodRepo.GetAll());
+            }
+            return View(product);
         }
 
         public IActionResult Create()
@@ -185,6 +192,15 @@ namespace JPP_CAPROJ2.Controllers
         {
 
             return View(_prodRepo.GetAll());
+        }
+
+        public IActionResult AddStocks(int id,int stocks)
+        {
+            var product = _prodRepo.GetIdBy(id);
+
+            product.Stocks += stocks;
+            _prodRepo.Update(product);
+            return View("Index", _prodRepo.GetAll());
         }
 
         [HttpGet]

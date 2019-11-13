@@ -23,7 +23,24 @@
 
         <form class="cmxform form-horizontal style-form" id="signupForm" asp-action="Update" asp-controller="Account" method="post">
             <input asp-for="UserId" type="hidden" />
-         
+            <div class="form-group ">
+                <label for="username" class="control-label col-lg-2">First Name</label>
+                <div class="col-lg-10">
+                    <input asp-for="FirstName" class="form-control " id="username" type="text" />
+                </div>
+            </div>
+            <div class="form-group ">
+                <label for="username" class="control-label col-lg-2">Middle Name</label>
+                <div class="col-lg-10">
+                    <input asp-for="MiddleName" class="form-control " id="username"  type="text" />
+                </div>
+            </div>
+            <div class="form-group ">
+                <label for="username" class="control-label col-lg-2">Last Name</label>
+                <div class="col-lg-10">
+                    <input asp-for="LastName" class="form-control " id="username" type="text" />
+                </div>
+            </div>
 
             <div class="form-group ">
                 <label for="username" class="control-label col-lg-2">Username</label>
@@ -66,7 +83,7 @@
             <div class="form-group ">
                 <label for="email" class="control-label col-lg-2">Address</label>
                 <div class="col-lg-10">
-                    <input asp-for="Address" class="form-control " id="email"  type="text" />
+                    <input asp-for="Address" class="form-control " id="email" type="text" />
                 </div>
             </div>
 

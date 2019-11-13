@@ -5,80 +5,81 @@ Layout = "BackEnd";
 @model Product
 
     <section id="main-content"> 
-         <div class="wrapper">
-<h1>@ViewData["Title"]</h1>
-<div class="row mt">
 
-    <div class="col-lg-12">
+        <div class="wrapper">
+            <h3><i class="fa fa-angle-right"></i>Create Account</h3>
+            <div class="row mt">
 
-        <div class="form-panel">
-            <div class="form">
-                <div class="alert alert-danger validation" asp-validation-summary="All"></div>
-                
-                <form class="cmxform form-horizontal style-form" enctype="multipart/form-data" id="signupForm" asp-action="Create" asp-controller="Product" method="post">
-                    <div class="form-group ">
-                        <label for="firstname" class="control-label col-lg-2">Product Name</label>
-                        <div class="col-lg-10">
-                            <input asp-for="ProductName" class="form-control" id="firstname" type="text" />
-                        </div>
-                    </div>
-                    <div class="form-group ">
-                        <label for="username" class="control-label col-lg-2">Price</label>
-                        <div class="col-lg-10">
-                            <input asp-for="Price" class="form-control " id="username" type="text" />
-                        </div>
-                    </div>
-                    <div class="form-group ">
-                        <label for="phone" class="control-label col-lg-2">Description</label>
-                        <div class="col-lg-10">
-                            <input asp-for="Description" class="form-control " id="phone" type="text" />
-                        </div>
-                    </div>
-                    <div class="form-group ">
-                        <label for="email" class="control-label col-lg-2">Main Image</label>
-                        <div class="col-lg-10">
-                            <input asp-for="img1" class="form-control " id="email" type="file" />
-                        </div>
-                    </div>
-                    <div class="form-group ">
-                        <label for="email" class="control-label col-lg-2">Image</label>
-                        <div class="col-lg-10">
-                            <input asp-for="img2" class="form-control " id="email" type="file" />
-                        </div>
-                    </div>
-                    <div class="form-group ">
-                        <label for="email" class="control-label col-lg-2">Image</label>
-                        <div class="col-lg-10">
-                            <input asp-for="img3" class="form-control " id="email" type="file" />
-                        </div>
-                    </div>
-                    <div class="form-group ">
-                        <label for="email" class="control-label col-lg-2">Image</label>
-                        <div class="col-lg-10">
-                            <input asp-for="img4" class="form-control " id="email" type="file" />
-                        </div>
-                    </div>
-                    <div class="form-group ">
-                        <label for="email" class="control-label col-lg-2">Image</label>
-                        <div class="col-lg-10">
-                            <input asp-for="img5" class="form-control " id="email" type="file" />
-                        </div>
-                    </div>
+                <div class="col-lg-12">
 
-                    <div class="form-group">
-                        <div class="col-lg-offset-2 col-lg-10">
-                            <button class="btn btn-theme" type="submit">Save</button>
-                            <button class="btn btn-theme04" type="button">Cancel</button>
+                    <div class="form-panel">
+                        <div class="form">
+                            <div class="alert alert-danger validation" asp-validation-summary="All"></div>
+
+                            <form class="cmxform form-horizontal style-form" enctype="multipart/form-data" id="signupForm" asp-action="Create" asp-controller="Product" method="post">
+                                <div class="form-group ">
+                                    <label for="firstname" class="control-label col-lg-2">Product Name</label>
+                                    <div class="col-lg-10">
+                                        <input asp-for="ProductName" class="form-control" id="firstname" type="text" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="username" class="control-label col-lg-2">Price</label>
+                                    <div class="col-lg-10">
+                                        <input asp-for="Price" min="200" class="form-control " id="username" type="number" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="phone" class="control-label col-lg-2">Description</label>
+                                    <div class="col-lg-10">
+                                        <input asp-for="Description" required class="form-control " id="phone" type="text" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="email" class="control-label col-lg-2">Main Image</label>
+                                    <div class="col-lg-10">
+                                        <input asp-for="img1" class="form-control " required id="email" type="file" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="email" class="control-label col-lg-2">Image</label>
+                                    <div class="col-lg-10">
+                                        <input asp-for="img2" class="form-control " id="email" type="file" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="email" class="control-label col-lg-2">Image</label>
+                                    <div class="col-lg-10">
+                                        <input asp-for="img3" class="form-control " id="email" type="file" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="email" class="control-label col-lg-2">Image</label>
+                                    <div class="col-lg-10">
+                                        <input asp-for="img4" class="form-control " id="email" type="file" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="email" class="control-label col-lg-2">Image</label>
+                                    <div class="col-lg-10">
+                                        <input asp-for="img5" class="form-control " id="email" type="file" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <button class="btn btn-theme" type="submit">Save</button>
+                                        <button class="btn btn-theme04" type="button">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </form>
+                    <!-- /form-panel -->
+                </div>
+                <!-- /col-lg-12 -->
             </div>
-        </div>
-        <!-- /form-panel -->
-    </div>
-    <!-- /col-lg-12 -->
-</div>
-         </div></div>
+        </div></section>
 <script>
 
         var mess = "@Model.Message";

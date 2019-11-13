@@ -26,7 +26,13 @@ namespace JPP_CAPROJ2.Data
 
                   var customer = new User {FirstName="customer",PhoneNumber="09198882900" ,UserName = "customer", Password = "YWRtaW5hZG1pbg==", Email = "Maeee", Status = "Activated", Role = "customer" };
          
+              
                 context.Users.Add(customer);
+
+                var customer1 = new User { FirstName = "kurichao", PhoneNumber = "09198882900", UserName = "kurichao", Password = "YWRtaW5hZG1pbg==", Email = "Maeee", Status = "Activated", Role = "customer" };
+
+
+                context.Users.Add(customer1);
 
                 var product = new Product { ProductName = "Adichan", Price = 200, Description = "Good Product" };
                   var product2 = new Product { ProductName = "Baguvix", Price = 500, Description = "Mediocre Product" };

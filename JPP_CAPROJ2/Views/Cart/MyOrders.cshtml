@@ -10,7 +10,7 @@
 <section id="main-content">
     <div class="wrapper">
 
-        <h3><i class="fa fa-angle-right"></i> Form Components</h3>
+        <h3><i class="fa fa-angle-right"></i>My Orders</h3>
         <!-- BASIC FORM ELELEMNTS -->
         <div class="row mt">
             <div class="col-lg-12">
@@ -47,11 +47,12 @@
                                         <td><span class="badge badge-pill"> @pVM.Transactions.PaymentStatus</td>
                                         <td>
                                             @{
+                                               
                                                 if (pVM.Transactions.DeliveryDate == null)
                                                 {
                                                     @Html.Raw("TBA");
                                                 }
-                                                else if (pVM.Transactions.DeliveryStatus != "Accepted" &&  pVM.Transactions.DeliveryStatus != "Delivered" && HttpContextAccessor.HttpContext.Session.GetString("UserName") != pVM.Transactions.WhoCanModify)
+                                                else if (pVM.Transactions.DeliveryStatus != "Accepted" && pVM.Transactions.DeliveryStatus != "Delivered" && HttpContextAccessor.HttpContext.Session.GetString("UserName") != pVM.Transactions.WhoCanModify)
                                                 {
                                                     @pVM.Transactions.DeliveryDate.Value.ToString("D")<br />
 

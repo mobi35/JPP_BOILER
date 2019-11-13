@@ -18,12 +18,12 @@ Layout = "BackEnd";
 <table class="table table-striped table-bordered responsive no-wrap" style="width:100%" id="userList">
     <thead>
         <tr>
-             <th>Task</th>
+           
             <th>Name</th>
             <th>Role</th>
             <th>Phone Number</th>
             <th>Email</th>
-            <th>Action</th>
+         
         </tr>
     </thead>
 
@@ -32,12 +32,12 @@ Layout = "BackEnd";
             foreach (var user in Model)
             {   
                 <tr>
-                      <td>@user.NumberOfTask</td>
+                    
                       <td>@user.FirstName @Html.Raw(", ") @user.LastName @Html.Raw(" ")  @user.MiddleName</td>
                     <td>@user.Role</td>
                     <td>@user.PhoneNumber</td>
                     <td>@user.Email</td>
-                    <td> <a return="confirm('are you sure you want to delete?')" asp-route-id="@user.UserId" asp-controller="Account" asp-action="Delete" >Delete</a>  </td>
+                  
                 </tr>
             }
         }

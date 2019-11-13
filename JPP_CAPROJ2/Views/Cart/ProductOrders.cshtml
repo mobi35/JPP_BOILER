@@ -77,17 +77,21 @@
                                                     <p>@order.ProductName  X  @order.Quantity</p>
                                                 }
                                             }
-
                                         </td>
                                         <td>@pVM.Transactions.PaymentTerms</td>
                                         <td>@pVM.Transactions.TotalPrice.ToString("N")</td>
                                         <td>
                                             @{
+                                                if (pVM.Transactions.PaymentStatus != "Accepted" && pVM.Transactions.PaymentTerms == "Cash on delivery" && DateTime.Now > pVM.Transactions.DateTimeStamps.Value.AddDays(5).Date)
+                                                {
+                                                    <a asp-route-id="@pVM.Transactions.TransactionKey" class="btn-sm btn-primary" asp-action="AcceptCOD" asp-controller="Cart">Complete Order</a>
+                                                }
+
                                                 if (pVM.Transactions.DeliveryDate != null)
                                                 {
-                                                    <span> @pVM.Transactions.DeliveryDate.Value.ToString("D")</span>
+                                                    <span class="badge badge-today">Delivered</span> <span>@pVM.Transactions.DeliveryDate.Value.ToString("D")</span>
                                                 }
-                                                else if (pVM.Transactions.PaymentStatus == "Accepted" && pVM.Transactions.DeliveryStatus != "Accepted" && pVM.Transactions.DeliveryStatus != "Delivered" && HttpContextAccessor.HttpContext.Session.GetString("UserName") != pVM.Transactions.WhoCanModify)
+                                                else if (pVM.Transactions.PaymentTerms != "COD" && pVM.Transactions.PaymentStatus == "Accepted" && pVM.Transactions.DeliveryStatus != "Accepted" && pVM.Transactions.DeliveryStatus != "Delivered" && HttpContextAccessor.HttpContext.Session.GetString("UserName") != pVM.Transactions.WhoCanModify)
                                                 {
                                                     @pVM.Transactions.DeliveryDate
 
@@ -107,8 +111,11 @@
                                                         <input class="btn btn-sm" type="submit" />
                                                     </form>
                                                 }
+                                                else if (pVM.Transactions.PaymentTerms == "COD" && pVM.Transactions.PaymentStatus == "Accepted")
+                                                {
+                                                    <span class="badge badge-pill">Service Completed </span> @pVM.Transactions.DateTimeStamps.Value.ToString("D")
+                                                }
                                             }
-
 
                                         </td>
                                         <td><span class="badge badge-pill">@pVM.Transactions.PaymentStatus</span> </td>

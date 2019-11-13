@@ -225,9 +225,14 @@ namespace JPP_CAPROJ2.Controllers
                 IncomePerMonth = listOfIncomePerMonth,
                 IncomePerWeek = listOfIncomePerWeek,
                 IncomeToday = totalIncomeToday,
-                NewTransactions = newTransactions
+                NewTransactions = newTransactions,
+                ListOfUsers = _userRepo.GetAll().Where(a => a.Role == "worker").OrderByDescending(a => a.NumberOfTask).ToList()
             };
 
+
+            //LIST OF USERS
+
+            
 
             return View(dashVM);
 

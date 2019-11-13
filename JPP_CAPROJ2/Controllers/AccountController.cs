@@ -101,13 +101,11 @@ namespace JPP_CAPROJ2.Controllers
             return View(GetList());
         }
 
-      
      
         public IActionResult Message(User user)
         {
             return View(user);
         }
-
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -133,7 +131,6 @@ namespace JPP_CAPROJ2.Controllers
                // _userRepo.Update(l);
                 user.Add(l);
             }
-
           
             return user;
         }
@@ -166,7 +163,10 @@ namespace JPP_CAPROJ2.Controllers
                 }
                 user.Password = base64Encode(user.Password);
                 _userRepo.Update(user);
-                return View("Index");
+                var userName = HttpContext.Session.GetString("UserName");
+                var userFound = _userRepo.FindUser(a => a.UserName == userName);
+                userFound.Message = "You have successfully updated your account";
+                return View("Update", userFound);
             }
 
             return View(user);

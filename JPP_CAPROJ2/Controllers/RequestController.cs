@@ -16,7 +16,7 @@ namespace JPP_CAPROJ2.Controllers
         private readonly INotificationRepository _notifRepo;
         private readonly IUserRepository _userRepo;
 private readonly IRequestRepository _requestRepo;
-        public RequestController( IOrderRepository orderedRepository, ITransactionRepository transactionRepo,  INotificationRepository notifRepo, IUserRepository userRepo, IRequestRepository requestRepo)
+        public RequestController(IOrderRepository orderedRepository, ITransactionRepository transactionRepo,  INotificationRepository notifRepo, IUserRepository userRepo, IRequestRepository requestRepo)
         {
             _userRepo = userRepo;
             _orderedRepository = orderedRepository;
@@ -108,6 +108,7 @@ private readonly IRequestRepository _requestRepo;
             service.IsPaid = true;
             serviceTransaction.BankAccount = "COD";
             serviceTransaction.PaymentStatus = "Accepted";
+            serviceTransaction.DeliveryDate = DateTime.Now;
             serviceTransaction.TotalPrice = service.Price;
             serviceTransaction.UserName = service.UserName;
             serviceTransaction.PaymentTerms = "COD";
@@ -139,6 +140,8 @@ private readonly IRequestRepository _requestRepo;
         }
 
         
+
+     
         [HttpGet]
         public IActionResult RejectQuotation(int id)
         {
