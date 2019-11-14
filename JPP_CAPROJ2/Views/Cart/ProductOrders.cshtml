@@ -57,8 +57,10 @@
                                 <th>Products</th>
                                 <th>Payment Terms</th>
                                 <th>Payment</th>
+                                <th>User</th>
                                 <th>Delivery Status</th>
                                 <th>Status</th>
+
                                 <th>Action</th>
                                 <th></th>
                                 <th></th>
@@ -68,94 +70,95 @@
                             @{
                                 foreach (var pVM in Model)
                                 {
-                                    <tr>
+                                                        <tr>
 
-                                        <td>
-                                            @{
-                                                foreach (var order in pVM.Orders)
-                                                {
-                                                    <p>@order.ProductName  X  @order.Quantity</p>
-                                                }
-                                            }
-                                        </td>
-                                        <td>@pVM.Transactions.PaymentTerms</td>
-                                        <td>@pVM.Transactions.TotalPrice.ToString("N")</td>
-                                        <td>
-                                            @{
-
-
-                                                if (pVM.Transactions.PaymentStatus != "Completed" && pVM.Transactions.PaymentTerms == "Cash on delivery" && DateTime.Now > pVM.Transactions.DateTimeStamps.Value.AddDays(5).Date)
-                                                {
-                                                    <a asp-route-id="@pVM.Transactions.TransactionKey" class="btn-sm btn-primary" asp-action="AcceptCOD" asp-controller="Cart">Complete Order</a>
-                                                }
-
-                                                if (pVM.Transactions.DeliveryDate != null)
-                                                {
-                                                    <span class="badge badge-today">Delivered</span> <span>@pVM.Transactions.DeliveryDate.Value.ToString("D")</span>
-                                                }
-                                                 else if (pVM.Transactions.PaymentStatus == "Completed" && pVM.Transactions.DeliveryStatus != "Completed" && pVM.Transactions.DeliveryStatus != "Delivered" && HttpContextAccessor.HttpContext.Session.GetString("UserName") != pVM.Transactions.WhoCanModify)
-                                                {
-                                                    @pVM.Transactions.DeliveryDate
-
-                                                    <span class="badge badge-pill">@pVM.Transactions.DeliveryStatus</span>
-
-                                                    if (pVM.Transactions.DeliveryDate != null)
-                                                    {
-                                                        <a asp-route-id="@pVM.Transactions.TransactionKey" class="btn-sm btn-primary" asp-action="AdminAcceptDelivery" asp-controller="Cart">Accept</a>
-                                                        <a asp-route-id="@pVM.Transactions.TransactionKey" class="btn-sm btn-danger" asp-action="AdminRejectDelivery" asp-controller="Cart">Reject</a>
-                                                    }
-                                                    <br /><br />
-                                                    <span style="color:gray;">Choose Date</span>
-                                                    <form method="post" asp-action="SetDeliveryDate" asp-controller="Cart">
-                                                        <input type="hidden" value="@pVM.Transactions.TransactionKey" name="id" />
-                                                        <input class="form-control" type="date" id="dateTime" name="dateTime" />
-                                                        <br />
-                                                        <input class="btn btn-sm" type="submit" />
-                                                    </form>
-                                                }
-                                                else if (pVM.Transactions.PaymentTerms == "COD" && pVM.Transactions.PaymentStatus == "Completed")
-                                                {
-                                                    <span class="badge badge-pill">Service Completed </span>
-                                                 
-                                                    @pVM.Transactions.TransactionCompletion.Value.ToString("D")
-                                                      
-
-                                                }
-                                            }
-
-                                        </td>
-                                        <td><span class="badge badge-pill">@pVM.Transactions.PaymentStatus</span> </td>
-
-                                        <td>
-                                            @{
-                                                if (pVM.Transactions.PaymentStatus == "pending" && pVM.Transactions.ImageString != null || pVM.Transactions.PaymentStatus == "Accepted by customer" && pVM.Transactions.ImageString != null)
-                                                {
-                                                    <a  onclick="return confirm('Are you sure you want to accept this transaction?')" asp-route-id="@pVM.Transactions.TransactionKey" asp-action="AcceptPayment" asp-controller="Cart" class="btn-success btn" > Accept Payment</a> <a class="btn-danger btn" asp-route-id="@pVM.Transactions.TransactionKey" onclick="return confirm('Are you sure you want to reject this transaction?')" asp-action="RejectPayment" asp-controller="Cart">Reject Payment</a>
-                                                }
-                                            }
-                                        </td>
-                                        <td>
-                                            @{
-                                                if (pVM.Transactions.ImageString != null)
-                                                {
-                                                    <a onclick="ImageView('@pVM.Transactions.ImageString');" href="#">View Image</a>
-
-                                                }
-                                            }
+                                                            <td>
+                                                                @{
+                                                                    foreach (var order in pVM.Orders)
+                                                                    {
+                                                                        <p>@order.ProductName  X  @order.Quantity</p>
+                                                                    }
+                                                                }
+                                                            </td>
+                                                            <td>@pVM.Transactions.PaymentTerms</td>
+                                                            <td>@pVM.Transactions.TotalPrice.ToString("N")</td>
+                                                            <td>@pVM.Transactions.UserName</td>
+                                                            <td>
+                                                                @{
 
 
-                                        </td>
+                                                                    if (pVM.Transactions.PaymentStatus != "Completed" && pVM.Transactions.PaymentTerms == "Cash on delivery" && DateTime.Now > pVM.Transactions.DateTimeStamps.Value.AddDays(5).Date)
+                                                                    {
+                                                                        <a asp-route-id="@pVM.Transactions.TransactionKey" class="btn-sm btn-primary" asp-action="AcceptCOD" asp-controller="Cart">Complete Order</a>
+                                                                    }
 
-                                        <td>
-                                            @{
+                                                                    if (pVM.Transactions.DeliveryDate != null)
+                                                                    {
+                                                                        <span class="badge badge-today">Delivered</span> <span>@pVM.Transactions.DeliveryDate.Value.ToString("D")</span>
+                                                                    }
+                                                                    else if (pVM.Transactions.PaymentStatus == "Completed" && pVM.Transactions.DeliveryStatus != "Completed" && pVM.Transactions.DeliveryStatus != "Delivered" && HttpContextAccessor.HttpContext.Session.GetString("UserName") != pVM.Transactions.WhoCanModify)
+                                                                    {
+                                                                        @pVM.Transactions.DeliveryDate
 
-                                                <a asp-action="Invoice" asp-controller="Cart" asp-route-id="@pVM.Transactions.TransactionKey">
-                                                    View Invoice
-                                                </a>
+                                                                        <span class="badge badge-pill">@pVM.Transactions.DeliveryStatus</span>
 
-                                            }
-                                        </td>
-                                    </tr>
+                                                                        if (pVM.Transactions.DeliveryDate != null)
+                                                                        {
+                                                                            <a asp-route-id="@pVM.Transactions.TransactionKey" class="btn-sm btn-primary" asp-action="AdminAcceptDelivery" asp-controller="Cart">Accept</a>
+                                                                            <a asp-route-id="@pVM.Transactions.TransactionKey" class="btn-sm btn-danger" asp-action="AdminRejectDelivery" asp-controller="Cart">Reject</a>
+                                                                        }
+                                                                        <br /><br />
+                                                                        <span style="color:gray;">Choose Date</span>
+                                                                        <form method="post" asp-action="SetDeliveryDate" asp-controller="Cart">
+                                                                            <input type="hidden" value="@pVM.Transactions.TransactionKey" name="id" />
+                                                                            <input class="form-control" type="date" id="dateTime" name="dateTime" />
+                                                                            <br />
+                                                                            <input class="btn btn-sm" type="submit" />
+                                                                        </form>
+                                                                    }
+                                                                    else if (pVM.Transactions.PaymentTerms == "COD" && pVM.Transactions.PaymentStatus == "Completed")
+                                                                    {
+                                                                        <span class="badge badge-pill">Service Completed </span>
+
+                                                                        @pVM.Transactions.TransactionCompletion.Value.ToString("D")
+
+
+                                                                    }
+                                                                }
+
+                                                            </td>
+                                                            <td><span class="badge badge-pill">@pVM.Transactions.PaymentStatus</span> </td>
+
+                                                            <td>
+                                                                @{
+                                                                    if (pVM.Transactions.PaymentStatus == "pending" && pVM.Transactions.ImageString != null || pVM.Transactions.PaymentStatus == "Accepted by customer" && pVM.Transactions.ImageString != null)
+                                                                    {
+                                                                        <a onclick="return confirm('Are you sure you want to accept this transaction?')" asp-route-id="@pVM.Transactions.TransactionKey" asp-action="AcceptPayment" asp-controller="Cart" class="btn-success btn"> Accept Payment</a> <a class="btn-danger btn" asp-route-id="@pVM.Transactions.TransactionKey" onclick="return confirm('Are you sure you want to reject this transaction?')" asp-action="RejectPayment" asp-controller="Cart">Reject Payment</a>
+                                                                    }
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @{
+                                                                    if (pVM.Transactions.ImageString != null)
+                                                                    {
+                                                                        <a onclick="ImageView('@pVM.Transactions.ImageString');" href="#">View Image</a>
+
+                                                                    }
+                                                                }
+
+
+                                                            </td>
+
+                                                            <td>
+                                                                @{
+
+                                                                    <a asp-action="Invoice" asp-controller="Cart" asp-route-id="@pVM.Transactions.TransactionKey">
+                                                                        View Invoice
+                                                                    </a>
+
+                                                                }
+                                                            </td>
+                                                        </tr>
                                 }
                             }
                         </tbody>
@@ -183,9 +186,9 @@
                     customize: function (win) {
                         $(win.document.body)
                             .css({ 'font-size': '10pt' })
-                            .prepend(
-                                '<img style= src="~/Images/activefinancelogo.png"  style="position:absolute; height:500px; z-index:5000; width:500px; top:0; left:0;" />'
-                            );
+                             .prepend(
+                                        '<h1 id="header"></h1><img  style="margin-left:250px; height:150px; text-align:center; z-index:5000; width:150px; top:0; left:0;" src="https://i.ibb.co/kMCSXcL/jpp.jpg" />'
+                                    );
 
                         $(win.document.body).find('table')
                             .addClass('compact')

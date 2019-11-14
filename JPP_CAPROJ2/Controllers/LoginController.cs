@@ -235,6 +235,9 @@ namespace JPP_CAPROJ2.Controllers
                 {
                     return RedirectToAction("Index", "Client");
                 }
+            }else if (matched && loginUser.Status == "Archived")
+            {
+                return View("Index", new User { Message = "This account has been archived. Please contact Administrator" });
             }
             else if(matched && loginUser.Status != "Activated")
             {

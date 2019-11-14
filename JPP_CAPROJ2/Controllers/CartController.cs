@@ -18,15 +18,17 @@ namespace JPP_CAPROJ2.Controllers
     {
         private IProductRepository _prodRepo;
         private ICartRepository _cartRepo;
+        private readonly IRequestRepository _requestRepo;
         private readonly IHostingEnvironment _hosting;
         private readonly IUserRepository _userRepo;
         private readonly INotificationRepository _notificationRepo;
         private readonly IOrderRepository _orders;
         private ITransactionRepository _transactionRepo;
-        public CartController(IHostingEnvironment hosting, IUserRepository userRepo,  INotificationRepository notificationRepo, IOrderRepository orders, ITransactionRepository transactionRepo, IProductRepository prodRepo, ICartRepository cartRepo)
+        public CartController(IHostingEnvironment hosting, IUserRepository userRepo,  INotificationRepository notificationRepo, IOrderRepository orders, ITransactionRepository transactionRepo, IProductRepository prodRepo, ICartRepository cartRepo, IRequestRepository requestRepo)
         {
             _prodRepo = prodRepo;
             _cartRepo = cartRepo;
+            _requestRepo = requestRepo;
             _hosting = hosting;
             _userRepo = userRepo;
             _notificationRepo = notificationRepo;
@@ -188,11 +190,14 @@ namespace JPP_CAPROJ2.Controllers
         {
 
             string htmlThing = "<table class='table'><thead> <tr><th> Item </th>   <th> Price</th>   <th>Qty</th> </tr> <tbody> ";
+            double totalPrice = 0;
             foreach (var list in _orders.GetAll().Where(a => a.TransactionID == id).ToList())
             {
-                htmlThing += $"<tr>  <td> { list.ProductName  } </td>   <td>{ list.Price }</td>   <td> {list.Quantity }</td>   </tr>";
+                totalPrice += list.Price;
+                htmlThing += $"<tr>  <td> { list.ProductName  } </td>   <td>{ list.Price.ToString("N") }</td>   <td> {list.Quantity }</td>   </tr>";
             }
-            htmlThing += "</tbody> </table>";
+           
+            htmlThing += $"<tr><td>Total</td> <td > P {totalPrice.ToString("N")} </td> </tr> </tbody> </table>";
             return Content(htmlThing);
         }
 
@@ -218,6 +223,7 @@ namespace JPP_CAPROJ2.Controllers
             transaction.PaymentStatus = "Completed";
             transaction.DeliveryStatus = "Completed";
             transaction.DeliveryDate = DateTime.Now;
+           
             _transactionRepo.Update(transaction);
             return View("ProductOrders", MyOrdersVM());
         }
@@ -285,6 +291,7 @@ namespace JPP_CAPROJ2.Controllers
             transaction.TotalPrice = totalPrice;
             transaction.UserName = userName;
             transaction.DateTimeStamps = DateTime.Now;
+            
             _transactionRepo.Create(transaction);
             
            var cart = _cartRepo.GetAll().AsQueryable().ToList();
@@ -361,6 +368,15 @@ namespace JPP_CAPROJ2.Controllers
             trans.DeliveryStatus = "Pending";
             trans.TransactionCompletion = DateTime.Now;
             _transactionRepo.Update(trans);
+          var service = _requestRepo.GetIdBy(trans.ServiceID);
+            if (service != null)
+            {
+                service.Status = "Paid";
+                service.ServiceId = trans.TransactionKey;
+                _requestRepo.Update(service);
+            }
+
+
             _notificationRepo.AddNotification("You're Transaction has been accepted.", trans.UserName);
             return View("ProductOrders", MyOrdersVM());
         }
@@ -386,6 +402,8 @@ namespace JPP_CAPROJ2.Controllers
             var trans = _transactionRepo.GetIdBy(id);
             trans.PaymentStatus = "Accepted by customer";
             _transactionRepo.Update(trans);
+
+            _requestRepo.GetIdBy(trans.ServiceID).Status = "Accepted by customer";
             //  _notificationRepo.AddNotification("You're Transaction is rejected. Please choose a valid bank account", trans.UserName);
             return View("MyOrders", MyClientOrdersVM());
         }
@@ -395,6 +413,8 @@ namespace JPP_CAPROJ2.Controllers
             var trans = _transactionRepo.GetIdBy(id);
             trans.PaymentStatus = "Rejected by customer";
             _transactionRepo.Update(trans);
+
+            _requestRepo.GetIdBy(trans.ServiceID).Status = "Rejected by customer";
             //  _notificationRepo.AddNotification("You're Transaction is rejected. Please choose a valid bank account", trans.UserName);
             return View("MyOrders", MyClientOrdersVM());
         }

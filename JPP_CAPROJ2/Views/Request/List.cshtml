@@ -3,7 +3,8 @@
     Layout = "BackEnd";
 }
 @model IEnumerable<Request>
-
+@using JPP_CAPROJ2.Data.Model.Interface;
+@inject IUserRepository UserRepository;
 
 
 <section id="main-content">
@@ -19,6 +20,7 @@
                     <table class="table table-striped table-bordered responsive no-wrap" style="width:100%;margin-top:2%;" id="userList">
                         <thead>
                             <tr>
+                                <th>Project ID</th>
                                 <th>Address</th>
                                 <th>Problem Encountered</th>
                                 <th>Price</th>
@@ -33,43 +35,53 @@
                             @{
                                 foreach (var request in Model)
                                 {
-                                                        <tr>
-                                                            <td>@request.Address</td>
-                                                            <td>@request.Requirements</td>
-                                                            <td>P @request.Price.ToString("N")</td>
-                                                            <td>@request.AssignedBy</td>
-                                                            <td>
-                                                                @request.Status
-                                                            </td>
-                                                            <td>
-                                                                @request.AvailableDate.ToString("D")
-                                                            </td>
+                                    var reqId = String.Format("{0:D5}", request.RequestId);
+                                    <tr>
+                                        <td>@Html.Raw("P")@reqId</td>
+                                        <td>@request.Address</td>
+                                        <td>@request.Requirements</td>
+                                        <td>P @request.Price.ToString("N")</td>
+                                        <td>@request.AssignedBy</td>
+                                        <td>
+                                            @request.Status
+                                        </td>
+                                        <td>
+                                            @request.AvailableDate.ToString("D")
+                                        </td>
 
-                                                            <td>
+                                        <td>
 
-                                                                @{
-                                                                    @using Microsoft.AspNetCore.Http;
-                                                                    @inject IHttpContextAccessor HttpContextAccessor
-                                                                    if (Startup.IsSessionAvailable)
-                                                                    {
-                                                                        if (HttpContextAccessor.HttpContext.Session.GetString("Role").ToString() != "employee")
-                                                                        {
-                                                                            if (request.Status == "for inspection")
-                                                                            {
+                                            @{
+                                                @using Microsoft.AspNetCore.Http;
+                                                @inject IHttpContextAccessor HttpContextAccessor
+                                                if (Startup.IsSessionAvailable)
+                                                {
+                                                    if (HttpContextAccessor.HttpContext.Session.GetString("Role").ToString() != "employee")
+                                                    {
+                                                        if (request.Status == "for inspection")
+                                                        {
 
-                                                                                <button onclick="MyFunction('@request.RequestId')" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">
-                                                                                    Service Quotation
-                                                                                </button>
+                                                            <button onclick="MyFunction('@request.RequestId')" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">
+                                                                Service Quotation
+                                                            </button>
 
-                                                                                <a asp-controller="Request" asp-route-id="@request.RequestId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to reject this viewing?')" asp-action="RejectQuotation">Reject</a>
-                                                                            }
-                                                                        }
-                                                                    }
+                                                            <a asp-controller="Request" asp-route-id="@request.RequestId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to reject this viewing?')" asp-action="RejectQuotation">Reject</a>
+                                                        }
+                                                    }
+                                                }
+                                                if (request.Status == "for inspection" && HttpContextAccessor.HttpContext.Session.GetString("Role").ToString() == "employee")
+                                                {
+                                                    <button class="btn btn-success btn-sm" onclick="ChangeWorker('@request.RequestId','@request.AssignedBy')" data-toggle="modal" data-target="#ProductModal">
+                                                        Change Worker
+                                                    </button>
 
-                                                                }
-                                                            </td>
+                                                }
 
-                                                        </tr>
+
+                                            }
+                                        </td>
+
+                                    </tr>
                                 }
                             }
                         </tbody>
@@ -79,7 +91,45 @@
             <!-- col-lg-12-->
         </div>
 
+        <div class="modal fade" id="ProductModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form method="post" asp-action="ChangeWorker" asp-controller="Request">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Worker List</h4>
+                        </div>
+                        <div class="modal-body">
 
+                            <h5>Please Select Worker</h5>
+
+                            <input id="workerId" type="hidden" name="id" />
+                            <select id="workerSelect" class="form-control" name="name">
+                                <option value=""></option>
+                                @{
+                                    foreach (var user in UserRepository.GetAll().ToList())
+                                    {
+                                        if (user.Role == "worker")
+                                        {
+                                            <option value="@user.UserName">@user.UserName</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+
+                            <div class="productOutput"></div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" value="Assign" />
+                        </div>
+                </form>
+
+            </div>
+            </div>
+        </div>
 
     </div>
 </section>
@@ -121,97 +171,106 @@
 </div>
 
 <script>
+
+    function ChangeWorker(id, name) {
+        $('#workerId').val(id);
+        $('#workerSelect').prop('selectedIndex',0);
+       $("#workerSelect option").prop('disabled', false);
+        $('#workerSelect option[value=' + name + ']').attr('disabled', 'disabled');
+    }
+
+
     function Validate() {
-        
+
         if (parseInt($('#priceTots').val()) == 0) {
             return false;
         }
     }
 
     $('#calculate').click(function () {
-         $('#priceTots').val(0);
-     
+        $('#priceTots').val(0);
+
         if ($('#c1').prop('checked') == true) {
             var total = $('#priceTots').val();
             var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c1').val() );
+            totalPriceVar += parseInt($('#c1').val());
             $('#priceTots').val(totalPriceVar);
-        
-        } 
 
-             if ($('#c2').prop('checked') == true) {
+        }
+
+        if ($('#c2').prop('checked') == true) {
             var total = $('#priceTots').val();
             var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c2').val() );
+            totalPriceVar += parseInt($('#c2').val());
             $('#priceTots').val(totalPriceVar);
-        
-        } 
 
-             if ($('#c3').prop('checked') == true) {
+        }
+
+        if ($('#c3').prop('checked') == true) {
             var total = $('#priceTots').val();
             var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c3').val() );
+            totalPriceVar += parseInt($('#c3').val());
             $('#priceTots').val(totalPriceVar);
-        
-        } 
+
+        }
 
 
-             if ($('#c4').prop('checked') == true) {
+        if ($('#c4').prop('checked') == true) {
             var total = $('#priceTots').val();
             var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c4').val() );
+            totalPriceVar += parseInt($('#c4').val());
             $('#priceTots').val(totalPriceVar);
-        
-        } 
 
-             if ($('#c5').prop('checked') == true) {
+        }
+
+        if ($('#c5').prop('checked') == true) {
             var total = $('#priceTots').val();
             var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c5').val() );
+            totalPriceVar += parseInt($('#c5').val());
             $('#priceTots').val(totalPriceVar);
-        
-        } 
+
+        }
 
 
-             if ($('#c6').prop('checked') == true) {
+        if ($('#c6').prop('checked') == true) {
             var total = $('#priceTots').val();
             var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c6').val() );
+            totalPriceVar += parseInt($('#c6').val());
             $('#priceTots').val(totalPriceVar);
-        
-        } 
 
-             if ($('#c7').prop('checked') == true) {
+        }
+
+        if ($('#c7').prop('checked') == true) {
             var total = $('#priceTots').val();
             var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c7').val() );
+            totalPriceVar += parseInt($('#c7').val());
             $('#priceTots').val(totalPriceVar);
-        
-        } 
 
-             if ($('#c8').prop('checked') == true) {
+        }
+
+        if ($('#c8').prop('checked') == true) {
             var total = $('#priceTots').val();
             var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c8').val() );
+            totalPriceVar += parseInt($('#c8').val());
             $('#priceTots').val(totalPriceVar);
-        
-        } 
 
-             if ($('#c9').prop('checked') == true) {
+        }
+
+        if ($('#c9').prop('checked') == true) {
             var total = $('#priceTots').val();
             var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c9').val() );
+            totalPriceVar += parseInt($('#c9').val());
             $('#priceTots').val(totalPriceVar);
-        
-        } 
 
-            if ($('#c0').prop('checked') == true) {
+        }
+
+        if ($('#c0').prop('checked') == true) {
             var total = $('#priceTots').val();
             var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c0').val() );
+            totalPriceVar += parseInt($('#c0').val());
             $('#priceTots').val(totalPriceVar);
-        
-        } 
+
+        }
 
 
 
@@ -229,7 +288,7 @@
 
 
         return false;
- 
+
     });
 
     function MyFunction(x) {
@@ -252,7 +311,7 @@
                         $(win.document.body)
                             .css({ 'font-size': '10pt' })
                             .prepend(
-                                '<img style= src="~/Images/activefinancelogo.png"  style="position:absolute; height:500px; z-index:5000; width:500px; top:0; left:0;" />'
+                                '<h1 id="header"></h1><img  style="margin-left:250px; height:150px; text-align:center; z-index:5000; width:150px; top:0; left:0;" src="https://i.ibb.co/kMCSXcL/jpp.jpg" />'
                             );
 
                         $(win.document.body).find('table')

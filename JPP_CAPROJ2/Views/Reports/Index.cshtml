@@ -3,8 +3,7 @@
     ViewData["Title"] = "Privacy Policy";
     Layout = "BackEnd";
 }
-
-
+    <link href="~/admin/lib/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
 
 <section id="main-content">
     <div class="wrapper">
@@ -26,17 +25,25 @@
                                 <option value="Top Customers">Top Customer</option>
                             </select>
                         </div>
-                        <div class="col-md-2">
-                            Start Date
-                            <input id="startDate" name="start" class="form-control" style="width:200px;" type="date" />
+                      
+                        <div class="col-md-6">
+                            <br />
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Date Range</label>
+                             
+                                    <div class="input-group input-large" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
+                                        <input type="text" id="startDate" class="form-control dpd1" name="from">
+                                        <span class="input-group-addon">To</span>
+                                        <input type="text" id="endDate" class="form-control dpd2" name="to">
+                                    </div>
+                                
+                           
+                            </div>
                         </div>
-                        <div class="col-md-2">
-                            End Date
-                            <input id="endDate" name="end" class="form-control" style="width:200px;" type="date" />
-                        </div>
+                      
                         <div class="col-md-2">
                             <br />
-                            <button id="showData">ShowData</button>
+                            <button id="showData" class="btn btn-success"> <span class="fa fa-print"></span> Generate</button>
                         </div>
                     </div>
                     <div id="Reports"></div>
@@ -50,12 +57,19 @@
     </div>
 </section>
 <style>
-    thead, th {text-align: center;}
-    .dt-head-center {text-align: center;}
-/* OR */
+    thead, th {
+        text-align: center;
+    }
 
-.table thead,
-.table th {text-align: center;}
+    .dt-head-center {
+        text-align: center;
+    }
+    /* OR */
+
+    .table thead,
+    .table th {
+        text-align: center;
+    }
 </style>
 
 <script>
@@ -64,12 +78,14 @@
 
         var report = $('#report').val();
         var d1 = $('#startDate').val();
-         var d2 = $('#endDate').val();
+        var d2 = $('#endDate').val();
+
+        d1.substr(0, 10);
         $.ajax({
 
             url: 'Reports/GetThis/',
             type: 'get',
-            data: { name: report, start : d1, end : d2 },
+            data: { name: report, start: d1, end: d2 },
             success: function (x) {
 
                 $(document).ready(function () {
@@ -80,7 +96,7 @@
 
                     responsive: true,
                     lengthChange: false,
-                     "order": [],
+                    "order": [],
                     "sScrollX": "100%",
                     "scrollCollapse": true,
                     dom: 'lBfrtip',
@@ -97,7 +113,7 @@
 
                                 $(win.document.body).find('table')
                                     .addClass('compact')
-                                   
+
                             }
                         }, 'excelHtml5', {
                             extend: 'pdf',
@@ -138,3 +154,22 @@
 <link href="~/DataTables-1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 <link href="~/DataTables-1.10.18/css/button.css" rel="stylesheet" />
 <script src="~/DataTables-1.10.18/js/dataTables.bootstrap4.js"></script>
+
+
+<script class="include" type="text/javascript" src="~/admin/lib/jquery.dcjqaccordion.2.7.js"></script>
+<script src="~/admin/lib/jquery.scrollTo.min.js"></script>
+<script src="~/admin/lib/jquery.nicescroll.js" type="text/javascript"></script>
+<!--common script for all pages-->
+<script src="~/admin/lib/common-scripts.js"></script>
+<!--script for this page-->
+<script src="~/admin/lib/jquery-ui-1.9.2.custom.min.js"></script>
+<script type="text/javascript" src="~/admin/lib/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+
+<script type="text/javascript" src="~/admin/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+<script type="text/javascript" src="~/admin/lib/bootstrap-daterangepicker/date.js"></script>
+<script type="text/javascript" src="~/admin/lib/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="~/admin/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="~/admin/lib/bootstrap-daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="~/admin/lib/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+<script src="~/admin/lib/advanced-form-components.js"></script>

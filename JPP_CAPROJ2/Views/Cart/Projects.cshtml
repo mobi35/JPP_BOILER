@@ -32,28 +32,66 @@
                             <tbody>
 
                                 @{
+                                    int pending = 0;
+                                    int onGoing = 0;
+                                    int completed = 0;
+                                    int rejected = 0;
+                                      int rejectedByCustomer = 0;
                                     foreach (var trans in Model)
                                     {
 
+                                      
                                         var projectNumber = String.Format("{0:D5}", trans.TransactionKey);
                                         <tr>
                                             <td>@Html.Raw("P")@projectNumber</td>
                                             <td>
-                                                @{
-                                                    if (trans.ServiceType != null)
-                                                    {
+                                                    @{
+                                                if (trans.ServiceType != null)
+                                                {
                                                         <p>@trans.ServiceType Service</p>
                                                     }
-                                                    else
-                                                    {
-                                                        @OrderedProduct.GetIdBy(1)
+                                                else
+                                                {
+                                                        <p>Product's Ordered</p>
                                                     }
-                                                }
+                                            }
 
 
                                             </td>
 
-                                            <td> <span class="badge-danger badge">@trans.PaymentStatus.ToLower() </span></td>
+                                            <td>
+                                                @{
+                                                    if (trans.PaymentStatus.ToLower() == "pending")
+                                                    {
+                                                        pending++;
+                                                        <span class="badge-danger badge">@trans.PaymentStatus.ToLower() </span>
+                                                    }
+                                                    else if (trans.PaymentStatus.ToLower() == "on-going")
+                                                    {
+                                                        onGoing++;
+                                                        <span class="badge-danger badge">@trans.PaymentStatus.ToLower() </span>
+                                                    }
+                                                    else if (trans.PaymentStatus.ToLower() == "completed")
+                                                    {
+                                                        completed++;
+                                                        <span style="background-color:#6ab04c" class="badge-danger badge">@trans.PaymentStatus.ToLower() </span>
+                                                    }
+                                                    else if (trans.PaymentStatus.ToLower() == "rejected")
+                                                    {
+                                                        rejected++;
+                                                        <span style="background-color:#eb4d4b" class="badge-danger badge">@trans.PaymentStatus.ToLower() </span>
+                                                    }
+                                                    else if (trans.PaymentStatus.ToLower() == "rejected by customer")
+                                                    {
+                                                        rejectedByCustomer++;
+                                                        <span style="background-color:#eb4d4b" class="badge-danger badge">@trans.PaymentStatus.ToLower() </span>
+                                                    }
+
+                                                }
+
+
+
+                                            </td>
                                             <td>
                                                 <button class="btn btn-success btn-sm" onclick="Product('@trans.TransactionKey')" data-toggle="modal" data-target="#ProductModal">
                                                     Show
@@ -67,6 +105,9 @@
 
                             </tbody>
                         </table>
+
+                        <h3> <span style="background-color:gray; font-size:23px;" class="badge badge-danger">  Pending : @pending </span>  <span style="font-size:23px;background-color:gray;" class="badge badge-danger">On-Going : @onGoing </span>  <span style="font-size:23px;background-color:#eb4d4b;" class="badge badge-danger">Rejected : @rejected </span> <span style="font-size:23px;background-color:#eb4d4b;" class="badge badge-danger">Rejected by customer : @rejectedByCustomer </span>  <span style="font-size:23px;background-color:#6ab04c;" class="badge badge-success">Completed : @completed </span> </h3>
+
                     </div>
                 </div>
             </div>
@@ -154,8 +195,8 @@
                         $(win.document.body)
                             .css({ 'font-size': '10pt' })
                             .prepend(
-                                '<img style= src="~/Images/activefinancelogo.png"  style="position:absolute; height:500px; z-index:5000; width:500px; top:0; left:0;" />'
-                            );
+                                        '<h1 id="header"></h1><img  style="margin-left:250px; height:150px; text-align:center; z-index:5000; width:150px; top:0; left:0;" src="https://i.ibb.co/kMCSXcL/jpp.jpg" />'
+                                    );
 
                         $(win.document.body).find('table')
                             .addClass('compact')

@@ -111,6 +111,21 @@ private readonly IRequestRepository _requestRepo;
             }
             return userList.OrderBy(a => a.NumberOfTask).ToList();
         }
+
+        [HttpPost]
+        public IActionResult ChangeWorker(int id, string name)
+        {
+            if (name != null) { 
+            var request = _requestRepo.GetIdBy(id);
+            request.AssignedBy = name;
+            var user = _userRepo.FindUser(a => a.UserName == name);
+            user.NumberOfTask -= 1;
+            _userRepo.Update(user);
+            _requestRepo.Update(request);
+            }
+            return View("List", AdminList());
+        }
+
         [HttpGet]
         public IActionResult CompleteService(int id)
         {

@@ -28,6 +28,7 @@
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
           "Microsoft.EntityFrameworkCore": "2.2.1",
           "Microsoft.NETCore.App": "2.2.0",
+          "Microsoft.Net.Compilers": "3.3.1",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.2.4",
           "Rotativa.AspNetCore": "1.0.6"
         },
@@ -108,6 +109,7 @@
         }
       },
       "Microsoft.EntityFrameworkCore.Analyzers/2.2.1": {},
+      "Microsoft.Net.Compilers/3.3.1": {},
       "Microsoft.VisualStudio.Web.CodeGeneration/2.2.4": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "2.2.0",
@@ -3609,6 +3611,13 @@
       "sha512": "sha512-449BpHABVbtekNyo1a00URxgPB1CFF3TaONAY1vXbU67jS5QOynjUbH+MiCkJVtIzoxuDOS2ybSOVGR8zd0J/Q==",
       "path": "microsoft.entityframeworkcore.analyzers/2.2.1",
       "hashPath": "microsoft.entityframeworkcore.analyzers.2.2.1.nupkg.sha512"
+    },
+    "Microsoft.Net.Compilers/3.3.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6ONPqret0xUw+XaMWQycs08IHynA9gO8/jkfDD+LR+v3amGuBTXbfpCGuDu/nADwWPECHIcbS0UWvOYlONwwHw==",
+      "path": "microsoft.net.compilers/3.3.1",
+      "hashPath": "microsoft.net.compilers.3.3.1.nupkg.sha512"
     },
     "Microsoft.VisualStudio.Web.CodeGeneration/2.2.4": {
       "type": "package",

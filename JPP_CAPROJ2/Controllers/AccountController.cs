@@ -87,6 +87,17 @@ namespace JPP_CAPROJ2.Controllers
             return View(user);
 
         }
+
+        public IActionResult ActivateAccount(int id)
+        {
+        
+            var userFound = _userRepo.GetIdBy(id);
+            userFound.Status = "Activated";
+            _userRepo.Update(userFound);
+            _notifRepo.AddNotification("Welcome back to JBoiler.Your account has been activated", userFound.UserName);
+            return View("List", GetList());
+        }
+
         public IActionResult List()
         {
             

@@ -64,9 +64,10 @@ namespace JPP_CAPROJ2.Controllers
                       $"</tr>" +
                      $"</thead>" +
                      $"<tbody>";
-
+                int masterListCount = 0;
                 foreach (var user in userList)
                 {
+                    masterListCount++;
                     tableDetails += $"<tr>" +
                         $"<td>{user.FirstName + " " + user.MiddleName + " " + user.LastName}</td>" +
                          $"<td>{user.UserName}</td>" +
@@ -75,7 +76,7 @@ namespace JPP_CAPROJ2.Controllers
                          $"<td>{user.Address}</td>" +
                         $"</tr>";
                 }
-                tableDetails += $"</tbody>" +
+                tableDetails += $" <tr>  <td> &nbsp</td> <td> &nbsp</td> <td> &nbsp</td> <td> &nbsp</td>  <td>Total Users</td> <td>{masterListCount}</td>  </tr> </tbody>" +
                   $"</table>";
                
             }
@@ -85,38 +86,45 @@ namespace JPP_CAPROJ2.Controllers
                 if (start == null || end == null) {
                     start = DateTime.Now;
                     end = DateTime.Now;
-                    salesList = _transactionRepo.GetAll().Where(a => a.PaymentStatus == "Accepted").ToList();
+                    salesList = _transactionRepo.GetAll().Where(a => a.PaymentStatus == "Completed").ToList();
                 }else
                 {
-                    salesList = _transactionRepo.GetAll().Where(a => a.PaymentStatus == "Accepted" && a.DateTimeStamps >= start && a.DateTimeStamps <= end).ToList();
+                    salesList = _transactionRepo.GetAll().Where(a => a.PaymentStatus == "Completed" && a.DateTimeStamps >= start && a.DateTimeStamps <= end).ToList();
                 }
 
                 tableDetails += $"<table class='table table-striped table-bordered responsive no-wrap' style='width:100%'  id='userList'> " +
-                                $" <caption  font-size: 90%;'> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                     {name}  {start.Value.Date} - {end.Value.Date} </caption>" +
+                                $" <caption  font-size: 90%;'> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                     {name}  {start.Value.Date.ToString("d")} - {end.Value.Date.ToString("d")} </caption>" +
                        $"<thead>" +
                       $"<tr>" +
+                         $"<th>Transaction ID</th>" +
                       $"<th>Username</th>" +
-                      $"<th>Payment Terms</th>" +
                       $"<th>Total Price</th>" +
                      $"<th>Payment Status</th>" +
-                      $"<th>Date</th>" +
-                      $"<th>Delivery Date</th>" +
+                      $"<th>Paid On</th>" +
+                    
                       $"</tr>" +
                      $"</thead>" +
                      $"<tbody>";
-
+                double salesTotal = 0;
                 foreach (var sale in salesList)
                 {
+
+
+                    string tKey = String.Format("{0:D5}", sale.TransactionKey);
+                    salesTotal += sale.TotalPrice;
                     tableDetails += $"<tr>" +
+                         $"<td>T{tKey}</td>" +
                         $"<td>{sale.UserName}</td>" +
-                         $"<td>{sale.PaymentTerms}</td>" +
-                        $"<td>{sale.TotalPrice}</td>" +
+                      
+                        $"<td>{sale.TotalPrice.ToString("N")}</td>" +
                          $"<td>{sale.PaymentStatus}</td>" +
-                         $"<td>{sale.DateTimeStamps}</td>" +
-                            $"<td>{sale.DeliveryDate}</td>" +
+                         $"<td>{sale.TransactionCompletion}</td>" +
+                        
                         $"</tr>";
                 }
-                tableDetails += $"</tbody>" +
+                tableDetails += $"" +
+                    $"<tr>   <td> &nbsp</td> <td> &nbsp</td> <td> &nbsp</td>      <td >Total Earned: </td> <td>P{salesTotal.ToString("N")}</td>  </tr>" +
+                    $"</tbody>" +
                   $"</table>";
 
             }
@@ -139,9 +147,10 @@ namespace JPP_CAPROJ2.Controllers
                       $"</tr>" +
                      $"</thead>" +
                      $"<tbody>";
-
+                int totalProduct = 0;
                 foreach (var product in prodList)
                 {
+                    totalProduct++;
                     tableDetails += $"<tr>" +
                      
                          $"<td>{product.ProductName}</td>" +
@@ -150,7 +159,7 @@ namespace JPP_CAPROJ2.Controllers
                            $"<td>{product.Stocks}</td>" +
                         $"</tr>";
                 }
-                tableDetails += $"</tbody>" +
+                tableDetails += $" <tr>  <td> &nbsp</td> <td> &nbsp</td> <td> &nbsp</td> <td> &nbsp</td>  <td>Total Number of Product : </td> <td> {totalProduct }</td> </tr> </tbody>" +
                   $"</table>";
 
             }
@@ -170,7 +179,7 @@ namespace JPP_CAPROJ2.Controllers
                     {
                         decimal totalSpentEach = 0;
                         int numOfTrans = 0;
-                        foreach (var transaction in _transactionRepo.GetAll().Where(a => a.PaymentStatus == "Accepted" && a.DateTimeStamps >= start && a.DateTimeStamps <= end ).ToList())
+                        foreach (var transaction in _transactionRepo.GetAll().Where(a => a.PaymentStatus == "Completed" && a.DateTimeStamps >= start && a.DateTimeStamps <= end ).ToList())
                         {
                             if (users.UserName == transaction.UserName)
                             {
@@ -190,7 +199,7 @@ namespace JPP_CAPROJ2.Controllers
                 }
 
                 tableDetails += $"<table class='table table-striped table-bordered responsive no-wrap' style='width:100%'  id='userList'> " +
-                                 $" <caption  font-size: 90%;'> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                     {name}  {start.Value.Date} - {end.Value.Date} </caption>" +
+                                 $" <caption  font-size: 90%;'> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                     {name}  {start.Value.Date.ToString("d")} - {end.Value.Date.ToString("d")} </caption>" +
                        $"<thead>" +
                       $"<tr>" +
 
@@ -201,16 +210,18 @@ namespace JPP_CAPROJ2.Controllers
                      $"</thead>" +
                      $"<tbody>";
                 var customerTop = topCustomer.OrderByDescending(a => a.Spent).ToList();
+                double userSpents = 0;
                 foreach (var topCus in customerTop)
                 {
+                    userSpents += (double)topCus.Spent;
                     tableDetails += $"<tr>" +
 
                          $"<td>{topCus.FullName}</td>" +
                         $"<td>{topCus.Transactions}</td>" +
-                         $"<td>{topCus.Spent}</td>" +
+                         $"<td>P{topCus.Spent.ToString("N")}</td>" +
                         $"</tr>";
                 }
-                tableDetails += $"</tbody>" +
+                tableDetails += $"<tr>  <td> &nbsp</td> <td> &nbsp</td> <td> &nbsp</td> <td> &nbsp</td>  <td>Total Spents </td>  <td> P{userSpents.ToString("N")} </td>  </tr>  </tbody>" +
                   $"</table>";
 
             }

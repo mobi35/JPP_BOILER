@@ -33,9 +33,13 @@ namespace JPP_CAPROJ2.Controllers
         {
             var userName = HttpContext.Session.GetString("UserName");
             var userFound = _userRepo.FindUser(a => a.UserName == userName);
-            _userRepo.Delete(userFound);
+            userFound.Status = "Archived";
+            _userRepo.Update(userFound);
           return RedirectToAction("Logout", "Login");
         }
+
+       
+
         public string base64Encode(string data)
         {
             try

@@ -19,10 +19,11 @@ Layout = "BackEnd";
           <table class="table table-striped table-bordered responsive no-wrap" style="width:100%;margin-top:2%;" id="userList">
     <thead>
         <tr>
+            <th>Service ID</th>
             <th>Address</th>
             <th>Price</th>
-              <th>Status</th>
-           <th>Action</th>
+            <th>Status</th>
+            <th>Action</th>
         </tr>
     </thead>
 
@@ -30,22 +31,25 @@ Layout = "BackEnd";
         @{
             foreach (var request in Model)
             {
-            <tr>
-                <td>@request.Address</td>
-                <td>@request.Description</td>
-                 <td>
-                 
-                    <span class="label label-warning">@request.Status</span>
-                     </td>
-                <td> <a return="confirm('are you sure you want to delete?')" asp-route-id="@request.RequestId" asp-controller="Request" asp-action="Delete">Delete</a> 
-                
-                <a  asp-route-id="@request.RequestId" asp-controller="Request" asp-action="AcceptService">Accept Service</a>
-                     <button onclick="getMyId('@request.RequestId')" class="btn btn-success btn-lg" id="payClick" data-toggle="modal" data-target="#myModal">
-                Accept/Reject Service
-                </button>
+                <tr>
+                    <td>@request.ServiceId</td>
+                    <td>@request.Address</td>
+                    <td>@request.Description</td>
+                    <td>
 
-                <a return="confirm('are you sure you want to reject?')" asp-route-id="@request.RequestId" asp-controller="Request" asp-action="RejectService">Reject Service</a> </td>
-            </tr>
+                        <span class="label label-warning">@request.Status</span>
+                    </td>
+                    <td>
+                        <a return="confirm('are you sure you want to delete?')" asp-route-id="@request.RequestId" asp-controller="Request" asp-action="Delete">Delete</a>
+
+                        <a asp-route-id="@request.RequestId" asp-controller="Request" asp-action="AcceptService">Accept Service</a>
+                        <button onclick="getMyId('@request.RequestId')" class="btn btn-success btn-lg" id="payClick" data-toggle="modal" data-target="#myModal">
+                            Accept/Reject Service
+                        </button>
+
+                        <a return="confirm('are you sure you want to reject?')" asp-route-id="@request.RequestId" asp-controller="Request" asp-action="RejectService">Reject Service</a>
+                    </td>
+                </tr>
             }
         }
     </tbody>
