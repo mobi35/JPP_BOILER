@@ -23,6 +23,10 @@
                                 <option value="Sales Report">Sales Reports</option>
                                 <option value="Products Report">Products Report</option>
                                 <option value="Top Customers">Top Customer</option>
+
+                                <option value="Lead Report">Lead Report</option>
+                                <option value="Profitable Service">Most Profitable Service</option>
+                                <option value="Project Progress">Project Progress List</option>
                             </select>
                         </div>
                       
@@ -32,9 +36,9 @@
                                 <label class="control-label col-md-3">Date Range</label>
                              
                                     <div class="input-group input-large" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
-                                        <input type="text" id="startDate" class="form-control dpd1" name="from">
+                                        <input type="text" value="01/1/2019" id="startDate" class="form-control dpd1" name="from">
                                         <span class="input-group-addon">To</span>
-                                        <input type="text" id="endDate" class="form-control dpd2" name="to">
+                                        <input type="text" id="endDate" value="01/1/2020" class="form-control dpd2" name="to">
                                     </div>
                                 
                            
@@ -79,6 +83,8 @@
         var report = $('#report').val();
         var d1 = $('#startDate').val();
         var d2 = $('#endDate').val();
+
+     
 
         d1.substr(0, 10);
         $.ajax({

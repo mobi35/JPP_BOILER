@@ -43,5 +43,7 @@ namespace JPP_CAPROJ2.Data.Model
 
         public bool isRead { get; set; }
 
+        public DateTime? DateCompleted { get; set; }
+
     }
 }

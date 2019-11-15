@@ -48,7 +48,15 @@ namespace JPP_CAPROJ2.Controllers
                 throw new Exception("Error in base64Encode" + e.Message);
             }
         }
+        
 
+       public IActionResult DeactivateAccount(int id)
+        {
+            var userFound = _userRepo.GetIdBy(id);
+            userFound.Status = "Archived";
+            _userRepo.Update(userFound);
+            return View("List", GetList());
+        }
 
         [HttpPost]
         public IActionResult Create(User user)

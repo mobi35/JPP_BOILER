@@ -18,15 +18,17 @@ namespace JPP_CAPROJ2.Controllers
         private readonly IHostingEnvironment _hosting;
         private readonly IUserRepository _userRepo;
         private readonly INotificationRepository _notificationRepo;
+        private readonly IRequestRepository _requestRepo;
         private readonly IOrderRepository _orders;
         private ITransactionRepository _transactionRepo;
 
-        public ReportsController(IHostingEnvironment hosting, IUserRepository userRepo, INotificationRepository notificationRepo, IOrderRepository orders, ITransactionRepository transactionRepo, IProductRepository prodRepo, ICartRepository cartRepo)
+        public ReportsController(IRequestRepository requestRepo ,IHostingEnvironment hosting, IUserRepository userRepo, INotificationRepository notificationRepo, IOrderRepository orders, ITransactionRepository transactionRepo, IProductRepository prodRepo, ICartRepository cartRepo)
         {
             _prodRepo = prodRepo;
             _cartRepo = cartRepo;
             _hosting = hosting;
             _userRepo = userRepo;
+            _requestRepo = requestRepo;
             _notificationRepo = notificationRepo;
             _orders = orders;
             _transactionRepo = transactionRepo;
@@ -175,7 +177,7 @@ namespace JPP_CAPROJ2.Controllers
                 {
 
                     decimal totalAmount = 0;
-                    foreach (var users in _userRepo.GetAll().ToList())
+                    foreach (var users in _userRepo.GetAll().Where(a => a.Role == "customer").ToList())
                     {
                         decimal totalSpentEach = 0;
                         int numOfTrans = 0;
@@ -222,6 +224,134 @@ namespace JPP_CAPROJ2.Controllers
                         $"</tr>";
                 }
                 tableDetails += $"<tr>  <td> &nbsp</td> <td> &nbsp</td> <td> &nbsp</td> <td> &nbsp</td>  <td>Total Spents </td>  <td> P{userSpents.ToString("N")} </td>  </tr>  </tbody>" +
+                  $"</table>";
+
+            }else if (name == "Lead Report")
+            {
+                var requestList = _requestRepo.GetAll().ToList();
+
+                if (start != null && end != null)
+                    requestList.Where(a => a.DateCompleted >= start && a.DateCompleted <= end).ToList();
+
+                  tableDetails += $"<table class='table table-striped table-bordered responsive no-wrap' style='width:100%'  id='userList'> " +
+                                $" <caption  font-size: 90%;'> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                     {name}  {start.Value.Date.ToString("d")} - {end.Value.Date.ToString("d")} </caption>" +
+                      $"<thead>" +
+                     $"<tr>" +
+                     $"<th>Lead Number</th>" +
+                     $"<th>Customer Name</th>" +
+                      $"<th>Service Requested</th>" +
+                       $"<th>Worker Responsible</th>" +
+                         $"<th>Inspection Date</th>" +
+                           $"<th>Date Completed</th>" +
+                             $"<th>Status</th>" +
+                     $"</tr>" +
+                    $"</thead>" +
+                    $"<tbody>";
+            
+                double requests = 0;
+                foreach (var request in requestList)
+                {
+                    string tKey = String.Format("{0:D5}", request.RequestId);
+                    requests++;
+                        tableDetails += $"<tr>" +
+                         $"<td>R{tKey}</td>" +
+                        $"<td>{request.UserName}</td>" +
+                         $"<td>{request.Description}</td>" +
+                            $"<td>{request.AssignedBy}</td>" +
+                                  $"<td>{request.Status}</td>" +
+                                   $"<td>P{request.AvailableDate}</td>" +
+                              $"<td>{request.DateCompleted}</td>" +
+
+                        $"</tr>";
+                }
+                tableDetails += $"<tr> <td> &nbsp</td>  <td> &nbsp</td> <td> &nbsp</td> <td> &nbsp</td> <td> &nbsp</td>  <td>Total Request </td>  <td> {requests} </td>  </tr>  </tbody>" +
+                  $"</table>";
+
+            }
+            else if (name == "Profitable Service")
+            {
+                var orderedProducts = _orders.GetAll().Where(a => a.ProductID == 0).GroupBy(a => a.ProductName)
+                    .Select(l => new { 
+                        Key = l.Key,
+                        Product = l.FirstOrDefault().ProductName,
+                        Sum = l.Sum(a => a.Price)
+                    }).OrderByDescending(a => a.Sum)
+                    .ToList();
+
+          
+
+                    tableDetails += $"<table class='table table-striped table-bordered responsive no-wrap' style='width:100%'  id='userList'> " +
+                            $" <caption  font-size: 90%;'> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                     {name}  {start.Value.Date.ToString("d")} - {end.Value.Date.ToString("d")} </caption>" +
+                  $"<thead>" +
+                 $"<tr>" +
+                  $"<th>Rank</th>" +
+                 $"<th>Product</th>" +
+                 $"<th>Total</th>" +
+                 
+                 $"</tr>" +
+                $"</thead>" +
+                $"<tbody>";
+                int rank = 0;
+                double totalOrdered = 0;
+                foreach (var order in orderedProducts)
+                {
+                    rank++;
+                    totalOrdered += order.Sum;
+                            tableDetails += $"<tr>" +
+                          $"<td>{rank}</td>" +
+                                $"<td>{order.Product}</td>" +
+                               $"<td>P{order.Sum.ToString("N")}</td>" +
+                               $"</tr>";
+                           
+                }
+                tableDetails += $"<tr>  <td> &nbsp</td>  <td>Total Earned </td>  <td> P{totalOrdered.ToString("N")} </td>  </tr>  </tbody>" +
+                  $"</table>";
+            }
+            else if (name == "Project Progress")
+            {
+
+                var projectProgress = _transactionRepo.GetAll().ToList();
+
+                if (start != null && end != null)
+                    projectProgress.Where(a => a.DateTimeStamps >= start && a.DateTimeStamps <= end).ToList();
+
+                    tableDetails += $"<table class='table table-striped table-bordered responsive no-wrap' style='width:100%'  id='userList'> " +
+                         $" <caption  font-size: 90%;'> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                     {name}  {start.Value.Date.ToString("d")} - {end.Value.Date.ToString("d")} </caption>" +
+               $"<thead>" +
+              $"<tr>" +
+               $"<th>Transaction Key</th>" +
+              $"<th>Payment Status</th>" +
+              $"<th>UserName</th>" +
+                 $"<th>Description</th>" +
+                $"<th>Price</th>" +
+              $"</tr>" +
+             $"</thead>" +
+             $"<tbody>";
+             
+                double totalPrice = 0;
+                foreach (var project in projectProgress)
+                {
+                    string tKey = String.Format("{0:D5}", project.TransactionKey);
+                    totalPrice += project.TotalPrice;
+                    tableDetails += $"<tr>" +
+                          
+                    $"<td>P{tKey}</td>" +
+                       $"<td>{project.PaymentStatus}</td>" +
+                            $"<td>{project.UserName}</td>";
+
+                    if (project.ServiceType == null)
+                    {
+                        tableDetails += "<td>"+ project.ServiceType + "</td>";
+                    }else
+                    {
+                        tableDetails += "<td>Products Ordered</td>";
+                    }
+                    tableDetails +=
+                      $"<td>P{project.TotalPrice}</td>" +
+                       $"</tr>";
+
+                }
+                tableDetails += $"<tr>  <td> &nbsp</td>   <td> &nbsp</td> <td> &nbsp</td>  <td>Total Earned </td>  <td> P{totalPrice.ToString("N")} </td>  </tr>  </tbody>" +
                   $"</table>";
 
             }

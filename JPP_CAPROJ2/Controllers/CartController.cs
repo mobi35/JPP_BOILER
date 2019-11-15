@@ -372,6 +372,7 @@ namespace JPP_CAPROJ2.Controllers
             if (service != null)
             {
                 service.Status = "Paid";
+                service.DateCompleted = DateTime.Now;
                 service.ServiceId = trans.TransactionKey;
                 _requestRepo.Update(service);
             }
@@ -395,9 +396,18 @@ namespace JPP_CAPROJ2.Controllers
             return View(MyOrdersVM());
          
         }
+        public IActionResult CancelPayment(int id)
+        {
+            var trans = _transactionRepo.GetIdBy(id);
+            trans.PaymentStatus = "Rejected by customer";
+            trans.DeliveryStatus = "Rejected by customer";
+            trans.ImageString = "nothing";
+            trans.TransactionCompletion = DateTime.Now;
+            _transactionRepo.Update(trans);
+            return View("MyOrders", MyClientOrdersVM());
+        }
 
-
-        public IActionResult AcceptService(int id)
+            public IActionResult AcceptService(int id)
         {
             var trans = _transactionRepo.GetIdBy(id);
             trans.PaymentStatus = "Accepted by customer";

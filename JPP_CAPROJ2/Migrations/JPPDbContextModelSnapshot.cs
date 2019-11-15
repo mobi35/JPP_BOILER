@@ -88,6 +88,8 @@ namespace JPP_CAPROJ2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime?>("DateOrdered");
+
                     b.Property<double>("Price");
 
                     b.Property<int>("ProductID");
@@ -172,6 +174,8 @@ namespace JPP_CAPROJ2.Migrations
                     b.Property<string>("AssignedBy");
 
                     b.Property<DateTime>("AvailableDate");
+
+                    b.Property<DateTime?>("DateCompleted");
 
                     b.Property<string>("Description");
 

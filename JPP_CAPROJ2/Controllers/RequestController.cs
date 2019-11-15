@@ -53,6 +53,7 @@ private readonly IRequestRepository _requestRepo;
             request.Requirements = request.Description;
                request.Description = serviceType;
                request.Status = "for inspection";
+            request.Price = 15000;
             request.UserName = userName;
             _requestRepo.Create(request);
 
@@ -61,11 +62,14 @@ private readonly IRequestRepository _requestRepo;
             serviceTransaction.BankAccount = "COD";
             serviceTransaction.PaymentStatus = "Pending";
             serviceTransaction.UserName = userName;
-            serviceTransaction.PaymentTerms = "COD";
+
+
+            serviceTransaction.PaymentTerms = "Service";
+
             serviceTransaction.DateTimeStamps = DateTime.Now;
             serviceTransaction.ServiceType = serviceType;
             serviceTransaction.ServiceID = _requestRepo.GetAll().LastOrDefault().RequestId;
-            serviceTransaction.TotalPrice = 1000;
+            serviceTransaction.TotalPrice = 15000;
             _transactionRepo.Create(serviceTransaction);
            
             request.Message = $"You have successfully requested for a service. Please wait {(int)dateRemainingDeliver.Value.TotalDays} day/s as the inspector will look at your unit";
@@ -253,6 +257,7 @@ private readonly IRequestRepository _requestRepo;
             defaultOrder.Price = 1000;
             defaultOrder.ProductName = "Inspection Cost";
             defaultOrder.Quantity = 1;
+            defaultOrder.DateOrdered = DateTime.Now;
             defaultOrder.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
             _orderedRepository.Create(defaultOrder);
 
@@ -261,7 +266,7 @@ private readonly IRequestRepository _requestRepo;
                 OrderedProducts orp = new OrderedProducts();
                 totalAmount += orp.Price = c1;
                 orp.ProductName = "Boiler Maintenance";
-                orp.Quantity = 1;
+                orp.Quantity = 1; orp.DateOrdered = DateTime.Now;
                 orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
                 _orderedRepository.Create(orp);
             }
@@ -271,7 +276,7 @@ private readonly IRequestRepository _requestRepo;
                 OrderedProducts orp = new OrderedProducts();
                 totalAmount += orp.Price = c2;
                 orp.ProductName = "Boiler Repair";
-                orp.Quantity = 1;
+                orp.Quantity = 1; orp.DateOrdered = DateTime.Now;
                 orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
                 _orderedRepository.Create(orp);
             }
@@ -281,7 +286,7 @@ private readonly IRequestRepository _requestRepo;
                 OrderedProducts orp = new OrderedProducts();
                 totalAmount += orp.Price = c3;
                 orp.ProductName = "Cleaning";
-                orp.Quantity = 1;
+                orp.Quantity = 1; orp.DateOrdered = DateTime.Now;
                 orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
                 _orderedRepository.Create(orp);
             }
@@ -291,7 +296,7 @@ private readonly IRequestRepository _requestRepo;
                 OrderedProducts orp = new OrderedProducts();
                 totalAmount += orp.Price = c4;
                 orp.ProductName = "Plumbing";
-                orp.Quantity = 1;
+                orp.Quantity = 1; orp.DateOrdered = DateTime.Now;
                 orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
                 _orderedRepository.Create(orp);
             }
@@ -301,7 +306,7 @@ private readonly IRequestRepository _requestRepo;
                 OrderedProducts orp = new OrderedProducts();
                 totalAmount += orp.Price = c5;
                 orp.ProductName = "Rehabilitation";
-                orp.Quantity = 1;
+                orp.Quantity = 1; orp.DateOrdered = DateTime.Now;
                 orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
                 _orderedRepository.Create(orp);
             }
@@ -311,7 +316,7 @@ private readonly IRequestRepository _requestRepo;
                 OrderedProducts orp = new OrderedProducts();
                 totalAmount += orp.Price = c6;
                 orp.ProductName = "Retubing";
-                orp.Quantity = 1;
+                orp.Quantity = 1; orp.DateOrdered = DateTime.Now;
                 orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
                 _orderedRepository.Create(orp);
             }
@@ -321,7 +326,7 @@ private readonly IRequestRepository _requestRepo;
                 OrderedProducts orp = new OrderedProducts();
                 totalAmount += orp.Price = c7;
                 orp.ProductName = "Fabrication of Reactors";
-                orp.Quantity = 1;
+                orp.Quantity = 1; orp.DateOrdered = DateTime.Now;
                 orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
                 _orderedRepository.Create(orp);
             }
@@ -331,7 +336,7 @@ private readonly IRequestRepository _requestRepo;
                 OrderedProducts orp = new OrderedProducts();
                 totalAmount += orp.Price = c8;
                 orp.ProductName = "Fully Retube";
-                orp.Quantity = 1;
+                orp.Quantity = 1; orp.DateOrdered = DateTime.Now;
                 orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
                 _orderedRepository.Create(orp);
             }
@@ -342,6 +347,7 @@ private readonly IRequestRepository _requestRepo;
                 totalAmount += orp.Price = c9;
                 orp.ProductName = "Partial Retubing";
                 orp.Quantity = 1;
+                orp.DateOrdered = DateTime.Now;
                 orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
                 _orderedRepository.Create(orp);
             }

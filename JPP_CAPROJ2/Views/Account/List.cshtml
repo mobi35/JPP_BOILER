@@ -23,6 +23,7 @@ Layout = "BackEnd";
             <th>Role</th>
             <th>Phone Number</th>
             <th>Email</th>
+         
             <th>Action</th>
         </tr>
     </thead>
@@ -37,12 +38,19 @@ Layout = "BackEnd";
                     <td>@user.Role</td>
                     <td>@user.PhoneNumber</td>
                     <td>@user.Email</td>
-                    <td>@{
-                        if (user.Status == "Archived")
-                        {
-                            <a class="btn-sm btn-success" asp-action="ActivateAccount" asp-controller="Account" asp-route-id="@user.UserId" >Activate</a>
+                   
+                    <td>
+                        @{
+                            if (user.Status == "Archived")
+                            {
+                                <a class="btn-sm btn-success" asp-action="ActivateAccount" asp-controller="Account" asp-route-id="@user.UserId">Activate</a>
+                            }
+                            else
+                            {
+                                <a class="btn-sm btn-danger" asp-action="DeactivateAccount" asp-controller="Account" asp-route-id="@user.UserId">Deactivate</a>
+                            }
                         }
-                    }</td>
+                    </td>
                 </tr>
             }
         }

@@ -22,6 +22,7 @@
 
                                 <th>Products</th>
                                 <th>Payment</th>
+                                <th>Payment Terms</th>
                                 <th>Status</th>
                                 <th>Delivery Date</th>
                                 <th></th>
@@ -45,24 +46,34 @@
                                                 foreach (var order in pVM.Orders)
                                                 {
                                                     <p>@order.ProductName  X  @order.Quantity</p>
-                                                 
+
 
                                                 }
 
-                                             
+
                                             }
 
                                         </td>
                                         <td>P @pVM.Transactions.TotalPrice.ToString("N")</td>
-                                        <td><span class="badge badge-pill"> @pVM.Transactions.PaymentStatus</td>
+                                        <td>@pVM.Transactions.PaymentTerms  </td>
                                         <td>
-                                            @{
-
+                                            <span class="badge badge-pill"> @pVM.Transactions.PaymentStatus </span> @{ if (pVM.Transactions.ImageString == null && pVM.Transactions.PaymentTerms != "Service")
+                                                {
+                                                    <a asp-route-id="@pVM.Transactions.TransactionKey" class="btn-sm btn-danger" asp-action="CancelPayment" asp-controller="Cart">Cancel Payment</a>
+                                                }
                                                 if (pVM.Transactions.PaymentStatus == "On-going")
                                                 {
                                                     <a asp-route-id="@pVM.Transactions.TransactionKey" class="btn-sm btn-primary" asp-action="AcceptService" asp-controller="Cart">Accept Service</a>
                                                     <a asp-route-id="@pVM.Transactions.TransactionKey" class="btn-sm btn-danger" asp-action="RejectService" asp-controller="Cart">Reject Service</a>
                                                 }
+                                            }
+                                        </td>
+                                        <td>
+                                            @{
+
+                                             
+
+                                           
 
                                                 if (pVM.Transactions.DeliveryDate == null)
                                                 {
@@ -99,6 +110,8 @@
                                                         <a class="btn btn-success" asp-action="DoneDelivery" asp-controller="Cart" asp-route-id="@pVM.Transactions.TransactionKey">Done Delivery</a>
                                                     }
                                                 }
+
+
                                             }
                                         </td>
                                         <td>
@@ -113,7 +126,7 @@
 
                                         <td>
                                             @{
-                                                if (pVM.Transactions.ImageString == null &&  pVM.Transactions.PaymentStatus != "Rejected by customer")
+                                                if (pVM.Transactions.ImageString == null  && pVM.Transactions.PaymentTerms != "Cash on delivery")
                                                 {
                                                     <form method="post" enctype="multipart/form-data" asp-controller="Cart" asp-action="AddDepositSlip">
                                                         <input name="id" value="@pVM.Transactions.TransactionKey" type="hidden" />
@@ -121,6 +134,7 @@
                                                         <input type="submit" />
                                                     </form>
                                                 }
+
                                             }
                                         </td>
 

@@ -47,7 +47,7 @@
 
 
                                         
-                                                <div class="input-group date" data-date-format="dd.mm.yyyy">
+                                                <div class="input-group date" data-date-format="yyyy/mm/dd">
                                                     <input asp-for="AvailableDate" type="text" class="form-control" placeholder="dd.mm.yyyy">
                                                     <div class="input-group-addon">
                                                         <span class="glyphicon glyphicon-th"></span>
@@ -133,7 +133,7 @@
         var endDate = new Date();
         date.setDate(date.getDate() +1);
         endDate.setDate(endDate.getDate() +60)
-        $('.input-group.date').datepicker({ format: "dd.mm.yyyy",numberOfMonths : 3, startDate:date, endDate:endDate,  daysOfWeekDisabled: [0]  });
+        $('.input-group.date').datepicker({ format: "yyyy-mm-dd",numberOfMonths : 3, startDate:date, endDate:endDate,  daysOfWeekDisabled: [0]  });
 
     });
 

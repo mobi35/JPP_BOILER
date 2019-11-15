@@ -37,6 +37,7 @@
                                     int completed = 0;
                                     int rejected = 0;
                                       int rejectedByCustomer = 0;
+                                      int acceptedByCustomer = 0;
                                     foreach (var trans in Model)
                                     {
 
@@ -69,6 +70,11 @@
                                                     else if (trans.PaymentStatus.ToLower() == "on-going")
                                                     {
                                                         onGoing++;
+                                                        <span class="badge-danger badge">@trans.PaymentStatus.ToLower() </span>
+                                                    }
+                                                    else if (trans.PaymentStatus.ToLower() == "accepted by customer")
+                                                    {
+                                                        acceptedByCustomer++;
                                                         <span class="badge-danger badge">@trans.PaymentStatus.ToLower() </span>
                                                     }
                                                     else if (trans.PaymentStatus.ToLower() == "completed")
@@ -106,7 +112,7 @@
                             </tbody>
                         </table>
 
-                        <h3> <span style="background-color:gray; font-size:23px;" class="badge badge-danger">  Pending : @pending </span>  <span style="font-size:23px;background-color:gray;" class="badge badge-danger">On-Going : @onGoing </span>  <span style="font-size:23px;background-color:#eb4d4b;" class="badge badge-danger">Rejected : @rejected </span> <span style="font-size:23px;background-color:#eb4d4b;" class="badge badge-danger">Rejected by customer : @rejectedByCustomer </span>  <span style="font-size:23px;background-color:#6ab04c;" class="badge badge-success">Completed : @completed </span> </h3>
+                        <h3> <span style="background-color:gray; font-size:23px;" class="badge badge-danger">  Pending : @pending </span>  <span style="font-size:23px;background-color:gray;" class="badge badge-danger">On-Going : @onGoing </span>  <span style="font-size:23px;background-color:#eb4d4b;" class="badge badge-danger">Rejected : @rejected </span> <span style="font-size:23px;background-color:#eb4d4b;" class="badge badge-danger">Rejected by customer : @rejectedByCustomer </span>  <span style="font-size:23px;background-color:#6ab04c;" class="badge badge-danger">Accepted by customer : @acceptedByCustomer </span>   <span style="font-size:23px;background-color:#6ab04c;" class="badge badge-success">Paid : @completed </span> </h3>
 
                     </div>
                 </div>

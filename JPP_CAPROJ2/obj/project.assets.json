@@ -13098,11 +13098,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ADRIAN\\Desktop\\VIYZZXC\\jpp_boiler\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj",
+      "projectUniqueName": "C:\\Users\\ADRIAN\\Desktop\\BOOM\\jpp_boiler\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj",
       "projectName": "JPP_CAPROJ2",
-      "projectPath": "C:\\Users\\ADRIAN\\Desktop\\VIYZZXC\\jpp_boiler\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj",
+      "projectPath": "C:\\Users\\ADRIAN\\Desktop\\BOOM\\jpp_boiler\\JPP_CAPROJ2\\JPP_CAPROJ2.csproj",
       "packagesPath": "C:\\Users\\ADRIAN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ADRIAN\\Desktop\\VIYZZXC\\jpp_boiler\\JPP_CAPROJ2\\obj\\",
+      "outputPath": "C:\\Users\\ADRIAN\\Desktop\\BOOM\\jpp_boiler\\JPP_CAPROJ2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
