@@ -99,9 +99,10 @@ namespace JPP_CAPROJ2.Controllers
                        $"<thead>" +
                       $"<tr>" +
                          $"<th>Transaction ID</th>" +
-                      $"<th>Username</th>" +
+                           $"<th>List of orders</th>" +
+                      $"<th>Full name</th>" +
                       $"<th>Total Price</th>" +
-                     $"<th>Payment Status</th>" +
+                    
                       $"<th>Paid On</th>" +
                     
                       $"</tr>" +
@@ -115,11 +116,17 @@ namespace JPP_CAPROJ2.Controllers
                     string tKey = String.Format("{0:D5}", sale.TransactionKey);
                     salesTotal += sale.TotalPrice;
                     tableDetails += $"<tr>" +
-                         $"<td>T{tKey}</td>" +
-                        $"<td>{sale.UserName}</td>" +
+                         $"<td>T{tKey}</td><td>";
+
+                    foreach (var x in _orders.GetAll().Where(a => a.TransactionID == sale.TransactionKey).ToList())
+                    {
+                        tableDetails += $"<p>{x.ProductName } : {x.Price} </p>";
+                    }
+                    tableDetails +=
+                       $"</td><td>{_userRepo.FindUser(a => a.UserName == sale.UserName).FirstName  } {_userRepo.FindUser(a => a.UserName == sale.UserName).MiddleName }  {_userRepo.FindUser(a => a.UserName == sale.UserName).LastName } </td>" +
                       
                         $"<td>{sale.TotalPrice.ToString("N")}</td>" +
-                         $"<td>{sale.PaymentStatus}</td>" +
+                       
                          $"<td>{sale.TransactionCompletion}</td>" +
                         
                         $"</tr>";
