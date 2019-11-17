@@ -103,7 +103,6 @@ namespace JPP_CAPROJ2.Controllers
                       $"<th>Full name</th>" +
                       $"<th>Total Price</th>" +
                       $"<th>Paid On</th>" +
-                    
                       $"</tr>" +
                      $"</thead>" +
                      $"<tbody>";
@@ -332,10 +331,10 @@ namespace JPP_CAPROJ2.Controllers
                          $" <caption  font-size: 90%;'> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                     {name}  {start.Value.Date.ToString("d")} - {end.Value.Date.ToString("d")} </caption>" +
                $"<thead>" +
               $"<tr>" +
-               $"<th>Transaction Key</th>" +
+               $"<th>Project ID</th>" +
                      $"<th>Service/Product List</th>" +
-              $"<th>Payment Status</th>" +
-              $"<th>UserName</th>" +
+              $"<th>Project Status</th>" +
+              $"<th>Customer Name</th>" +
                  $"<th>Description</th>" +
                 $"<th>Price</th>" +
               $"</tr>" +
