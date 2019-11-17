@@ -98,11 +98,10 @@ namespace JPP_CAPROJ2.Controllers
                                 $" <caption  font-size: 90%;'> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                     {name}  {start.Value.Date.ToString("d")} - {end.Value.Date.ToString("d")} </caption>" +
                        $"<thead>" +
                       $"<tr>" +
-                         $"<th>Transaction ID</th>" +
-                           $"<th>List of orders</th>" +
+                      $"<th>Transaction ID</th>" +
+                      $"<th>Service/Product List</th>" +
                       $"<th>Full name</th>" +
                       $"<th>Total Price</th>" +
-                    
                       $"<th>Paid On</th>" +
                     
                       $"</tr>" +
@@ -317,6 +316,13 @@ namespace JPP_CAPROJ2.Controllers
             else if (name == "Project Progress")
             {
 
+                int pending = 0;
+                int onGoing = 0;
+                int completed = 0;
+                int rejected = 0;
+                int rejectedByCustomer = 0;
+                int acceptedByCustomer = 0;
+
                 var projectProgress = _transactionRepo.GetAll().ToList();
 
                 if (start != null && end != null)
@@ -327,6 +333,7 @@ namespace JPP_CAPROJ2.Controllers
                $"<thead>" +
               $"<tr>" +
                $"<th>Transaction Key</th>" +
+                     $"<th>Service/Product List</th>" +
               $"<th>Payment Status</th>" +
               $"<th>UserName</th>" +
                  $"<th>Description</th>" +
@@ -338,13 +345,45 @@ namespace JPP_CAPROJ2.Controllers
                 double totalPrice = 0;
                 foreach (var project in projectProgress)
                 {
-                    string tKey = String.Format("{0:D5}", project.TransactionKey);
+                    if (project.PaymentStatus.ToLower() == "pending")
+                    {
+                        pending++;
+                    }
+                    else if (project.PaymentStatus.ToLower() == "on-going")
+                    {
+                        onGoing++;
+                    }
+                    else if (project.PaymentStatus.ToLower() == "accepted by customer")
+                    {
+                        acceptedByCustomer++;
+                    }
+                    else if (project.PaymentStatus.ToLower() == "completed")
+                    {
+                        completed++;
+                    }
+                    else if (project.PaymentStatus.ToLower() == "rejected")
+                    {
+                        rejected++;
+                    }
+                    else if (project.PaymentStatus.ToLower() == "rejected by customer")
+                    {
+                        rejectedByCustomer++;
+                    }
+
+                        string tKey = String.Format("{0:D5}", project.TransactionKey);
                     totalPrice += project.TotalPrice;
                     tableDetails += $"<tr>" +
-                          
-                    $"<td>P{tKey}</td>" +
-                       $"<td>{project.PaymentStatus}</td>" +
-                            $"<td>{project.UserName}</td>";
+
+                    $"<td>P{tKey}</td><td>";
+
+                    foreach (var x in _orders.GetAll().Where(a => a.TransactionID == project.TransactionKey).ToList())
+                    {
+                        tableDetails += $"<p>{x.ProductName } : {x.Price} </p>";
+                    }
+
+                    tableDetails +=
+                       $"</td><td>{project.PaymentStatus}</td>" +
+                            $"<td>{_userRepo.FindUser(a => a.UserName == project.UserName).FirstName  } {_userRepo.FindUser(a => a.UserName == project.UserName).MiddleName }  {_userRepo.FindUser(a => a.UserName == project.UserName).LastName } </td>";
 
                     if (project.ServiceType == null)
                     {
@@ -358,7 +397,7 @@ namespace JPP_CAPROJ2.Controllers
                        $"</tr>";
 
                 }
-                tableDetails += $"<tr>  <td> &nbsp</td>   <td> &nbsp</td> <td> &nbsp</td>  <td>Total Earned </td>  <td> P{totalPrice.ToString("N")} </td>  </tr>  </tbody>" +
+                tableDetails += $"<tr>  <td> pending : {pending} </td>   <td> on-going {onGoing}</td> <td> rejected {rejected}</td>  <td> rejected by customer : {rejectedByCustomer}</td> <td> accepted by customer : {acceptedByCustomer}</td>  <td> paid :  {completed} </td>  </tr>  </tbody>" +
                   $"</table>";
 
             }
