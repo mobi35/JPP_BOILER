@@ -62,6 +62,17 @@ using Microsoft.AspNetCore.Mvc;
                 return View("Services", GetList());
             }
 
+            public IActionResult ShowService(int id)
+            {
+            ServiceAndQuotation serviceAndQuotation = new ServiceAndQuotation
+            {
+
+                Service = _serviceRepo.GetIdBy(id),
+                Quotation = _quotationRepo.GetAll().Where(a => a.ServiceID == id).ToList()
+
+            };
+                return View(serviceAndQuotation);
+            }
 
             public List<Service> GetList()
             {
@@ -81,7 +92,65 @@ using Microsoft.AspNetCore.Mvc;
                 return View("Services", GetList());
             }
         
+            [HttpPost]
+            public IActionResult CreateNewQuotation(int id, string name, double price)
+            {
+
+            Quotations quote = new Quotations();
+            quote.QuotationName = name;
+            quote.Price = price;
+            quote.ServiceID = id;
+            _quotationRepo.Create(quote);
+
+            ServiceAndQuotation serviceAndQuotation = new ServiceAndQuotation
+            {
+
+                Service = _serviceRepo.GetIdBy(id),
+                Quotation = _quotationRepo.GetAll().Where(a => a.ServiceID == id).ToList()
+
+            };
+
+            return View("ShowService",serviceAndQuotation);
+            }
             [HttpGet]
+            public IActionResult UpdateQuotation(int id)
+            {
+            
+            return View(_quotationRepo.GetIdBy(id));
+            }
+            
+            [HttpPost]
+           public IActionResult UpdateQuotation(Quotations quote) {
+
+            _quotationRepo.Update(quote);
+            ServiceAndQuotation serviceAndQuotation = new ServiceAndQuotation
+            {
+
+                Service = _serviceRepo.GetIdBy(quote.ServiceID),
+                Quotation = _quotationRepo.GetAll().Where(a => a.ServiceID == quote.ServiceID).ToList()
+
+            };
+            return View("ShowService", serviceAndQuotation);
+
+               }
+
+
+           
+            public IActionResult DeleteQuotation(int id)
+            {
+            var get = _quotationRepo.GetIdBy(id);
+            _quotationRepo.Delete(get);
+            ServiceAndQuotation serviceAndQuotation = new ServiceAndQuotation
+            {
+
+                Service = _serviceRepo.GetIdBy(get.ServiceID),
+                Quotation = _quotationRepo.GetAll().Where(a => a.ServiceID == get.ServiceID).ToList()
+
+            };
+            return View("ShowService", serviceAndQuotation);
+
+        }
+        [HttpGet]
             public IActionResult QuotationService(int id){
 
             RequestService reqServ = new RequestService
@@ -115,12 +184,7 @@ using Microsoft.AspNetCore.Mvc;
              }
         
 
-             
-            public IActionResult DeleteQuotation(int id)
-            {
-                _quotationRepo.Delete(_quotationRepo.GetIdBy(id));
-                return View("Create", _quotationRepo.GetAll().ToList());
-            }
+         
             [HttpPost]
             public IActionResult CreateQuotation(string title, int price,  string serviceType)
             {

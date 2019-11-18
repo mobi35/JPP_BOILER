@@ -16,7 +16,8 @@ Layout = "BackEnd";
         <tr>
             <th>Name</th>
             <th>Price</th>
-           <th>Action</th>
+            <th>Action</th>
+            <th>Add Quotation</th>
         </tr>
     </thead>
     <tbody>
@@ -27,6 +28,7 @@ Layout = "BackEnd";
                 <td>@service.Name</td>
                 <td>@service.Price</td>
                 <td><a asp-route-id="@service.ServiceId" asp-controller="Service" asp-action="EditService">Edit</a> <a return="confirm('are you sure you want to delete?')" asp-route-id="@service.ServiceId" asp-controller="Service" asp-action="DeleteService">Delete</a>  </td>
+                <td> <a asp-route-id="@service.ServiceId" asp-controller="Service" asp-action="ShowService">Add Quotation</a>  </td>
             </tr>
             }
         }

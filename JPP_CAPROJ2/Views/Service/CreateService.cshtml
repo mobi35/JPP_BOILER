@@ -15,11 +15,12 @@
 
               
                 <form method="post" asp-action="CreateService" asp-controller="Service">
-                <h3>Create Service</h3>
+                    <h3>Create Service</h3>
                     <input type="text" placeholder="Service" asp-for="Name" style="width:200px;" class="form-control" />
                     <input type="number" asp-for="Price" style="width:200px;" placeholder="Price" class="form-control" />
-                   
+
                     <input type="text" placeholder="Description" asp-for="Description" style="width:200px;" class="form-control" />
+
                     <input type="submit" class="btn btn-primary" />
                 </form>
    

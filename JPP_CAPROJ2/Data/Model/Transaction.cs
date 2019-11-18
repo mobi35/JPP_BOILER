@@ -47,5 +47,7 @@ namespace JPP_CAPROJ2.Data.Model
         public string WhoCanModify { get; set; }
 
         public DateTime? TransactionCompletion { get; set; }
+
+        public int RequestId { get; set; }
     }
 }

@@ -17,16 +17,36 @@ namespace JPP_CAPROJ2.Controllers
         private readonly IUserRepository _userRepo;
         private readonly IServiceRepository _serviceRepo;
         private readonly IRequestRepository _requestRepo;
-        public RequestController(IServiceRepository serviceRepo, IOrderRepository orderedRepository, ITransactionRepository transactionRepo,  INotificationRepository notifRepo, IUserRepository userRepo, IRequestRepository requestRepo)
+        private readonly IQuotationRepository _quotation;
+        public RequestController( IQuotationRepository quotation, IServiceRepository serviceRepo, IOrderRepository orderedRepository, ITransactionRepository transactionRepo,  INotificationRepository notifRepo, IUserRepository userRepo, IRequestRepository requestRepo)
         {
             _userRepo = userRepo;
             _orderedRepository = orderedRepository;
             _transactionRepo = transactionRepo;
+            _quotation = quotation;
             _serviceRepo = serviceRepo;
             _notifRepo = notifRepo;
             _requestRepo = requestRepo;
         }
-        
+
+        public IActionResult GetQuotation(int service)
+        {
+            var quote = _quotation.GetAll().Where(a => a.ServiceID == service).ToList();
+            string quotationStyle = "";
+            int number = 0;
+            quotationStyle += $"<input type = 'hidden' id='numberOfQuotation' name = 'numberOfQuotation' value = '{quote.Count()}' /> ";
+            foreach (var q in quote)
+            {
+                number++;
+                quotationStyle += $"" +
+                  
+                    $" <input type = 'hidden' id = 'l{number}' name='l{number}' value='{q.QuotationName}' />  <input  type = 'checkbox' id='q{number}' value='{q.Price}' name = 'q{number}' > {q.QuotationName}  <br> " +
+                  
+                    $"";
+            }
+            return Content(quotationStyle);
+        }
+
         [HttpPost]
         public IActionResult Create(Request request, string serviceType, int serviceId)
         {
@@ -57,6 +77,7 @@ namespace JPP_CAPROJ2.Controllers
                request.Description = serviceType;
                request.Status = "for inspection";
             request.Price = _serviceRepo.GetIdBy(serviceId).Price;
+            request.ServiceId = serviceId;
             request.UserName = userName;
             _requestRepo.Create(request);
 
@@ -71,7 +92,8 @@ namespace JPP_CAPROJ2.Controllers
 
             serviceTransaction.DateTimeStamps = DateTime.Now;
             serviceTransaction.ServiceType = serviceType;
-            serviceTransaction.ServiceID = _requestRepo.GetAll().LastOrDefault().RequestId;
+            serviceTransaction.ServiceID = serviceId;
+            serviceTransaction.RequestId = _requestRepo.GetAll().LastOrDefault().RequestId;
             serviceTransaction.TotalPrice = _serviceRepo.GetIdBy(serviceId).Price;
             _transactionRepo.Create(serviceTransaction);
            
@@ -106,6 +128,60 @@ namespace JPP_CAPROJ2.Controllers
                _requestRepo.Create(requestVM.Requests);
              req.Message = "You have successfully requested for a service. Please wait for 2-3 days as the inspector will look at your unit";
                  return View("ViewError",req);
+        }
+
+        public IActionResult FuckService()
+        {
+            double totalAmount = 0;
+            string stringszz = "";
+
+
+            OrderedProducts defaultOrder = new OrderedProducts();
+            double mainPrice = Double.Parse(Request.Form["etoUngPriceDati"].ToString());
+            
+            defaultOrder.Price = mainPrice;
+            totalAmount += mainPrice;
+            defaultOrder.ProductName = Request.Form["description"].ToString();
+            defaultOrder.Quantity = 1;
+            defaultOrder.DateOrdered = DateTime.Now;
+            int serviceId = Int32.Parse(Request.Form["sid"].ToString());
+            int reqId = Int32.Parse(Request.Form["id"].ToString());
+            defaultOrder.TransactionID = _transactionRepo.FindTransaction(a => a.RequestId == reqId).TransactionKey;
+            _orderedRepository.Create(defaultOrder);
+
+
+            for (int i = 1; i <= Int32.Parse( Request.Form["numberOfQuotation"].ToString() ) ; i++)
+            {
+                string serachable = "q" + i;
+                if (Request.Form.Keys.Any(k => k == serachable))
+                {
+
+                OrderedProducts orp = new OrderedProducts();
+                 double singlePrice =   Double.Parse(Request.Form["q" + i].ToString());
+                 orp.Price = singlePrice;
+                 totalAmount += singlePrice;
+                orp.ProductName = Request.Form["l" + i].ToString();
+                orp.Quantity = 1;
+                orp.DateOrdered = DateTime.Now;
+                int service = Int32.Parse(Request.Form["sid"].ToString());
+                orp.TransactionID = _transactionRepo.FindTransaction(a => a.RequestId == reqId).TransactionKey;
+                _orderedRepository.Create(orp);
+                }
+                //  stringszz += $" {Request.Form["sid"]} :  {Request.Form["l" + i]}  {Request.Form["q" + i]}  <br>";
+            }
+
+
+            var request = _requestRepo.GetIdBy(Int32.Parse(Request.Form["id"].ToString()));
+            request.Status = "accepted";
+            request.Price = (float)totalAmount;
+            var trans = _transactionRepo.GetIdBy(defaultOrder.TransactionID);
+            trans.PaymentStatus = "On-going";
+            trans.TotalPrice = totalAmount;
+            trans.ImageString = null;
+            _transactionRepo.Update(trans);
+            _requestRepo.Update(request);
+
+            return Content("total" + totalAmount);
         }
 
         public List<User> Workers(){
@@ -255,7 +331,6 @@ namespace JPP_CAPROJ2.Controllers
         {
             double totalAmount = price;
 
-
             OrderedProducts defaultOrder = new OrderedProducts();
             defaultOrder.Price = price;
             defaultOrder.ProductName = description;
@@ -264,108 +339,16 @@ namespace JPP_CAPROJ2.Controllers
             defaultOrder.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
             _orderedRepository.Create(defaultOrder);
 
-            if (c1 != 0)
-            {
-                OrderedProducts orp = new OrderedProducts();
-                totalAmount += orp.Price = c1;
-                orp.ProductName = "Boiler Maintenance";
-                orp.Quantity = 1; orp.DateOrdered = DateTime.Now;
-                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
-                _orderedRepository.Create(orp);
-            }
-
-            if (c2 != 0)
-            {
-                OrderedProducts orp = new OrderedProducts();
-                totalAmount += orp.Price = c2;
-                orp.ProductName = "Boiler Repair";
-                orp.Quantity = 1; orp.DateOrdered = DateTime.Now;
-                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
-                _orderedRepository.Create(orp);
-            }
-
-            if (c3 != 0)
-            {
-                OrderedProducts orp = new OrderedProducts();
-                totalAmount += orp.Price = c3;
-                orp.ProductName = "Cleaning";
-                orp.Quantity = 1; orp.DateOrdered = DateTime.Now;
-                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
-                _orderedRepository.Create(orp);
-            }
-
-            if (c4 != 0)
-            {
-                OrderedProducts orp = new OrderedProducts();
-                totalAmount += orp.Price = c4;
-                orp.ProductName = "Plumbing";
-                orp.Quantity = 1; orp.DateOrdered = DateTime.Now;
-                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
-                _orderedRepository.Create(orp);
-            }
-
-            if (c5 != 0)
-            {
-                OrderedProducts orp = new OrderedProducts();
-                totalAmount += orp.Price = c5;
-                orp.ProductName = "Rehabilitation";
-                orp.Quantity = 1; orp.DateOrdered = DateTime.Now;
-                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
-                _orderedRepository.Create(orp);
-            }
-
-            if (c6 != 0)
-            {
-                OrderedProducts orp = new OrderedProducts();
-                totalAmount += orp.Price = c6;
-                orp.ProductName = "Retubing";
-                orp.Quantity = 1; orp.DateOrdered = DateTime.Now;
-                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
-                _orderedRepository.Create(orp);
-            }
-
-            if (c7 != 0)
-            {
-                OrderedProducts orp = new OrderedProducts();
-                totalAmount += orp.Price = c7;
-                orp.ProductName = "Fabrication of Reactors";
-                orp.Quantity = 1; orp.DateOrdered = DateTime.Now;
-                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
-                _orderedRepository.Create(orp);
-            }
-
-            if (c8 != 0)
-            {
-                OrderedProducts orp = new OrderedProducts();
-                totalAmount += orp.Price = c8;
-                orp.ProductName = "Fully Retube";
-                orp.Quantity = 1; orp.DateOrdered = DateTime.Now;
-                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
-                _orderedRepository.Create(orp);
-            }
+           
 
             if (c9 != 0)
             {
-                OrderedProducts orp = new OrderedProducts();
-                totalAmount += orp.Price = c9;
-                orp.ProductName = "Partial Retubing";
-                orp.Quantity = 1;
-                orp.DateOrdered = DateTime.Now;
-                orp.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;
-                _orderedRepository.Create(orp);
+               
             }
 
 
 
-            var request = _requestRepo.GetIdBy(id);
-            request.Status = "accepted";
-            request.Price = (float)totalAmount;
-           var trans = _transactionRepo.GetIdBy(defaultOrder.TransactionID);
-            trans.PaymentStatus = "On-going";
-            trans.TotalPrice = totalAmount;
-            trans.ImageString = null;
-            _transactionRepo.Update(trans);
-             _requestRepo.Update(request);  
+           
             return RedirectToAction("List","Request");
          }
     [HttpGet]

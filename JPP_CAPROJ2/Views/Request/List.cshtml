@@ -5,11 +5,11 @@
 @model IEnumerable<Request>
 @using JPP_CAPROJ2.Data.Model.Interface;
 @inject IUserRepository UserRepository;
-
+@inject IQuotationRepository QuotationRepository;
 
 <section id="main-content">
     <div class="wrapper">
-
+     
         <h3><i class="fa fa-angle-right"></i>Service Requests</h3>
         <!-- BASIC FORM ELELEMNTS -->
         <div class="row mt">
@@ -61,7 +61,7 @@
                                                         if (request.Status == "for inspection")
                                                         {
 
-                                                            <button onclick="MyFunction('@request.RequestId','@request.Description','@request.Price')" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">
+                                                            <button  id="disbutton" class="btn btn-success btn-sm"  onclick="return MyFunction('@request.RequestId','@request.ServiceId','@request.Description','@request.Price')"    data-toggle="modal" data-target="#myModal">
                                                                 Service Quotation
                                                             </button>
 
@@ -100,7 +100,7 @@
                             <h4 class="modal-title" id="myModalLabel">Worker List</h4>
                         </div>
                         <div class="modal-body">
-
+                           
                             <h5>Please Select Worker</h5>
 
                             <input id="workerId" type="hidden" name="id" />
@@ -128,8 +128,8 @@
                 </form>
 
             </div>
-            </div>
         </div>
+    </div>
 
     </div>
 </section>
@@ -139,7 +139,7 @@
 <br />
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form asp-controller="Request" asp-action="AcceptService" method="post">
+        <form id="QuotationForm" >
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -147,25 +147,26 @@
                 </div>
                 <div class="modal-body">
                     <h5>Service Details</h5>
+                    <input type="checkbox" checked="checked" readonly name="c0" id="c0" /> <span id="newName"></span><br />
+                    <div class="tableList"></div>
+
+
+
                     <input type="hidden" id="desc" name="description" value="" />
+                    <input type="hidden" id="etoUngPriceDati" name="etoUngPriceDati" value="" />
                     <input type="hidden" id="price" name="price" value="" />
-                    <input style="display:none;" type="checkbox" checked="checked" name="c0" id="c0" value="1000" />
-                    <input type="checkbox" name="c1" id="c1" value="5000" /> Boiler Maintenance <br />
-                    <input type="checkbox" name="c2" id="c2" value="10000" /> Boiler Repair<br />
-                    <input type="checkbox" name="c3" id="c3" value="5500" /> Cleaning<br />
-                    <input type="checkbox" name="c4" id="c4" value="15000" /> Plumbing<br />
-                    <input type="checkbox" name="c5" id="c5" value="12500" /> Rehabilitation<br />
-                    <input type="checkbox" name="c6" id="c6" value="8500" /> Retubing<br />
-                    <input type="checkbox" name="c7" id="c7" value="9000" /> Fabrication of Reactors<br />
-                    <input type="checkbox" name="c8" id="c8" value="15250" /> Fully Retube<br />
-                    <input type="checkbox" name="c9" id="c9" value="13275" /> Partial Retubing
+
+                    <input type="hidden" id="sid" name="sid" value="" />
+
                     <input type="hidden" id="requestId" name="id" class="form-control" placeholder="placeholder">
+                    <h4>Total Price:</h4>
                     <input type="number" name="price" min="1" id="priceTots" readonly value="1000" class="form-control" placeholder="Service Price">
-                    <button id="calculate">Calculate</button>
+                    <br />
+                    <button class="btn-sm btn-success" id="calculate"> <span class="fa fa-calculator"></span> Calculate</button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input type="submit" onclick="return Validate()" class="btn btn-primary" />
+                    <button  id="fuckingsubmit" class="btn btn-primary" >Submit</button>
                 </div>
             </div>
         </form>
@@ -174,10 +175,73 @@
 
 <script>
 
+   
+
+    $("#fuckingsubmit").click(function (e) {
+     
+             var myform = document.getElementById("QuotationForm");
+        var fd = new FormData(myform);
+
+    $.ajax({
+        url: "/Request/FuckService",
+        data: fd,
+        cache: false,
+        processData: false,
+        contentType: false,
+        dataType: "html",
+        type: 'POST',
+        success: function (x) {
+            if (x != null) {
+                alert("done");
+            }
+        }
+    });
+
+         e.preventDefault();
+    });
+
+
+ 
+    function MyFunction(rid,sid,desc,price) {
+      
+
+     
+          $('#etoUngPriceDati').val(price);
+         $('#requestId').val(rid);
+          $('#sid').val(sid);
+
+            $('#desc').val(desc);
+
+            $('#price').val(price);
+            $('#c0').val(price);
+        $('#priceTots').val(price);
+
+        $('#newName').text(desc);
+
+            $.ajax({
+                url: '/Request/GetQuotation',
+                type: 'get',
+                data: { service: sid },
+                success: function (x) {
+                    $(document).ready(function () {  
+                        $('.tableList').html(x);
+                    })
+                }
+
+            });
+      }
+
+
+
+
+
+     
+
+
     function ChangeWorker(id, name) {
         $('#workerId').val(id);
-        $('#workerSelect').prop('selectedIndex',0);
-       $("#workerSelect option").prop('disabled', false);
+        $('#workerSelect').prop('selectedIndex', 0);
+        $("#workerSelect option").prop('disabled', false);
         $('#workerSelect option[value=' + name + ']').attr('disabled', 'disabled');
     }
 
@@ -187,123 +251,42 @@
         if (parseInt($('#priceTots').val()) == 0) {
             return false;
         }
+
+    
+
+        return false;
+
     }
 
     $('#calculate').click(function () {
         $('#priceTots').val(0);
 
-        if ($('#c1').prop('checked') == true) {
+        $('#priceTots').val($('#price').val() );
+        var quotationTotal = $('#numberOfQuotation').val();
+
+        for (i = 1; i <= quotationTotal; i++ ) {
+            if ($('#q' + i).prop('checked') == true) {
             var total = $('#priceTots').val();
             var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c1').val());
+            totalPriceVar += parseInt($('#q' + i).val());
             $('#priceTots').val(totalPriceVar);
+        }
 
         }
 
-        if ($('#c2').prop('checked') == true) {
-            var total = $('#priceTots').val();
-            var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c2').val());
-            $('#priceTots').val(totalPriceVar);
-
-        }
-
-        if ($('#c3').prop('checked') == true) {
-            var total = $('#priceTots').val();
-            var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c3').val());
-            $('#priceTots').val(totalPriceVar);
-
-        }
-
-
-        if ($('#c4').prop('checked') == true) {
-            var total = $('#priceTots').val();
-            var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c4').val());
-            $('#priceTots').val(totalPriceVar);
-
-        }
-
-        if ($('#c5').prop('checked') == true) {
-            var total = $('#priceTots').val();
-            var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c5').val());
-            $('#priceTots').val(totalPriceVar);
-
-        }
-
-
-        if ($('#c6').prop('checked') == true) {
-            var total = $('#priceTots').val();
-            var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c6').val());
-            $('#priceTots').val(totalPriceVar);
-
-        }
-
-        if ($('#c7').prop('checked') == true) {
-            var total = $('#priceTots').val();
-            var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c7').val());
-            $('#priceTots').val(totalPriceVar);
-
-        }
-
-        if ($('#c8').prop('checked') == true) {
-            var total = $('#priceTots').val();
-            var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c8').val());
-            $('#priceTots').val(totalPriceVar);
-
-        }
-
-        if ($('#c9').prop('checked') == true) {
-            var total = $('#priceTots').val();
-            var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c9').val());
-            $('#priceTots').val(totalPriceVar);
-
-        }
-
-        if ($('#c0').prop('checked') == true) {
-            var total = $('#priceTots').val();
-            var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#c0').val());
-            $('#priceTots').val(totalPriceVar);
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
 
         return false;
 
     });
 
-    function MyFunction(x,d,p) {
-        $('#requestId').val(x);
-
-        $('#desc').val(d);
-
-        $('#price').val(p);
-        $('#c0').val(p);
-        $('#priceTots').val(p);
-    }
+   
 
     $(document).ready(function () {
+
+        
+
+
         $('#userList').DataTable({
 
             responsive: true,

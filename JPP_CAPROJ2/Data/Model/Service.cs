@@ -25,5 +25,6 @@ namespace JPP_CAPROJ2.Data.Model
         [NotMapped]
         public string Message { get; set; }
 
+
     }
 }

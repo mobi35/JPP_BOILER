@@ -126,7 +126,7 @@
 
                                         <td>
                                             @{
-                                                if (pVM.Transactions.ImageString == null  && pVM.Transactions.PaymentTerms != "Cash on delivery")
+                                                if (pVM.Transactions.ImageString == null  && pVM.Transactions.PaymentTerms != "Cash on delivery" && pVM.Transactions.PaymentStatus.ToLower() != "on-going" && pVM.Transactions.PaymentStatus.ToLower() != "rejected"  && pVM.Transactions.PaymentStatus.ToLower() != "rejected by customer"   && pVM.Transactions.PaymentStatus.ToLower() != "completed"   &&   pVM.Transactions.PaymentStatus.ToLower() != "pending" || pVM.Transactions.PaymentTerms == "Bank Account" && pVM.Transactions.ImageString == null)
                                                 {
                                                     <form method="post" enctype="multipart/form-data" asp-controller="Cart" asp-action="AddDepositSlip">
                                                         <input name="id" value="@pVM.Transactions.TransactionKey" type="hidden" />
@@ -138,7 +138,7 @@
                                             }
 
                                             @{ 
-                                                if (pVM.Transactions.PaymentTerms == "Service" && pVM.Transactions.PaymentStatus.ToLower() == "on-going")
+                                                if (pVM.Transactions.PaymentTerms == "Service" && pVM.Transactions.PaymentStatus.ToLower() != "pending")
                                                 {
                                                     <br />
                                                    <a class="btn-sm btn-success" asp-action="QuotationReceipt" asp-controller="Cart" asp-route-id="@pVM.Transactions.TransactionKey" >Quotation Receipt</a>

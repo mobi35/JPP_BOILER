@@ -152,6 +152,8 @@ namespace JPP_CAPROJ2.Migrations
 
                     b.Property<string>("QuotationName");
 
+                    b.Property<int>("ServiceID");
+
                     b.Property<string>("ServiceName");
 
                     b.HasKey("QuotationPK");
@@ -251,6 +253,8 @@ namespace JPP_CAPROJ2.Migrations
                     b.Property<string>("PaymentStatus");
 
                     b.Property<string>("PaymentTerms");
+
+                    b.Property<int>("RequestId");
 
                     b.Property<int>("ServiceID");
 
