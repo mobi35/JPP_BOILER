@@ -61,7 +61,7 @@
                                                         if (request.Status == "for inspection")
                                                         {
 
-                                                            <button onclick="MyFunction('@request.RequestId')" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">
+                                                            <button onclick="MyFunction('@request.RequestId','@request.Description','@request.Price')" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">
                                                                 Service Quotation
                                                             </button>
 
@@ -147,6 +147,8 @@
                 </div>
                 <div class="modal-body">
                     <h5>Service Details</h5>
+                    <input type="hidden" id="desc" name="description" value="" />
+                    <input type="hidden" id="price" name="price" value="" />
                     <input style="display:none;" type="checkbox" checked="checked" name="c0" id="c0" value="1000" />
                     <input type="checkbox" name="c1" id="c1" value="5000" /> Boiler Maintenance <br />
                     <input type="checkbox" name="c2" id="c2" value="10000" /> Boiler Repair<br />
@@ -291,8 +293,14 @@
 
     });
 
-    function MyFunction(x) {
+    function MyFunction(x,d,p) {
         $('#requestId').val(x);
+
+        $('#desc').val(d);
+
+        $('#price').val(p);
+        $('#c0').val(p);
+        $('#priceTots').val(p);
     }
 
     $(document).ready(function () {

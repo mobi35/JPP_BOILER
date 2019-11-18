@@ -131,8 +131,17 @@
                                                     <form method="post" enctype="multipart/form-data" asp-controller="Cart" asp-action="AddDepositSlip">
                                                         <input name="id" value="@pVM.Transactions.TransactionKey" type="hidden" />
                                                         <input name="imageFile" type="file" />
-                                                        <input type="submit" />
+                                                        <input class="btn-sm btn-primary" value="Add Deposit Slip" type="submit" />
                                                     </form>
+                                                }
+
+                                            }
+
+                                            @{ 
+                                                if (pVM.Transactions.PaymentTerms == "Service" && pVM.Transactions.PaymentStatus.ToLower() == "on-going")
+                                                {
+                                                    <br />
+                                                   <a class="btn-sm btn-success" asp-action="QuotationReceipt" asp-controller="Cart" asp-route-id="@pVM.Transactions.TransactionKey" >Quotation Receipt</a>
                                                 }
 
                                             }

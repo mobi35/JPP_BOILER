@@ -2488,3 +2488,7 @@ C:\Users\ADICHAN\Desktop\areeya\jpp_boiler\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\J
 C:\Users\ADICHAN\Desktop\areeya\jpp_boiler\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.dll
 C:\Users\ADICHAN\Desktop\areeya\jpp_boiler\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.pdb
 C:\Users\ADICHAN\Desktop\areeya\jpp_boiler\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\JPP_CAPROJ2.csproj.CopyComplete
+C:\Users\ADICHAN\Desktop\areeya\jpp_boiler\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\CreateService.g.cshtml.cs
+C:\Users\ADICHAN\Desktop\areeya\jpp_boiler\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\ServiceList.g.cshtml.cs
+C:\Users\ADICHAN\Desktop\areeya\jpp_boiler\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Service\EditService.g.cshtml.cs
+C:\Users\ADICHAN\Desktop\areeya\jpp_boiler\JPP_CAPROJ2\obj\Debug\netcoreapp2.2\Razor\Views\Cart\QuotationReceipt.g.cshtml.cs

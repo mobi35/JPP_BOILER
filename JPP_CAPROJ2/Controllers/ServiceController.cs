@@ -1,7 +1,8 @@
 ﻿    using JPP_CAPROJ2.Data.Model;
 
     using JPP_CAPROJ2.Data.Model.Interface;
-    using Microsoft.AspNetCore.Mvc;
+using JPP_CAPROJ2.Models.ViewModel;
+using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -81,14 +82,19 @@
             }
         
             [HttpGet]
-            public IActionResult QuotationService(string id){
-                Startup.whatService = id;
-                return View();
+            public IActionResult QuotationService(int id){
+
+            RequestService reqServ = new RequestService
+            {
+                Service = _serviceRepo.GetIdBy(id)
+            };
+            
+                return View(reqServ);
             }
 
               public IActionResult QuotationService(){
                 return View();
-             }
+              }
 
              public IActionResult ClientService(){
                  return View(GetList());
@@ -127,6 +133,40 @@
                 _quotationRepo.Create(quotation);
                 return View("Create",_quotationRepo.GetAll().ToList());
             }
+
+        [HttpPost]
+        public IActionResult CreateService(Service service)
+        {
+            _serviceRepo.Create(service);
+            return View("ServiceList",_serviceRepo.GetAll().ToList());
+        }
+        public IActionResult CreateService()
+        {
+            return View();
+        }
+
+        public IActionResult DeleteService(int id)
+        {
+            var service = _serviceRepo.GetIdBy(id);
+            _serviceRepo.Delete(service);
+            return View("ServiceList", _serviceRepo.GetAll().ToList());
+        }
+
+        [HttpGet]
+        public IActionResult EditService(int id)
+        {
+            return View(_serviceRepo.GetIdBy(id));
+        }
+        public IActionResult EditService(Service service)
+        {
+            _serviceRepo.Update(service);
+            return View("ServiceList", _serviceRepo.GetAll().ToList());
+        }
+
+        public IActionResult ServiceList()
+        {
+            return View(_serviceRepo.GetAll().ToList());
+        }
 
 
 

@@ -15,18 +15,21 @@ namespace JPP_CAPROJ2.Controllers
         private readonly ITransactionRepository _transactionRepo;
         private readonly INotificationRepository _notifRepo;
         private readonly IUserRepository _userRepo;
-private readonly IRequestRepository _requestRepo;
-        public RequestController(IOrderRepository orderedRepository, ITransactionRepository transactionRepo,  INotificationRepository notifRepo, IUserRepository userRepo, IRequestRepository requestRepo)
+        private readonly IServiceRepository _serviceRepo;
+        private readonly IRequestRepository _requestRepo;
+        public RequestController(IServiceRepository serviceRepo, IOrderRepository orderedRepository, ITransactionRepository transactionRepo,  INotificationRepository notifRepo, IUserRepository userRepo, IRequestRepository requestRepo)
         {
             _userRepo = userRepo;
             _orderedRepository = orderedRepository;
             _transactionRepo = transactionRepo;
+            _serviceRepo = serviceRepo;
             _notifRepo = notifRepo;
             _requestRepo = requestRepo;
         }
         
         [HttpPost]
-        public IActionResult Create(Request request, string serviceType){
+        public IActionResult Create(Request request, string serviceType, int serviceId)
+        {
 
             if (request.AvailableDate <= DateTime.Now)
             {
@@ -53,7 +56,7 @@ private readonly IRequestRepository _requestRepo;
             request.Requirements = request.Description;
                request.Description = serviceType;
                request.Status = "for inspection";
-            request.Price = 15000;
+            request.Price = _serviceRepo.GetIdBy(serviceId).Price;
             request.UserName = userName;
             _requestRepo.Create(request);
 
@@ -69,7 +72,7 @@ private readonly IRequestRepository _requestRepo;
             serviceTransaction.DateTimeStamps = DateTime.Now;
             serviceTransaction.ServiceType = serviceType;
             serviceTransaction.ServiceID = _requestRepo.GetAll().LastOrDefault().RequestId;
-            serviceTransaction.TotalPrice = 15000;
+            serviceTransaction.TotalPrice = _serviceRepo.GetIdBy(serviceId).Price;
             _transactionRepo.Create(serviceTransaction);
            
             request.Message = $"You have successfully requested for a service. Please wait {(int)dateRemainingDeliver.Value.TotalDays} day/s as the inspector will look at your unit";
@@ -248,14 +251,14 @@ private readonly IRequestRepository _requestRepo;
 
 
         [HttpPost]
-         public IActionResult AcceptService(int id, float price,double c1, double c2, double c3, double c4, double c5, double c6, double c7, double c8, double c9)
+         public IActionResult AcceptService(int id, float price,double c1, double c2, double c3, double c4, double c5, double c6, double c7, double c8, double c9, string description, double prodPrice)
         {
-            double totalAmount = 1000;
+            double totalAmount = price;
 
 
             OrderedProducts defaultOrder = new OrderedProducts();
-            defaultOrder.Price = 1000;
-            defaultOrder.ProductName = "Inspection Cost";
+            defaultOrder.Price = price;
+            defaultOrder.ProductName = description;
             defaultOrder.Quantity = 1;
             defaultOrder.DateOrdered = DateTime.Now;
             defaultOrder.TransactionID = _transactionRepo.FindTransaction(a => a.ServiceID == id).TransactionKey;

@@ -1,0 +1,180 @@
+﻿@model MyOrdersViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="JPP Boiler">
+    <title>JPP Boiler</title>
+
+    <!-- Favicons -->
+    <link href="img/favicon.png" rel="icon">
+    <link href="~/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!--external css-->
+    <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/css/style.css" rel="stylesheet">
+    <link href="~/css/style-responsive.css" rel="stylesheet">
+
+    <!-- =======================================================
+      Template Name: Dashio
+      Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
+      Author: TemplateMag.com
+      License: https://templatemag.com/license/
+    ======================================================= -->
+</head>
+<body>
+
+    <div class="container">
+        <!--main content start-->
+        <section id="main-content">
+            <section class="wrapper">
+                <div class="col-lg-12 mt">
+                    <div class="row content-panel">
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <div class="invoice-body">
+                                <div class="pull-left">
+                                    <h1>JPP Boiler</h1>
+                                    <address>
+                                        <strong>John Paul and Peter Boiler Repair and Services</strong><br>
+                                        016 Purok 6 Lawa (24.73 mi)
+                                        Calamba, Laguna 4027<br>
+                                       
+                                        (049) 834 4479
+                                    </address>
+                                </div>
+                                <!-- /pull-left -->
+                                <div class="pull-right">
+                                    <h2>Quotation</h2>
+                                </div>
+                                <!-- /pull-right -->
+                                <div class="clearfix"></div>
+                                <br>
+                                <br>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <h4>@Model.User.FirstName @Model.User.MiddleName @Model.User.LastName</h4>
+                                        <address>
+                                            <strong> @Model.User.Email</strong><br>
+                                            @Model.User.Address<br>
+                                            @Model.User.PhoneNumber<br>
+                                        </address>
+                                    </div>
+                                    <!-- /col-md-9 -->
+                                    <div class="col-md-3">
+                                        <br>
+                                        <div>
+                                            <div class="pull-left"> QUOTATION NO : </div>
+                                            @{ 
+                                                var tstring = String.Format("{0:D5}", Model.Transactions.TransactionKey);
+                                            }
+                                            <div class="pull-right"> Q- @tstring </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div>
+                                            <!-- /col-md-3 -->
+                                            <div class="pull-left"> QUOTATION DATE : </div>
+                                            <div class="pull-right"> @Model.Transactions.DateTimeStamps.Value.Date.ToShortDateString() </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <!-- /row -->
+                                        <br>
+                                        <div class="well well-small green">
+                                            <div class="pull-left"> Total Due : </div>
+                                            <div class="pull-right"> @Html.Raw("P")@Model.Transactions.TotalPrice.ToString("N") </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                    <!-- /invoice-body -->
+                                </div>
+                                <!-- /col-lg-10 -->
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:60px" class="text-center">QTY</th>
+                                            <th class="text-left">DESCRIPTION</th>
+                                            <th style="width:140px" class="text-right">UNIT PRICE</th>
+                                            <th style="width:90px" class="text-right">TOTAL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            foreach (var orders in Model.Orders)
+                                            {
+                                                var total = orders.Price * orders.Quantity;
+                                                <tr>
+                                                   <td class="text-center">@orders.Quantity</td>
+                                                    <td>@orders.ProductName</td>
+                                                    <td class="text-right">@Html.Raw("P")@orders.Price.ToString("N")</td>
+                                                    <td class="text-right">@Html.Raw("P")@total.ToString("N") </td>
+                                                </tr>
+                                            }
+                                        }
+                                        <tr>
+                                            <td colspan="2" rowspan="4">
+                                                <h4>Thank you for your business.</h4>
+                                          
+                                            <td class="text-right"><strong>Subtotal</strong></td>
+                                        
+                                        </tr>
+                                     
+                                        <tr>
+                                            <td class="text-right no-border"><strong>VAT Included in Total</strong></td>
+                                            <td class="text-right">P0.00</td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td class="text-right no-border">
+                                                <div class="well well-small green"><strong>Total</strong></div>
+                                            </td>
+                                            <td class="text-right"><strong> @Html.Raw("P")@Model.Transactions.TotalPrice.ToString("N") </strong></td>
+                                        </tr>
+                                    </tbody>
+
+
+
+                                </table>
+                                <br>
+                                <br>
+                            </div>
+                            <!--/col-lg-12 mt -->
+            </section>
+            <!-- /wrapper -->
+        </section>
+        <!-- /MAIN CONTENT -->
+        <!--main content end-->
+        <!--footer start-->
+    
+        <!--footer end-->
+        </section>
+
+    </div>
+
+</body>
+</html>
+
+<script>
+    window.print();
+</script>
+
+<script src="~/lib/jquery/jquery.min.js"></script>
+<script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+<script class="include" type="text/javascript" src="~/lib/jquery.dcjqaccordion.2.7.js"></script>
+<script src="~/lib/jquery.scrollTo.min.js"></script>
+<script src="~/lib/jquery.nicescroll.js" type="text/javascript"></script>
+<!--common script for all pages-->
+<script src="~/lib/common-scripts.js"></script>
+<!--script for this page-->
+

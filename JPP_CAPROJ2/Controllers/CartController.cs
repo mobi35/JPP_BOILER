@@ -170,6 +170,18 @@ namespace JPP_CAPROJ2.Controllers
             return View("Index", _prodRepo.GetAll());
         }
 
+
+        public IActionResult QuotationReceipt(int id)
+        {
+            MyOrdersViewModel myOrdersVM = new MyOrdersViewModel
+            {
+                Transactions = _transactionRepo.GetIdBy(id),
+                Orders = _orders.GetAll().Where(a => a.TransactionID == id).ToList(),
+                User = _userRepo.FindUser(a => a.UserName == _transactionRepo.GetIdBy(id).UserName)
+
+            };
+            return View(myOrdersVM);
+        }
         public IActionResult Checkout()
         {
             List<ProductCartViewModel> productCartVM = new List<ProductCartViewModel>();
