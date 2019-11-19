@@ -55,10 +55,11 @@
 
                                    
 
-                                        <input type="text" name="id" value="@Model.Service.ServiceId" />
-
-                                        <input type="text" name="name" />
-                                        <input type="text" name="price" />
+                                        <input type="hidden" name="id" value="@Model.Service.ServiceId" />
+                                        <span>Quotation Name</span>
+                                        <input class="form-control" type="text" name="name" />
+                                        <span>Quotation Price</span>
+                                        <input class="form-control" type="number" min="1" name="price" />
                                     </div>
                                     <div class="modal-footer">
                                         <input type="submit" value="Submit" />

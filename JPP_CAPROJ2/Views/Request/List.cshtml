@@ -183,7 +183,7 @@
         var fd = new FormData(myform);
 
     $.ajax({
-        url: "/Request/FuckService",
+        url: "/Request/DoService",
         data: fd,
         cache: false,
         processData: false,
@@ -193,6 +193,8 @@
         success: function (x) {
             if (x != null) {
                 alert("done");
+                window.location.reload();
+                fd = null;
             }
         }
     });
@@ -246,6 +248,7 @@
     }
 
 
+
     function Validate() {
 
         if (parseInt($('#priceTots').val()) == 0) {
@@ -268,7 +271,7 @@
             if ($('#q' + i).prop('checked') == true) {
             var total = $('#priceTots').val();
             var totalPriceVar = parseInt(total);
-            totalPriceVar += parseInt($('#q' + i).val());
+            totalPriceVar += parseInt($('#q' + i).val()  ) * parseInt( $('#stock' + i).val() ) ;
             $('#priceTots').val(totalPriceVar);
         }
 

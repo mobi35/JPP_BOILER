@@ -16,5 +16,7 @@ namespace JPP_CAPROJ2.Data.Model
         public string QuotationName { get; set; }
         public double Price { get; set; }
 
+     
+
     }
 }

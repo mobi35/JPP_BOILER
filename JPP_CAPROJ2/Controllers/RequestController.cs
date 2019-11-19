@@ -40,7 +40,7 @@ namespace JPP_CAPROJ2.Controllers
                 number++;
                 quotationStyle += $"" +
                   
-                    $" <input type = 'hidden' id = 'l{number}' name='l{number}' value='{q.QuotationName}' />  <input  type = 'checkbox' id='q{number}' value='{q.Price}' name = 'q{number}' > {q.QuotationName}  <br> " +
+                    $" <input type = 'hidden' id = 'l{number}' name='l{number}' value='{q.QuotationName}' />  <input  type = 'checkbox' id='q{number}' value='{q.Price}' name = 'q{number}' > {q.QuotationName}  qty : <input type='number' min='1' value ='1' id='stock{number}' name='stock{number}' />  <br> " +
                   
                     $"";
             }
@@ -130,7 +130,7 @@ namespace JPP_CAPROJ2.Controllers
                  return View("ViewError",req);
         }
 
-        public IActionResult FuckService()
+        public IActionResult DoService()
         {
             double totalAmount = 0;
             string stringszz = "";
@@ -159,10 +159,11 @@ namespace JPP_CAPROJ2.Controllers
                 OrderedProducts orp = new OrderedProducts();
                  double singlePrice =   Double.Parse(Request.Form["q" + i].ToString());
                  orp.Price = singlePrice;
-                 totalAmount += singlePrice;
+                
                 orp.ProductName = Request.Form["l" + i].ToString();
-                orp.Quantity = 1;
-                orp.DateOrdered = DateTime.Now;
+                orp.Quantity = Int32.Parse(Request.Form["stock" + i].ToString()); ;
+                    totalAmount += singlePrice * orp.Quantity;
+                    orp.DateOrdered = DateTime.Now;
                 int service = Int32.Parse(Request.Form["sid"].ToString());
                 orp.TransactionID = _transactionRepo.FindTransaction(a => a.RequestId == reqId).TransactionKey;
                 _orderedRepository.Create(orp);
